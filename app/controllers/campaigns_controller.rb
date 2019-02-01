@@ -4,6 +4,7 @@ class CampaignsController < ApplicationController
 
   def home
     # Retrieve all active campaigns
+    redirect_to dashboard_path if current_user
     @campaigns = Campaign.where(active: true).order(created_at: :desc).page params[:page]
   end
 
@@ -76,7 +77,8 @@ class CampaignsController < ApplicationController
 
       # Retrieve available and pending balance for an account
       @balance = Stripe::Balance.retrieve(stripe_account: current_user.stripe_account)
-      @balance_available = @balance.available.first.amount + @balance.pending.first.amount
+      @balance_available = @balance.available.first.amount
+      @balance_pending = @balance.pending.first.amount
 
       # Retrieve transactions with an available_on date in the future
       # For a large platform, it's generally preferrable to handle these async
@@ -104,8 +106,13 @@ class CampaignsController < ApplicationController
 
       # Check for a debit card external account and determine amount for payout
       @debit_card = @stripe_account.external_accounts.find { |c| c.object == "card"}
-      @instant_amt = @balance_available*0.97
-      @instant_fee = @balance_available*0.03
+      @bank_account = @stripe_account.external_accounts.find { |c| c.object == "bank_account"}
+
+      @balance_available*0.03 >= 75 ? @instant_fee = @balance_available*0.03 : @instant_fee = 75
+      @instant_amt = @balance_available - @instant_fee
+
+      @balance_available*0.015 >= 75 ? @standard_fee = @balance_available*0.015 : @standard_fee = 75
+      @standard_amt = @balance_available - @standard_fee
 
     # Handle Stripe exceptions
     rescue Stripe::StripeError => e

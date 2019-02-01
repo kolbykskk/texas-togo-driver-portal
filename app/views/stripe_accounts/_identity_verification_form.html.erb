@@ -6,7 +6,7 @@
           <div class="col-md-12">
             <div class="form-group">
               <%= f.label :address_line1, "Street address" %>
-              <%= f.text_field :address_line1, class: "form-control input-lg", placeholder: "185 Berry St" %>
+              <%= f.text_field :address_line1, class: "form-control input-lg", placeholder: "185 Arbor St" %>
             </div>
           </div>
         </div>
@@ -14,20 +14,20 @@
           <div class="col-md-4">
             <div class="form-group">
               <%= f.label :address_city, "City" %>
-              <%= f.text_field :address_city, class: "form-control input-lg", placeholder: "San Francisco" %>
+              <%= f.text_field :address_city, class: "form-control input-lg", placeholder: "Amarillo" %>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <%= f.label :address_state, "State" %>
-              <%= f.select(:address_state, options_for_select(states, @account[:address_state]), {}, { class: "form-control input-lg" }) %>
+              <%= f.select(:address_state, options_for_select(states, @account[:address_state] || 'TX'), {:include_blank => ''}, { class: "form-control input-lg"}) %>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label>Zip code</label>
               <%= f.label :address_postal, "Zip" %>
-              <%= f.text_field :address_postal, class: "form-control input-lg", placeholder: "90210" %>
+              <%= f.text_field :address_postal, class: "form-control input-lg", placeholder: "79101" %>
             </div>
           </div>
         </div>
@@ -48,13 +48,13 @@
           <div class="col-md-6">
             <div class="form-group">
               <%= f.label :first_name, "First Name" %>
-              <%= f.text_field :first_name, class: "form-control input-lg", placeholder: "Jane" %>
+              <%= f.text_field :first_name, class: "form-control input-lg" %>
             </div>
           </div>
           <div class="col-md-6">
             <div class="form-group">
               <%= f.label :last_name, "Last Name" %>
-              <%= f.text_field :last_name, class: "form-control input-lg", placeholder: "Doe" %>
+              <%= f.text_field :last_name, class: "form-control input-lg" %>
             </div>
           </div>
         </div>

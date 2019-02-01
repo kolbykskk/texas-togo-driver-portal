@@ -1,4 +1,4 @@
-<%= content_for :page_title, 'Fundraising Marketplace | Review charge' %>
+<%= content_for :page_title, 'Texas Togo Driver Portal | Review charge' %>
 <div class="container">
   <div class="row">
     <div class="col-md-12 text-center topspace-lg">
@@ -12,31 +12,12 @@
       </h2>
       <div class="panel panel-default">
         <div class="panel-body">
-          <dl class="dl-horizontal">
-            <dt>From</dt>
-            <dd><%= @charge.metadata.name %></dd>
-            <hr>
+          <dl style="margin-bottom: 0px;" class="dl-horizontal">
             <dt>Payment method</dt>
             <dd><%= @charge.source.brand %> ending in <%= @charge.source.last4 %></dd>
             <hr>
-            <dt>For</dt>
-            <dd><%= link_to @campaign.title, campaign_path(@campaign) %></dd>
-            <hr>
-            <dt>Marketplace fee</dt>
-            <dd><%= format_amount(@charge.application_fee.amount) %></dd>
-            <hr>
-            <dt>Net earnings</dt>
-            <dd><%= format_amount(@charge.amount - @charge.application_fee.amount) %></dd>
-            <hr>
             <dt>Created</dt>
             <dd><%= format_date(@charge.created) %></dd>
-            <hr>
-            <dt>Refunded</dt>
-            <dd><%= @charge.refunded %></dd>
-            <hr>
-            <dt>Disputed</dt>
-            <dd><%= @charge.dispute.present? %></dd>
-            <hr>
           </dl>
           <% if @charge.refunded %>
             <button class="btn btn-lg btn-block btn-custom btn-danger disabled">This charge has been refunded</button>
@@ -53,8 +34,6 @@
                 The bank sided in favor of the donor. <%= format_amount(@charge.dispute.balance_transactions.first.net.abs) %> in fees and disputed funds have been withdrawn from your account.
               <% end %>
             </div>
-          <% else %>
-            <%= link_to "Refund this donation", charge_path(@charge.id), method: :delete, data: { confirm: "Are you sure you want to refund this charge?", disable_with: "<i class='fa fa-spinner fa-spin'></i> Refunding charge..." }, class: "btn btn-lg btn-block btn-custom btn-danger" %>
           <% end %>
         </div>
       </div>

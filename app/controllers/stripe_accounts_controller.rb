@@ -16,6 +16,9 @@ class StripeAccountsController < ApplicationController
         if params[:full_account]
           stripe_account = Stripe::Account.create(
             managed: true,
+            payout_schedule: {
+              "interval": "manual"
+            },
             legal_entity: {
               first_name: account_params[:first_name].capitalize,
               last_name: account_params[:last_name].capitalize,
@@ -43,6 +46,9 @@ class StripeAccountsController < ApplicationController
         else
           stripe_account = Stripe::Account.create(
             managed: true,
+            payout_schedule: {
+              "interval": "manual"
+            },
             legal_entity: {
               first_name: account_params[:first_name].capitalize,
               last_name: account_params[:last_name].capitalize,

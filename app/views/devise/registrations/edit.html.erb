@@ -1,4 +1,4 @@
-<%= content_for :page_title, 'Fundraising Marketplace | Your account' %>
+<%= content_for :page_title, 'Texas Togo Driver Portal | Your account' %>
 <div class="container">
   <div class="row topspace-lg">
     <div class="col-md-6 col-md-offset-3">
@@ -8,7 +8,6 @@
       <div class="panel panel-default topspace-lg">
         <div class="panel-body placeholder">
           <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-            <%= devise_error_messages! %>
 
             <div class="form-group">
               <%= f.label :email %>
@@ -33,7 +32,7 @@
             </div>
 
             <div class="actions">
-              <%= f.submit "Update", class: "btn btn-primary btn-lg btn-block btn-custom", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Updating your account..."} %>
+              <%= f.button "Update", class: "btn btn-lg btn-block btn-primary btn-custom", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Updating..."} %>
             </div>
           <% end %>
         </div>

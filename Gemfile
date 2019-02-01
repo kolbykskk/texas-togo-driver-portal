@@ -66,3 +66,9 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'figaro'
+
+gem "switch_user"
+
+gem 'carrierwave', '~> 1.0'
+
+gem 'sidekiq'

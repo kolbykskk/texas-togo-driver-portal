@@ -15,7 +15,7 @@
             <td>
               <% if payout.type.eql?('bank_account') %>
                 <i class="fa fa-bank text-muted"></i>
-                <%= link_to payout.id, payout_path(payout.id), class: "leftspace" %>
+                <span class="leftspace"><%= payout.id %></span>
               <% else %>
                 <i class="fa fa-credit-card text-muted"></i>
                 <span class="leftspace"><%= payout.id %></span>

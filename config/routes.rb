@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
+  
+  get 'payment_sheets/create'
 
   devise_for :users, controllers: { registrations: "registrations" }
 
@@ -14,6 +18,8 @@ Rails.application.routes.draw do
   post 'instant_transfer', to: 'debit_cards#transfer'
   get 'payouts/:id', to: 'payouts#show', as: 'payout'
   post 'webhooks/stripe', to: 'webhooks#stripe'
+
+  resources :payment_sheets
 
   resources :campaigns
 

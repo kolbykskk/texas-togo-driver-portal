@@ -40,12 +40,14 @@ class DebitCardsController < ApplicationController
       # Retrieve the account object for this user
       account = Stripe::Account.retrieve(current_user.stripe_account)
 
+      params[:method] == "instant" ? method = "instant" : method = "standard"
+
       # Create an instant payout
       payout = Stripe::Payout.create(
         {
           amount: params[:amount],
           currency: "usd",
-          method: "instant",
+          method: method,
           destination: params[:destination]
         },
         { stripe_account: account.id }
@@ -56,7 +58,7 @@ class DebitCardsController < ApplicationController
         amount: params[:fee],
         currency: "usd",
         source: account.id,
-        description: "Instant payout fee for #{payout.id}"
+        description: "Payout fee for #{payout.id}"
       )
 
       # Success, send on to the dashboard

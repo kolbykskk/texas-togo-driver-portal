@@ -1,5 +1,10 @@
-<%= content_for :page_title, 'Fundraising Marketplace | Dashboard' %>
+<%= content_for :page_title, 'Texas Togo Driver Portal | Dashboard' %>
 <div class="container">
+<%= switch_user_select %>
+  <%= form_for PaymentSheet.new do |f| %>
+    <%= f.file_field :sheet %>
+    <%= f.submit %>
+  <% end %>
   <div class="row">
     <div class="col-md-12 text-center topspace">
       <%= render 'layouts/messages' %>
@@ -8,15 +13,9 @@
   <% unless @stripe_account.verification.fields_needed.empty? %>
     <%= render 'verification' %>
   <% end %>
-  <h2 class="page-header"><i class="fa fa-line-chart purple"></i>  My Campaigns</h2>
-  <% unless @campaigns.empty? %>
-    <%= render 'campaigns' %>
-  <% else %>
-    <%= link_to "Create your first fundraising campaign to get started", new_campaign_path %>.
-  <% end %>
   <h2 class="page-header">
-    <i class="fa fa-dollar purple"></i>  Donations
-    <br><small><span class="raised"><%= format_amount(@balance_available) %></span> pending</small>
+    <i class="fa fa-dollar"></i>  Payments
+    <br><small><span class="raised"><%= format_amount(@balance_pending) %></span> pending</small>
   </h2>
   <div class="panel panel-default">
     <div class="panel-body">
@@ -29,18 +28,28 @@
               For an extra 3% fee, we'll create an instant transfer to your debit card.
             </p>
             <% if @debit_card %>
-              <%= button_to "Get this transfer instantly", instant_transfer_path, data: { confirm: "Instant payout #{format_amount(@instant_amt)} to your #{@debit_card.brand} debit card ending in #{@debit_card.last4}?", disable_with: "Transferring funds..." }, method: :post, params: { amount: @instant_amt.round, fee: @instant_fee.round, destination: @debit_card.id }, class: "btn btn-success btn-lg btn-custom" %>
+              <%= button_to "Get this transfer instantly", instant_transfer_path, data: { confirm: "Instant payout #{format_amount(@instant_amt)} to your #{@debit_card.brand} debit card ending in #{@debit_card.last4}?", disable_with: "Transferring funds..." }, method: :post, params: { amount: @instant_amt.round, fee: @instant_fee.round, destination: @debit_card.id, method: 'instant' }, class: "btn btn-success btn-lg btn-custom" %>
             <% else %>
               <%= link_to "Add a debit card", debit_cards_new_path, class: "btn btn-lg btn-success btn-custom" %>
             <% end %>
           </div>
+          <div class="strike">
+              <span>or</span>
+          </div>
+          <div class="topspace text-center">
+            <% if @bank_account %>
+              <%= button_to "Get this transfer in 2-5 days", instant_transfer_path, data: { confirm: "Standard payout #{format_amount(@standard_amt)} to your #{@bank_account.bank_name} bank account ending in #{@bank_account.last4}?", disable_with: "Transferring funds..." }, method: :post, params: { amount: @standard_amt.round, fee: @standard_fee.round, destination: @bank_account.id, method: 'standard' }, class: "btn btn-primary btn-lg btn-custom" %>
+            <% else %>
+              <%= link_to "Add a bank account", new_bank_account_path, class: "btn btn-lg btn-primary btn-custom" %>
+            <% end %>
+          </div>
         <% end %>
       <% else %>
-        No donations yet.
+        No payments yet.
       <% end %>
     </div>
   </div>
-  <h2 class="page-header"><i class="fa fa-bank purple"></i> Payouts</h2>
+  <h2 class="page-header"><i class="fa fa-bank"></i> Payouts</h2>
   <div class="panel panel-default">
     <div class="panel-body">
       <% unless @payouts.data.empty? %>

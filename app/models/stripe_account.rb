@@ -5,6 +5,15 @@ class StripeAccount < ApplicationRecord
   validates :last_name,
   presence: true, length: { minimum: 1, maximum: 40 }
 
+  validates :dob_month,
+  presence: true
+
+  validates :dob_day,
+  presence: true
+
+  validates :dob_year,
+  presence: true
+
   validates :account_type,
   presence: true, inclusion: { in: %w(individual company), message: "%{value} is not a valid account type"}
 
