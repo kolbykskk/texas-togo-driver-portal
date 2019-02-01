@@ -23,6 +23,7 @@ class BankAccountsController < ApplicationController
 
   def create
     # Redirect if no token is POSTed or the user doesn't have a Stripe account
+
     unless params[:stripeToken] && current_user.stripe_account
       redirect_to new_bank_account_path and return
     end

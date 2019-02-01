@@ -6,7 +6,6 @@ html {
   min-height: 100%;
 }
 body {
-  padding-top: 60px;
   font-family: "Lato";
   font-size: 16px;
   margin-bottom: 220px;
@@ -38,25 +37,11 @@ h1, h2, h3, h4 {
   font-weight: 300;
 
 }
-.navbar-default {
-  background-color: #fff;
-  height: 60px;
-  img {
-    margin-top:10px;
-  }
-  .navbar-nav > .active > a, .navbar-nav > .active > a:hover, .navbar-nav > .active > a:focus {
-    background-color: #fff;
-    color: #000;
-  }
-  .navbar-collapse {
-    background-color: #fff;
-  }
-  .fa {
-    margin-right: 8px;
-  }
+.navbar {
+  margin-bottom: 0px !important;
 }
 .home-hero {
-  background-image:url('https://unsplash.it/1200/600?image=0&blur');
+  background-image:url('https://www.txtogo.com/editable/images/user/become-driver.jpg');
   background-size:cover;
   background-color: #666;
   color: #fff;

@@ -7,14 +7,10 @@
       <div class="row">
         <div class="col-md-6 col-md-offset-3 text-center topspace-lg">
           <%= render 'layouts/messages' %>
-          <h1 class="topspace-lg">Fundraising Marketplace</h1>
-          <h3>A <a href="https://stripe.com/connect">Stripe Connect</a> example app</h3>
+          <h1 class="topspace-lg">Texas ToGo Driver Portal</h1>
+          <h3>Need help? <a href="#">Contact Us</a></h3>
           <p class="topspace-lg">
-            <% if user_signed_in? %>
-              <%= link_to "Create a campaign", new_campaign_path, class: "btn btn-xl btn-primary btn-custom btn-block shadow-sm" %>
-            <% else %>
-              <%= link_to "Create an account", new_user_registration_path, class: "btn btn-xl btn-primary btn-custom btn-block shadow-sm" %>
-            <% end %>
+            <%= link_to "Get Started", new_user_registration_path, class: "btn btn-xl btn-primary btn-custom btn-block shadow-sm" %>
           </p>
         </div>
       </div>
