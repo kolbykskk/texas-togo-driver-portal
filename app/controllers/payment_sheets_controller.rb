@@ -10,6 +10,14 @@ class PaymentSheetsController < ApplicationController
     end
   end
 
+  def disbursments
+    @payment_sheet = PaymentSheet.find_by(params[:id])
+    @disbursments = Disbursment.where(payment_sheet_id: params[:id])
+    @driver_count = @disbursments.count
+    @total_paid = @disbursments.sum(:amount)
+    @deliveries_made = @disbursments.sum(:deliveries_made)
+  end
+
   private
   def payment_sheet_params
     params.require(:payment_sheet).permit(

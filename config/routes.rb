@@ -18,6 +18,12 @@ Rails.application.routes.draw do
   post 'instant_transfer', to: 'debit_cards#transfer'
   get 'payouts/:id', to: 'payouts#show', as: 'payout'
   post 'webhooks/stripe', to: 'webhooks#stripe'
+  get 'payment_sheet/:id/disbursments', to: 'payment_sheets#disbursments'
+
+  resources :users, only: [:index] do
+    post :impersonate, on: :member
+    post :stop_impersonating, on: :collection
+  end
 
   resources :payment_sheets
 

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  payment_sheet: one
+  driver_name: MyString
+  driver_phone: MyString
+  amount: 1
+
+two:
+  payment_sheet: two
+  driver_name: MyString
+  driver_phone: MyString
+  amount: 1

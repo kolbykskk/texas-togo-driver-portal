@@ -44,6 +44,10 @@ class CampaignsController < ApplicationController
 
   def dashboard
     # List campaigns for the current user
+    if Stat.find_by(user_id: current_user.id).nil?
+      Stat.create(user_id: current_user.id)
+    end
+    @stat = Stat.find_by(user_id: current_user.id)
     @campaigns = current_user.campaigns.order(created_at: :desc)
 
     # Redirect if there's not a Stripe account for this user yet
@@ -56,20 +60,18 @@ class CampaignsController < ApplicationController
     begin
       @stripe_account = Stripe::Account.retrieve(current_user.stripe_account)
 
-      # Last 100 charges
-      @payments = Stripe::Charge.list(
+      # Last 10 charges
+      @payments = Stripe::Transfer.list(
         {
-          limit: 100,
-          expand: ['data.source_transfer.source_transaction.dispute', 'data.application_fee'],
-          source: {object: 'all'}
-        },
-        { stripe_account: current_user.stripe_account }
+          limit: 10,
+          destination: @stripe_account.id
+        }
       )
 
-      # Last 100 payouts from the managed account to their bank account
+      # Last 10 payouts from the managed account to their bank account
       @payouts = Stripe::Payout.list(
         {
-          limit: 100,
+          limit: 10,
           expand: ['data.destination']
         },
         { stripe_account: current_user.stripe_account }
@@ -79,6 +81,8 @@ class CampaignsController < ApplicationController
       @balance = Stripe::Balance.retrieve(stripe_account: current_user.stripe_account)
       @balance_available = @balance.available.first.amount
       @balance_pending = @balance.pending.first.amount
+
+      @payment_sheets = PaymentSheet.all.order(created_at: :desc)
 
       # Retrieve transactions with an available_on date in the future
       # For a large platform, it's generally preferrable to handle these async
@@ -111,7 +115,7 @@ class CampaignsController < ApplicationController
       @balance_available*0.03 >= 75 ? @instant_fee = @balance_available*0.03 : @instant_fee = 75
       @instant_amt = @balance_available - @instant_fee
 
-      @balance_available*0.015 >= 75 ? @standard_fee = @balance_available*0.015 : @standard_fee = 75
+      @standard_fee = 50
       @standard_amt = @balance_available - @standard_fee
 
     # Handle Stripe exceptions

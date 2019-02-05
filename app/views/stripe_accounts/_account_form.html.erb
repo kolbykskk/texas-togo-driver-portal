@@ -1,11 +1,9 @@
-<div class="panel panel-default topspace-lg">
-  <div class="panel-body">
     <%= form_for @account do | f | %>
       <div class="row">
         <div class="col-md-12">
           <div class="form-group">
             <%= f.label :account_type, "Account Type" %>
-            <%= f.select(:account_type, options_for_select([["Individual","individual"], ["Company","company"]], @account[:account_type]), {}, { class: "form-control input-lg" }) %>
+            <%= f.select(:account_type, options_for_select([["Individual","individual"]], @account[:account_type]), {}, { class: "form-control input-lg" }) %>
           </div>
         </div>
       </div>
@@ -31,13 +29,13 @@
         <div class="col-md-6">
           <div class="form-group">
             <%= f.label :first_name, "First Name" %>
-            <%= f.text_field :first_name, class: "form-control input-lg" %>
+            <%= f.text_field :first_name, class: "form-control input-lg", value: "#{current_user.first_name}" %>
           </div>
         </div>
         <div class="col-md-6">
           <div class="form-group">
             <%= f.label :last_name, "Last Name" %>
-            <%= f.text_field :last_name, class: "form-control input-lg" %>
+            <%= f.text_field :last_name, class: "form-control input-lg", value: "#{current_user.last_name}" %>
           </div>
         </div>
       </div>
@@ -118,13 +116,11 @@
       <div class="row">
         <div class="col-md-12">
           <div class="form-group">
-            <%= f.button "Create Account", class: "btn btn-primary btn-lg btn-block btn-custom", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Creating account..."} %>
+            <%= f.button "Create Account", class: "btn btn-alt-primary", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Creating account..."} %>
           </div>
         </div>
       </div>
     <% end %>
-  </div>
-</div>
 <script>
   $(function(){
     $('#stripe_account_account_type').change(function(){

@@ -1,12 +1,442 @@
-<%= content_for :page_title, 'Texas Togo Driver Portal | Sign in' %>
-<div class="container">
-  <div class="row topspace-lg">
-    <div class="col-md-6 col-md-offset-3">
-      <h1 class="text-center">Sign in to your account</h1>
+<!doctype html>
+<html lang="en" class="no-focus">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
+  <title>Codebase - Bootstrap 4 Admin Template &amp; UI Framework</title>
+
+  <meta name="description" content="Codebase - Bootstrap 4 Admin Template &amp; UI Framework created by pixelcave and published on Themeforest">
+  <meta name="author" content="pixelcave">
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- Open Graph Meta -->
+  <meta property="og:title" content="Codebase - Bootstrap 4 Admin Template &amp; UI Framework">
+  <meta property="og:site_name" content="Codebase">
+  <meta property="og:description" content="Codebase - Bootstrap 4 Admin Template &amp; UI Framework created by pixelcave and published on Themeforest">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="">
+  <meta property="og:image" content="">
+
+  <!-- Icons -->
+  <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
+  <link rel="shortcut icon" href="assets/media/favicons/favicon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/media/favicons/favicon-192x192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/media/favicons/apple-touch-icon-180x180.png">
+  <!-- END Icons -->
+
+  <!-- Stylesheets -->
+
+  <!-- Fonts and Codebase framework -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli:300,400,400i,600,700">
+  <%= stylesheet_link_tag "codebase.min.css" %>
+
+  <!-- You can include a specific file from css/themes/ folder to alter the default color theme of the template. eg: -->
+  <!-- <link rel="stylesheet" id="css-theme" href="assets/css/themes/flat.min.css"> -->
+  <!-- END Stylesheets -->
+</head>
+
+<body>
+
+  <!-- Page Container -->
+  <!--
+            Available classes for #page-container:
+
+        GENERIC
+
+            'enable-cookies'                            Remembers active color theme between pages (when set through color theme helper Template._uiHandleTheme())
+
+        SIDEBAR & SIDE OVERLAY
+
+            'sidebar-r'                                 Right Sidebar and left Side Overlay (default is left Sidebar and right Side Overlay)
+            'sidebar-mini'                              Mini hoverable Sidebar (screen width > 991px)
+            'sidebar-o'                                 Visible Sidebar by default (screen width > 991px)
+            'sidebar-o-xs'                              Visible Sidebar by default (screen width < 992px)
+            'sidebar-inverse'                           Dark themed sidebar
+
+            'side-overlay-hover'                        Hoverable Side Overlay (screen width > 991px)
+            'side-overlay-o'                            Visible Side Overlay by default
+
+            'enable-page-overlay'                       Enables a visible clickable Page Overlay (closes Side Overlay on click) when Side Overlay opens
+
+            'side-scroll'                               Enables custom scrolling on Sidebar and Side Overlay instead of native scrolling (screen width > 991px)
+
+        HEADER
+
+            ''                                          Static Header if no class is added
+            'page-header-fixed'                         Fixed Header
+
+        HEADER STYLE
+
+            ''                                          Classic Header style if no class is added
+            'page-header-modern'                        Modern Header style
+            'page-header-inverse'                       Dark themed Header (works only with classic Header style)
+            'page-header-glass'                         Light themed Header with transparency by default
+                                                        (absolute position, perfect for light images underneath - solid light background on scroll if the Header is also set as fixed)
+            'page-header-glass page-header-inverse'     Dark themed Header with transparency by default
+                                                        (absolute position, perfect for dark images underneath - solid dark background on scroll if the Header is also set as fixed)
+
+        MAIN CONTENT LAYOUT
+
+            ''                                          Full width Main Content if no class is added
+            'main-content-boxed'                        Full width Main Content with a specific maximum width (screen width > 1200px)
+            'main-content-narrow'                       Full width Main Content with a percentage width (screen width > 1200px)
+        -->
+  <div id="page-container" class="sidebar-o enable-page-overlay side-scroll page-header-modern main-content-boxed side-trans-enabled">
+    <div id="page-overlay"></div>
+    <aside id="side-overlay" data-simplebar="init">
+      <div class="simplebar-track vertical" style="visibility: visible;">
+        <div class="simplebar-scrollbar" style="visibility: visible; top: 0px; height: 865px;"></div>
+      </div>
+      <div class="simplebar-track horizontal" style="visibility: hidden;">
+        <div class="simplebar-scrollbar"></div>
+      </div>
+      <div class="simplebar-scroll-content" style="padding-right: 15px; margin-bottom: -30px;">
+        <div class="simplebar-content" style="padding-bottom: 15px; margin-right: -15px;">
+          <div class="content-header content-header-fullrow">
+            <div class="content-header-section align-parent">
+              <button type="button" class="btn btn-circle btn-dual-secondary align-v-r" data-toggle="layout"
+                data-action="side_overlay_close">
+                <i class="fa fa-times text-danger"></i>
+              </button>
+              <div class="content-header-item">
+                <a class="align-middle link-effect text-primary-dark font-w600" href="be_pages_generic_profile.php">John
+                  Smith</a>
+              </div>
+            </div>
+          </div>
+          <div class="content-side">
+            <div class="block pull-t pull-r-l">
+              <div class="block-content block-content-full block-content-sm bg-body-light">
+                <form action="be_pages_generic_search.php" method="post">
+                  <div class="input-group">
+                    <input type="text" class="form-control" id="side-overlay-search" name="side-overlay-search"
+                      placeholder="Search..">
+                    <div class="input-group-append">
+                      <button type="submit" class="btn btn-secondary px-10">
+                        <i class="fa fa-search"></i>
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="block pull-r-l">
+              <div class="block-content block-content-full block-content-sm bg-body-light">
+                <div class="row">
+                  <div class="col-4">
+                    <div class="font-size-sm font-w600 text-uppercase text-muted">Clients</div>
+                    <div class="font-size-h4">460</div>
+                  </div>
+                  <div class="col-4">
+                    <div class="font-size-sm font-w600 text-uppercase text-muted">Sales</div>
+                    <div class="font-size-h4">728</div>
+                  </div>
+                  <div class="col-4">
+                    <div class="font-size-sm font-w600 text-uppercase text-muted">Earnings</div>
+                    <div class="font-size-h4">$7,860</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="block pull-r-l">
+              <div class="block-header bg-body-light">
+                <h3 class="block-title"><i class="fa fa-fw fa-users font-size-default mr-5"></i>Friends</h3>
+                <div class="block-options">
+                  <button type="button" class="btn-block-option" data-toggle="block-option" data-action="state_toggle"
+                    data-action-mode="demo">
+                    <i class="si si-refresh"></i>
+                  </button>
+                  <button type="button" class="btn-block-option" data-toggle="block-option" data-action="content_toggle"><i
+                      class="si si-arrow-up"></i></button>
+                </div>
+              </div>
+            </div>
+            <div class="block pull-r-l">
+              <div class="block-header bg-body-light">
+                <h3 class="block-title">
+                  <i class="fa fa-fw fa-clock-o font-size-default mr-5"></i>Activity
+                </h3>
+                <div class="block-options">
+                  <button type="button" class="btn-block-option" data-toggle="block-option" data-action="state_toggle"
+                    data-action-mode="demo">
+                    <i class="si si-refresh"></i>
+                  </button>
+                  <button type="button" class="btn-block-option" data-toggle="block-option" data-action="content_toggle"><i
+                      class="si si-arrow-up"></i></button>
+                </div>
+              </div>
+              <div class="block-content">
+                <ul class="list list-activity">
+                  <li>
+                    <i class="si si-wallet text-success"></i>
+                    <div class="font-w600">+$29 New sale</div>
+                    <div>
+                      <a href="javascript:void(0)">Admin Template</a>
+                    </div>
+                    <div class="font-size-xs text-muted">5 min ago</div>
+                  </li>
+                  <li>
+                    <i class="si si-close text-danger"></i>
+                    <div class="font-w600">Project removed</div>
+                    <div>
+                      <a href="javascript:void(0)">Best Icon Set</a>
+                    </div>
+                    <div class="font-size-xs text-muted">26 min ago</div>
+                  </li>
+                  <li>
+                    <i class="si si-pencil text-info"></i>
+                    <div class="font-w600">You edited the file</div>
+                    <div>
+                      <a href="javascript:void(0)">
+                        <i class="fa fa-file-text-o"></i> Docs.doc
+                      </a>
+                    </div>
+                    <div class="font-size-xs text-muted">3 hours ago</div>
+                  </li>
+                  <li>
+                    <i class="si si-plus text-success"></i>
+                    <div class="font-w600">New user</div>
+                    <div>
+                      <a href="javascript:void(0)">StudioWeb - View Profile</a>
+                    </div>
+                    <div class="font-size-xs text-muted">5 hours ago</div>
+                  </li>
+                  <li>
+                    <i class="si si-wrench text-warning"></i>
+                    <div class="font-w600">App v5.5 is available</div>
+                    <div>
+                      <a href="javascript:void(0)">Update now</a>
+                    </div>
+                    <div class="font-size-xs text-muted">8 hours ago</div>
+                  </li>
+                  <li>
+                    <i class="si si-user-follow text-pulse"></i>
+                    <div class="font-w600">+1 Friend Request</div>
+                    <div>
+                      <a href="javascript:void(0)">Accept</a>
+                    </div>
+                    <div class="font-size-xs text-muted">1 day ago</div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="block pull-r-l">
+              <div class="block-header bg-body-light">
+                <h3 class="block-title">
+                  <i class="fa fa-fw fa-pencil font-size-default mr-5"></i>Profile
+                </h3>
+                <div class="block-options">
+                  <button type="button" class="btn-block-option" data-toggle="block-option" data-action="content_toggle"><i
+                      class="si si-arrow-up"></i></button>
+                </div>
+              </div>
+              <div class="block-content">
+                <form action="be_pages_dashboard.php" method="post" onsubmit="return false;">
+                  <div class="form-group mb-15">
+                    <label for="side-overlay-profile-name">Name</label>
+                    <div class="input-group">
+                      <input type="text" class="form-control" id="side-overlay-profile-name" name="side-overlay-profile-name"
+                        placeholder="Your name.." value="John Smith" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABHklEQVQ4EaVTO26DQBD1ohQWaS2lg9JybZ+AK7hNwx2oIoVf4UPQ0Lj1FdKktevIpel8AKNUkDcWMxpgSaIEaTVv3sx7uztiTdu2s/98DywOw3Dued4Who/M2aIx5lZV1aEsy0+qiwHELyi+Ytl0PQ69SxAxkWIA4RMRTdNsKE59juMcuZd6xIAFeZ6fGCdJ8kY4y7KAuTRNGd7jyEBXsdOPE3a0QGPsniOnnYMO67LgSQN9T41F2QGrQRRFCwyzoIF2qyBuKKbcOgPXdVeY9rMWgNsjf9ccYesJhk3f5dYT1HX9gR0LLQR30TnjkUEcx2uIuS4RnI+aj6sJR0AM8AaumPaM/rRehyWhXqbFAA9kh3/8/NvHxAYGAsZ/il8IalkCLBfNVAAAAABJRU5ErkJggg==&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;">
+                      <div class="input-group-append">
+                        <span class="input-group-text">
+                          <i class="fa fa-user"></i>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group mb-15">
+                    <label for="side-overlay-profile-email">Email</label>
+                    <div class="input-group">
+                      <input type="email" class="form-control" id="side-overlay-profile-email" name="side-overlay-profile-email"
+                        placeholder="Your email.." value="john.smith@example.com">
+                      <div class="input-group-append">
+                        <span class="input-group-text">
+                          <i class="fa fa-envelope"></i>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group mb-15">
+                    <label for="side-overlay-profile-password">New Password</label>
+                    <div class="input-group">
+                      <input type="password" class="form-control" id="side-overlay-profile-password" name="side-overlay-profile-password"
+                        placeholder="New Password.." style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACIUlEQVQ4EX2TOYhTURSG87IMihDsjGghBhFBmHFDHLWwSqcikk4RRKJgk0KL7C8bMpWpZtIqNkEUl1ZCgs0wOo0SxiLMDApWlgOPrH7/5b2QkYwX7jvn/uc//zl3edZ4PPbNGvF4fC4ajR5VrNvt/mo0Gr1ZPOtfgWw2e9Lv9+chX7cs64CS4Oxg3o9GI7tUKv0Q5o1dAiTfCgQCLwnOkfQOu+oSLyJ2A783HA7vIPLGxX0TgVwud4HKn0nc7Pf7N6vV6oZHkkX8FPG3uMfgXC0Wi2vCg/poUKGGcagQI3k7k8mcp5slcGswGDwpl8tfwGJg3xB6Dvey8vz6oH4C3iXcFYjbwiDeo1KafafkC3NjK7iL5ESFGQEUF7Sg+ifZdDp9GnMF/KGmfBdT2HCwZ7TwtrBPC7rQaav6Iv48rqZwg+F+p8hOMBj0IbxfMdMBrW5pAVGV/ztINByENkU0t5BIJEKRSOQ3Aj+Z57iFs1R5NK3EQS6HQqF1zmQdzpFWq3W42WwOTAf1er1PF2USFlC+qxMvFAr3HcexWX+QX6lUvsKpkTyPSEXJkw6MQ4S38Ljdbi8rmM/nY+CvgNcQqdH6U/xrYK9t244jZv6ByUOSiDdIfgBZ12U6dHEHu9TpdIr8F0OP692CtzaW/a6y3y0Wx5kbFHvGuXzkgf0xhKnPzA4UTyaTB8Ph8AvcHi3fnsrZ7Wore02YViqVOrRXXPhfqP8j6MYlawoAAAAASUVORK5CYII=&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;">
+                      <div class="input-group-append">
+                        <span class="input-group-text">
+                          <i class="fa fa-asterisk"></i>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group mb-15">
+                    <label for="side-overlay-profile-password-confirm">Confirm New Password</label>
+                    <div class="input-group">
+                      <input type="password" class="form-control" id="side-overlay-profile-password-confirm" name="side-overlay-profile-password-confirm"
+                        placeholder="Confirm New Password.." style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACIUlEQVQ4EX2TOYhTURSG87IMihDsjGghBhFBmHFDHLWwSqcikk4RRKJgk0KL7C8bMpWpZtIqNkEUl1ZCgs0wOo0SxiLMDApWlgOPrH7/5b2QkYwX7jvn/uc//zl3edZ4PPbNGvF4fC4ajR5VrNvt/mo0Gr1ZPOtfgWw2e9Lv9+chX7cs64CS4Oxg3o9GI7tUKv0Q5o1dAiTfCgQCLwnOkfQOu+oSLyJ2A783HA7vIPLGxX0TgVwud4HKn0nc7Pf7N6vV6oZHkkX8FPG3uMfgXC0Wi2vCg/poUKGGcagQI3k7k8mcp5slcGswGDwpl8tfwGJg3xB6Dvey8vz6oH4C3iXcFYjbwiDeo1KafafkC3NjK7iL5ESFGQEUF7Sg+ifZdDp9GnMF/KGmfBdT2HCwZ7TwtrBPC7rQaav6Iv48rqZwg+F+p8hOMBj0IbxfMdMBrW5pAVGV/ztINByENkU0t5BIJEKRSOQ3Aj+Z57iFs1R5NK3EQS6HQqF1zmQdzpFWq3W42WwOTAf1er1PF2USFlC+qxMvFAr3HcexWX+QX6lUvsKpkTyPSEXJkw6MQ4S38Ljdbi8rmM/nY+CvgNcQqdH6U/xrYK9t244jZv6ByUOSiDdIfgBZ12U6dHEHu9TpdIr8F0OP692CtzaW/a6y3y0Wx5kbFHvGuXzkgf0xhKnPzA4UTyaTB8Ph8AvcHi3fnsrZ7Wore02YViqVOrRXXPhfqP8j6MYlawoAAAAASUVORK5CYII=&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;">
+                      <div class="input-group-append">
+                        <span class="input-group-text">
+                          <i class="fa fa-asterisk"></i>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-6">
+                      <button type="submit" class="btn btn-block btn-alt-primary">
+                        <i class="fa fa-refresh mr-5"></i> Update
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="block pull-r-l">
+              <div class="block-header bg-body-light">
+                <h3 class="block-title">
+                  <i class="fa fa-fw fa-wrench font-size-default mr-5"></i>Settings
+                </h3>
+                <div class="block-options">
+                  <button type="button" class="btn-block-option" data-toggle="block-option" data-action="content_toggle"><i
+                      class="si si-arrow-up"></i></button>
+                </div>
+              </div>
+              <div class="block-content">
+                <div class="row gutters-tiny">
+                  <div class="col-6">
+                    <div class="custom-control custom-checkbox mb-5">
+                      <input type="checkbox" class="custom-control-input" id="side-overlay-settings-status" name="side-overlay-settings-status"
+                        value="1" checked="">
+                      <label class="custom-control-label" for="side-overlay-settings-status">Online Status</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mb-5">
+                      <input type="checkbox" class="custom-control-input" id="side-overlay-settings-public-profile"
+                        name="side-overlay-settings-public-profile" value="1">
+                      <label class="custom-control-label" for="side-overlay-settings-public-profile">Public Profile</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mb-5">
+                      <input type="checkbox" class="custom-control-input" id="side-overlay-settings-notifications" name="side-overlay-settings-notifications"
+                        value="1" checked="">
+                      <label class="custom-control-label" for="side-overlay-settings-notifications">Notifications</label>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="custom-control custom-checkbox mb-5">
+                      <input type="checkbox" class="custom-control-input" id="side-overlay-settings-updates" name="side-overlay-settings-updates"
+                        value="1">
+                      <label class="custom-control-label" for="side-overlay-settings-updates">Auto updates</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mb-5">
+                      <input type="checkbox" class="custom-control-input" id="side-overlay-settings-api-access" name="side-overlay-settings-api-access"
+                        value="1" checked="">
+                      <label class="custom-control-label" for="side-overlay-settings-api-access">API Access</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mb-5">
+                      <input type="checkbox" class="custom-control-input" id="side-overlay-settings-limit-requests"
+                        name="side-overlay-settings-limit-requests" value="1">
+                      <label class="custom-control-label" for="side-overlay-settings-limit-requests">API Requests</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <header id="page-header">
+      <div class="content-header">
+        <div class="content-header-section">
+        <% if current_user %>
+            <%= link_to dashboard_path do %>
+          <button type="button" class="btn btn-rounded btn-dual-secondary">
+            <span class="d-none d-sm-inline-block">Dashboard</span>
+          </button>
+          <% end %>
+        <% else %>
+            <%= link_to root_path do %>
+          <button type="button" class="btn btn-rounded btn-dual-secondary">
+            <span class="d-none d-sm-inline-block">Home</span>
+          </button>
+          <% end %>
+        <% end %>
+        </div>
+        <div class="content-header-section">
+        <% if current_user %>
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-rounded btn-dual-secondary" id="page-header-user-dropdown" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-user d-sm-none"></i>
+                            <span class="d-none d-sm-inline-block"><%= current_user.first_name[0] %>. <%= current_user.last_name %></span>
+              <i class="fa fa-angle-down ml-5"></i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right min-width-200" aria-labelledby="page-header-user-dropdown">
+              <h5 class="h6 text-center py-10 mb-5 border-b text-uppercase">User</h5>
+              <%= link_to edit_user_registration_path, class: 'dropdown-item' do %>
+              <i class="si si-user mr-5"></i> Account
+              <% end %>
+              <div class="dropdown-divider"></div>
+              <%= link_to destroy_user_session_path, method: :delete, class: 'dropdown-item' do %>
+              <i class="si si-logout mr-5"></i> Sign Out
+              <% end %>
+            </div>
+          </div>
+        <% else %>
+<div class="btn-group" role="group">
+ <%= link_to new_user_session_path do %>
+             <button type="button" class="btn btn-rounded btn-dual-secondary">
+            <span class="d-none d-sm-inline-block">Sign In</span>
+          </button>
+          <% end %>
+           <%= link_to new_user_registration_path do %>
+             <button type="button" class="btn btn-rounded btn-dual-secondary">
+            <span class="d-none d-sm-inline-block">Sign Up</span>
+          </button>
+          <% end %>
+          </div>
+        <% end %>
+        </div>
+      </div>
+      <div id="page-header-search" class="overlay-header">
+        <div class="content-header content-header-fullrow">
+          <form action="be_pages_generic_search.php" method="post">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <button type="button" class="btn btn-secondary" data-toggle="layout" data-action="header_search_off">
+                  <i class="fa fa-times"></i>
+                </button>
+              </div>
+              <input type="text" class="form-control" placeholder="Search or hit ESC.." id="page-header-search-input"
+                name="page-header-search-input">
+              <div class="input-group-append">
+                <button type="submit" class="btn btn-secondary">
+                  <i class="fa fa-search"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div id="page-header-loader" class="overlay-header bg-primary">
+        <div class="content-header content-header-fullrow text-center">
+          <div class="content-header-item">
+            <i class="fa fa-sun-o fa-spin text-white"></i>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main id="main-container" style="min-height: 1113px;">
+      <div class="content">
+        <h2 class="content-heading">Sign In</h2>
+        <div class="row js-appear-enabled animated fadeIn" data-toggle="appear">
+          <!-- Row #3 -->
+          <div class="col-md-6 col-md-push-3 col-sm-push-3">
+            <div class="block">
+              <div class="block-content">
       <%= devise_error_messages! %>
       <%= render 'layouts/messages' %>
-      <div class="panel panel-default topspace-lg">
-        <div class="panel-body placeholder">
           <%= form_for(resource, as: resource_name, 
             url: session_path(resource_name)) do |f| %>
             <div class="form-group">
@@ -18,17 +448,68 @@
               <%= f.password_field :password, autocomplete: "off", class: "form-control input-lg", placeholder: "Password" %>
             </div>
             <div class="form-group">
-              <%= f.button "Log in", class: "btn btn-lg btn-block btn-primary btn-custom", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Logging in..."} %>
+              <%= f.button "Log in", class: "btn btn-alt-primary", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Logging in..."} %>
             </div>
           <% end %>
-          <div class="text-center">
+          <div class="form-group text-center">
             <%= link_to "Forgot your password?", new_user_password_path %>
           </div>
-        </div>
-      </div>
-      <div class="text-center">
+      <div class="form-group text-center">
         Need an account? <%= link_to "Sign up", new_user_registration_path %>
       </div>
-    </div>
+
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+    </main>
+    <footer id="page-footer" class="opacity-0" style="opacity: 1;">
+      <div class="content py-20 font-size-xs clearfix">
+        <div class="float-right">
+            Texas ToGo Driver Panel
+        </div>
+                    <div class="float-left">
+                        &copy; 2015-2018 Texas ToGo. All Rights Reserved
+                    </div>
+      </div>
+    </footer>
   </div>
-</div>
+
+  <!--
+            Codebase JS Core
+
+            Vital libraries and plugins used in all pages. You can choose to not include this file if you would like
+            to handle those dependencies through webpack. Please check out assets/_es6/main/bootstrap.js for more info.
+
+            If you like, you could also include them separately directly from the assets/js/core folder in the following
+            order. That can come in handy if you would like to include a few of them (eg jQuery) from a CDN.
+
+            assets/js/core/jquery.min.js
+            assets/js/core/bootstrap.bundle.min.js
+            assets/js/core/simplebar.min.js
+            assets/js/core/jquery-scrollLock.min.js
+            assets/js/core/jquery.appear.min.js
+            assets/js/core/jquery.countTo.min.js
+            assets/js/core/js.cookie.min.js
+        -->
+  <%= javascript_include_tag "codebase.core.min.js" %>
+
+  <!--
+            Codebase JS
+
+            Custom functionality including Blocks/Layout API as well as other vital and optional helpers
+            webpack is putting everything together at assets/_es6/main/app.js
+        -->
+  <%= javascript_include_tag "codebase.app.min.js" %>
+
+  <!-- Page JS Plugins -->
+  <%= javascript_include_tag "Chart.bundle.min.js" %>
+
+  <!-- Page JS Code -->
+  <%= javascript_include_tag "be_pages_dashboard.min.js" %>
+
+</body>
+
+</html>

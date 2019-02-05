@@ -1,38 +1,140 @@
-<div class="row">
-  <div class="col-md-12">
-    <table class="table table-bordered table-striped table-hover">
-      <thead>
-        <tr>
-          <th>Payment ID</th>
-          <th>Amount</th>
-          <th>Created</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @payments.each do |payment| %>
-          <% if payment.source_transfer.source_transaction.present? %>
-            <tr>
-              <td>
-                <% if payment.source_transfer.source_transaction.source.object.eql?('card') %>
-                  <i class="fa fa-credit-card text-muted"></i>
-                <% end %>
-                <span class="leftspace"><%= payment.source_transfer.source_transaction.id %></span>
-                <% if payment.source_transfer.source_transaction.dispute.present? %>
-                  <% if payment.source_transfer.source_transaction.dispute.status.eql?('needs_response') %>
-                    <span class="label label-danger leftspace">Disputed</span>
-                  <% elsif payment.source_transfer.source_transaction.dispute.status.eql?('lost') %>
-                    <span class="label label-default leftspace">Dispute lost</span>
-                  <% elsif payment.source_transfer.source_transaction.dispute.status.eql?('won') %>
-                    <span class="label label-success leftspace">Dispute won</span>
-                  <% end %>
-                <% end %>
-              </td>
-              <td><%= number_to_currency(payment.amount/100) %></td>
-              <td><%= format_date(payment.created) %></td>
-            </tr>
-          <% end %>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
-</div>
+<% if current_user.admin? %>
+                    <div class="row js-appear-enabled animated fadeIn" data-toggle="appear">
+                        <!-- Row #3 -->
+                        <div class="col-md-12">
+                            <div class="block block-rounded block-bordered">
+                                <div class="block-header block-header-default border-b">
+                                    <h3 class="block-title">Uploaded CSVs</h3>
+                                </div>
+                                <div class="block-content">
+                                    <table class="table table-borderless table-striped">
+                                        <% unless @payment_sheets.count == 0 %>
+
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 100px;" class="text-center d-none d-sm-table-cell">ID</th>
+                                                <th># Of Drivers</th>
+                                                <th style="width: 30%;">Total Paid</th>
+                                                <th style="width: 15%;">Created</th>
+                                                <th class="text-center" style="width: 100px;">Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <% @payment_sheets.each do |payment| %>
+                                      <tr class="clickable-row" data-href="/payment_sheet/<%= payment.id %>/disbursments">
+                                        <td class="text-center d-none d-sm-table-cell">PS.<%= payment.id %></td>
+                                        <td><%= payment.number_of_drivers %></td>
+                                        <td><%= number_to_currency(payment.total_paid/100) %></td>
+                                        <td><%= format_date(payment.created_at) %></td>
+                                        <td class="text-center">
+                                        <% if !payment.finished %>
+                                            <span class="badge badge-info">Processing</span>
+                                        <% else %>
+                                            <span class="badge badge-success">Finished</span>
+                                        <% end %>
+                                        </td>
+                                      </tr>
+                                    <% end %>
+                                    <% else %>
+                                        No entries yet
+                                    <% end %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                      
+                    </div>
+<% else %>
+                    <div class="row js-appear-enabled animated fadeIn" data-toggle="appear">
+                        <!-- Row #3 -->
+                        <div class="col-md-6">
+                            <div class="block block-rounded block-bordered">
+                                <div class="block-header block-header-default border-b">
+                                    <h3 class="block-title">Payments</h3>
+                                    <div class="block-options">
+                                        <button type="button" class="btn-block-option" data-toggle="block-option" data-action="state_toggle" data-action-mode="demo">
+                                            <i class="si si-refresh"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="block-content">
+                                    <table class="table data-table table-borderless table-striped">
+                                                      <% unless @payments.data.empty? %>
+
+                                        <thead>
+                                            <tr>
+                                                <th class="d-none d-sm-table-cell" style="width: 100px;">Payment ID</th>
+                                                <th>Amount</th>
+                                                <th>Date</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                                          <% @payments.each do |payment| %>
+                                      <tr>
+                                        <td class="d-none d-sm-table-cell"><%= payment.destination_payment %></td>
+                                        <td><%= number_to_currency(payment.amount.to_f/100) %></div>
+                                        <td><%= format_date(payment.created) %></td>
+                                      </tr>
+                                    <% end %>
+                                        </tbody>
+                                        <% else %>
+                                            <tbody>
+                                            <tr>
+                                            No payments yet
+                                            </tr>
+                                            </tbody>
+                                        <% end %>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="block block-rounded block-bordered">
+                                <div class="block-header block-header-default border-b">
+                                    <h3 class="block-title">Payouts</h3>
+                                    <div class="block-options">
+                                        <button type="button" class="btn-block-option" data-toggle="block-option" data-action="state_toggle" data-action-mode="demo">
+                                            <i class="si si-refresh"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="block-content">
+                                    <table class="table table-borderless table-striped">
+                                    <% unless @payouts.data.empty? %>
+                                        <thead>
+                                            <tr>
+                                                <th class="d-none d-sm-table-cell" style="width: 100px;">Transfer ID</th>
+                                                <th>Destination</th>
+                                                <th>Amount</th>
+                                                <th class="d-none d-sm-table-cell text-center">Date</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                          <% @payouts.each do |payout| %>
+                                            <tr>
+                                              <td class="d-none d-sm-table-cell"><%= payout.id %></td>
+                                              <td>             
+                                                <% if payout.type.eql?('bank_account') %>
+                                                  <%= payout.destination.bank_name %> ending in <%= payout.destination.last4 %>
+                                                <% elsif payout.type.eql?('card') %>
+                                                  <%= payout.destination.brand %> ending in <%= payout.destination.last4 %>
+                                                <% end %>
+                                              </td>
+                                              <td><%= format_amount(payout.amount) %></td>
+                                              <td class="d-none d-sm-table-cell"><%= format_date(payout.arrival_date) %></td>
+                                          </tr>
+                                          <% end %>
+                                        </tbody>
+                                        <% else %>
+                                            <tbody>
+                                                <tr>No payouts yet</tr>
+                                            </tbody>
+                                        <% end %>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END Row #3 -->
+                    </div>
+    <% end %>

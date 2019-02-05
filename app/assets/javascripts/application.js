@@ -15,3 +15,19 @@
 //= require jquery_ujs
 //= require data-confirm-modal
 //= require_tree .
+
+jQuery(document).ready(function($) {
+    $(".clickable-row").click(function() {
+        window.location = $(this).data("href");
+    });
+
+    $('.open-uploader').click(function(){
+        $('.browse-csv').click();
+    });
+
+    $('.browse-csv').change(function(){
+        $('.browse-csv-submit').click();
+    });
+
+    $('.data-table').DataTable();
+});

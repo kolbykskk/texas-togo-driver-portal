@@ -67,8 +67,10 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'figaro'
 
-gem "switch_user"
+gem 'pretender'
 
 gem 'carrierwave', '~> 1.0'
 
 gem 'sidekiq'
+
+gem 'simple-line-icons-rails'

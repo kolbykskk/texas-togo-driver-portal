@@ -118,7 +118,7 @@ h1, h2, h3, h4 {
   border: 1px solid #0080FF;
 }
 .raised {
-  color: #00b19d;
+  color: #3bafda;
 }
 .feature {
   font-family: "Lato";
@@ -195,34 +195,7 @@ h1, h2, h3, h4 {
 .highlight {
   background-color: #CCE6FF;
 }
-/* flash */
-.alert-danger, .alert-error {
-  background-color: #ef5350;
-  box-shadow: 2px 2px 2px rgba(37, 46, 53, 0.06);
-  color: #fff;
-  text-align: left;
-}
-.alert-alert {
-  background-color: #ef5350;
-  box-shadow: 2px 2px 2px rgba(37, 46, 53, 0.06);
-  color: #fff;
-  text-align: left;
-}
-.alert-success {
-  background-color: #00b19d;
-  box-shadow: 2px 2px 2px rgba(37, 46, 53, 0.06);
-  color: #fff;
-  text-align: left;
-}
-.alert-notice {
-  background-color: #00b19d;
-  box-shadow: 2px 2px 2px rgba(37, 46, 53, 0.06);
-  color: #fff;
-  text-align: left;
-}
-.alert-danger h2, .alert-error h2 {
-  margin-top:0px;
-}
+
 .box-shadow {
   -webkit-box-shadow: 0px 2px 3px 0px rgba(50, 50, 50, 0.75);
   -moz-box-shadow:    0px 2px 3px 0px rgba(50, 50, 50, 0.75);

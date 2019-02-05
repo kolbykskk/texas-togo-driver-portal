@@ -79,9 +79,8 @@ class StripeAccountsController < ApplicationController
       current_user.stripe_account = stripe_account.id
 
       if current_user.save
-        flash[:success] = "Your account has been created!
-          Next, add a bank account where you'd like to receive transfers below."
-        redirect_to new_bank_account_path
+        flash[:success] = "Your account has been created!"
+        redirect_to dashboard_path
       else
         handle_error("Sorry, we weren't able to create this account.", 'new')
       end

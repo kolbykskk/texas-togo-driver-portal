@@ -1,0 +1,22 @@
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-bordered table-striped table-hover">
+      <thead>
+        <tr>
+          <th>Total Paid</th>
+          <th># Of Drivers</th>
+          <th>Created</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @payment_sheets.each do |sheet| %>
+            <tr class='clickable-row' data-href="/payment_sheet/<%= sheet.id %>/disbursments">
+              <td><%= number_to_currency(sheet.total_paid.to_f/100) %></td>
+              <td><%= sheet.number_of_drivers %></td>
+              <td><%= format_date(sheet.created_at) %></td>
+            </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

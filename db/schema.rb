@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190201230005) do
+ActiveRecord::Schema.define(version: 20190205205202) do
 
   create_table "campaigns", force: :cascade do |t|
     t.integer  "user_id"
@@ -35,10 +35,37 @@ ActiveRecord::Schema.define(version: 20190201230005) do
     t.string   "name"
   end
 
+  create_table "disbursments", force: :cascade do |t|
+    t.integer  "payment_sheet_id"
+    t.string   "driver_name"
+    t.string   "driver_phone"
+    t.integer  "amount"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.integer  "commissions"
+    t.integer  "tips"
+    t.integer  "charges"
+    t.integer  "credits"
+    t.integer  "deliveries_made"
+    t.index ["payment_sheet_id"], name: "index_disbursments_on_payment_sheet_id"
+  end
+
   create_table "payment_sheets", force: :cascade do |t|
     t.string   "sheet"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.integer  "number_of_drivers"
+    t.integer  "total_paid"
+    t.boolean  "finished",          default: false
+  end
+
+  create_table "stats", force: :cascade do |t|
+    t.integer  "deliveries"
+    t.integer  "days_worked"
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["user_id"], name: "index_stats_on_user_id"
   end
 
   create_table "stripe_accounts", force: :cascade do |t|
@@ -79,6 +106,8 @@ ActiveRecord::Schema.define(version: 20190201230005) do
     t.string   "stripe_account"
     t.boolean  "admin",                  default: false
     t.string   "phone_number"
+    t.string   "first_name"
+    t.string   "last_name"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

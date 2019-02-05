@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
+  impersonates :user
 
   # Pretty generic method to handle exceptions.
   # You'll probably want to do some logging, notifications, etc.

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  deliveries: 1
+  days_worked: 1
+  user: one
+
+two:
+  deliveries: 1
+  days_worked: 1
+  user: two
