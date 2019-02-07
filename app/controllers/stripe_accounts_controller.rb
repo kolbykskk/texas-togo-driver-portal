@@ -13,9 +13,9 @@ class StripeAccountsController < ApplicationController
         # For readability, both account creation options are shown separately
 
         # First option: create an account with full account application info
-        if params[:full_account]
+        # if params[:full_account]
           stripe_account = Stripe::Account.create(
-            managed: true,
+            type: 'custom',
             payout_schedule: {
               "interval": "manual"
             },
@@ -42,29 +42,29 @@ class StripeAccountsController < ApplicationController
             }
           )
 
-        # Second option: create an account with incremental info
-        else
-          stripe_account = Stripe::Account.create(
-            managed: true,
-            payout_schedule: {
-              "interval": "manual"
-            },
-            legal_entity: {
-              first_name: account_params[:first_name].capitalize,
-              last_name: account_params[:last_name].capitalize,
-              type: account_params[:account_type],
-              dob: {
-                day: account_params[:dob_day],
-                month: account_params[:dob_month],
-                year: account_params[:dob_year]
-              }
-            },
-            tos_acceptance: {
-              date: Time.now.to_i,
-              ip: request.remote_ip
-            }
-          )
-        end
+        # # Second option: create an account with incremental info
+        # else
+        #   stripe_account = Stripe::Account.create(
+        #     type: 'custom',
+        #     payout_schedule: {
+        #       "interval": "manual"
+        #     },
+        #     legal_entity: {
+        #       first_name: account_params[:first_name].capitalize,
+        #       last_name: account_params[:last_name].capitalize,
+        #       type: account_params[:account_type],
+        #       dob: {
+        #         day: account_params[:dob_day],
+        #         month: account_params[:dob_month],
+        #         year: account_params[:dob_year]
+        #       }
+        #     },
+        #     tos_acceptance: {
+        #       date: Time.now.to_i,
+        #       ip: request.remote_ip
+        #     }
+        #   )
+        # end
 
       # If this is a business, update with these values
       if account_params[:account_type].eql?('company')
