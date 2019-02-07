@@ -4,7 +4,7 @@ class ProcessPaymentSheetWorker
 
   def perform(*args)
     payment_sheet = PaymentSheet.last
-    CSV.foreach(open(payment_sheet.sheet.url)).map { |row| 
+    CSV.foreach(CSV.parse(open(payment_sheet.sheet.url).read).map { |row| 
       user = User.find_by(phone_number: row[1])
       if !user.nil?
         amount = (row[9].to_f * 100).to_i
