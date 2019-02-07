@@ -12,7 +12,7 @@ class PaymentSheetsController < ApplicationController
   end
 
   def disbursments
-    @payment_sheet = PaymentSheet.find_by(params[:id])
+    @payment_sheet = PaymentSheet.find(params[:id])
     @disbursments = Disbursment.where(payment_sheet_id: params[:id])
     @driver_count = @disbursments.count
     @total_paid = @disbursments.sum(:amount)
