@@ -76,3 +76,5 @@ gem 'sidekiq'
 gem 'simple-line-icons-rails'
 
 gem 'toastr-rails'
+
+gem 'fog'
