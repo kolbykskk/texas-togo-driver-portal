@@ -3,6 +3,7 @@ class PaymentSheetsController < ApplicationController
     @payment_sheet = PaymentSheet.new(payment_sheet_params)
     if @payment_sheet.save
         ProcessPaymentSheetWorker.perform_async
+        flash[:success] = "Payment disbursment process successfully started in the background."
         redirect_to dashboard_path
     else
       flash[:error] = "There was an error."

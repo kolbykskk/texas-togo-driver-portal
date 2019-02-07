@@ -74,3 +74,5 @@ gem 'carrierwave', '~> 1.0'
 gem 'sidekiq'
 
 gem 'simple-line-icons-rails'
+
+gem 'toastr-rails'

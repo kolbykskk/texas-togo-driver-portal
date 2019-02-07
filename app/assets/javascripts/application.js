@@ -14,6 +14,7 @@
 //= require bootstrap
 //= require jquery_ujs
 //= require data-confirm-modal
+//= require toastr
 //= require_tree .
 
 jQuery(document).ready(function($) {
@@ -28,6 +29,4 @@ jQuery(document).ready(function($) {
     $('.browse-csv').change(function(){
         $('.browse-csv-submit').click();
     });
-
-    $('.data-table').DataTable();
 });

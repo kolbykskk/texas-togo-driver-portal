@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
     def index
-        @users = User.order(:id)
+        @users = User.where('admin IS ?', false).order(:id)
     end
     
     def impersonate
