@@ -486,7 +486,7 @@
                         <%= link_to users_path, class: 'block text-center' do %>
                         <div class="block-content ribbon ribbon-bookmark ribbon-crystal ribbon-left bg-gd-dusk">
                             <div class="ribbon-box">
-                                <%= User.count %>
+                                <%= User.where.not(admin: true).count %>
                             </div>
                             <p class="mt-5">
                                 <i class="si si-users fa-3x text-white-op"></i>
