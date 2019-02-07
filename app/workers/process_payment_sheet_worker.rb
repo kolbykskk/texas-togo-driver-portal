@@ -4,7 +4,7 @@ class ProcessPaymentSheetWorker
 
   def perform(*args)
     payment_sheet = PaymentSheet.last
-    CSV.read(open(payment_sheet.sheet.url))).map { |row| 
+    CSV.new(open(payment_sheet.sheet.url)).each do |row| 
       user = User.find_by(phone_number: row[1])
       if !user.nil?
         amount = (row[9].to_f * 100).to_i
@@ -34,7 +34,7 @@ class ProcessPaymentSheetWorker
         Disbursment.create(deliveries_made: row[10].to_i, commissions: commissions, tips: tips, charges: charges, credits: credits, payment_sheet_id: payment_sheet.id, driver_name: row[0], driver_phone: row[1], amount: amount)
         payment_sheet.number_of_drivers += 1 
       end
-    }
+    end
     payment_sheet.finished = true
     payment_sheet.save
   end
