@@ -7,7 +7,7 @@ class RetryDisbursmentsWorker
 
     not_found_disbursments.each do |item|
       user = User.find_by(phone_number: item.driver_phone)
-      next if user.nil? || !user.try(:stripe_account).nil?
+      next if user.nil? || user.try(:stripe_account).nil?
 
       amount = item.amount
   
