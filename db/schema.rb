@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190205205202) do
+ActiveRecord::Schema.define(version: 20190208135852) do
 
   create_table "campaigns", force: :cascade do |t|
     t.integer  "user_id"
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 20190205205202) do
     t.integer  "charges"
     t.integer  "credits"
     t.integer  "deliveries_made"
+    t.boolean  "not_found"
     t.index ["payment_sheet_id"], name: "index_disbursments_on_payment_sheet_id"
   end
 
@@ -57,6 +58,7 @@ ActiveRecord::Schema.define(version: 20190205205202) do
     t.integer  "number_of_drivers"
     t.integer  "total_paid"
     t.boolean  "finished",          default: false
+    t.integer  "not_found"
   end
 
   create_table "stats", force: :cascade do |t|

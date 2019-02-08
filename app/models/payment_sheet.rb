@@ -6,5 +6,6 @@ class PaymentSheet < ApplicationRecord
     def default_values
         self.total_paid ||= 0
         self.number_of_drivers ||= 0
+        self.not_found ||= 0
     end
 end

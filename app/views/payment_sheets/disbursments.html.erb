@@ -237,7 +237,7 @@
                                     </thead>
                                     <tbody>
                                         <% @disbursments.each do |disbursment| %>
-                                        <tr>
+                                        <tr class="<%= disbursment.not_found ? "bg-danger-light" : "bg-success-light" %>">
                                             <td>
                                                 <%= disbursment.driver_name %>
                                             </td>
