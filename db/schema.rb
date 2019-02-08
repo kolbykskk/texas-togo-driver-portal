@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190208135852) do
+ActiveRecord::Schema.define(version: 20190208142256) do
 
   create_table "campaigns", force: :cascade do |t|
     t.integer  "user_id"
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 20190208135852) do
     t.integer  "total_paid"
     t.boolean  "finished",          default: false
     t.integer  "not_found"
+    t.boolean  "failed"
   end
 
   create_table "stats", force: :cascade do |t|

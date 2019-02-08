@@ -29,10 +29,12 @@
                                         <td><%= number_to_currency(payment.total_paid/100) %></td>
                                         <td><%= format_date(payment.created_at) %></td>
                                         <td class="text-center">
-                                        <% if !payment.finished %>
-                                            <span class="badge badge-info">Processing</span>
-                                        <% else %>
+                                        <% if payment.failed %>
+                                            <span class="badge badge-danger">Failed</span>
+                                        <% elsif payment.finished %>
                                             <span class="badge badge-success">Finished</span>
+                                        <% else %>
+                                            <span class="badge badge-info">Processing</span>
                                         <% end %>
                                         </td>
                                       </tr>
