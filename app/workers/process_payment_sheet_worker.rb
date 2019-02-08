@@ -1,6 +1,7 @@
 class ProcessPaymentSheetWorker
   include Sidekiq::Worker
   require 'csv'    
+  sidekiq_options retry: false, backtrace: true
 
   def perform(*args)
     begin
