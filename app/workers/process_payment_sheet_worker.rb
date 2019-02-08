@@ -30,12 +30,11 @@ class ProcessPaymentSheetWorker
               }
             )
             Disbursment.create(deliveries_made: row[10].to_i, commissions: commissions, tips: tips, charges: charges, credits: credits, payment_sheet_id: payment_sheet.id, driver_name: row[0], driver_phone: row[1], amount: amount)
+            payment_sheet.number_of_drivers += 1 
           else
             Disbursment.create(not_found: true, deliveries_made: row[10].to_i, commissions: commissions, tips: tips, charges: charges, credits: credits, payment_sheet_id: payment_sheet.id, driver_name: row[0], driver_phone: row[1], amount: amount)
             payment_sheet.not_found += 1
           end
-
-          payment_sheet.number_of_drivers += 1 
       end
       payment_sheet.finished = true
       payment_sheet.save
