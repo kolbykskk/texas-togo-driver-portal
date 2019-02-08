@@ -40,6 +40,7 @@ class ProcessPaymentSheetWorker
       payment_sheet.finished = true
       payment_sheet.save
     rescue => e
+      puts e
       payment_sheet = PaymentSheet.last
       payment_sheet.failed = true
       payment_sheet.save
