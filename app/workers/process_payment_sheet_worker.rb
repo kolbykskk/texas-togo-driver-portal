@@ -5,7 +5,7 @@ class ProcessPaymentSheetWorker
   def perform(*args)
     begin
       payment_sheet = PaymentSheet.last
-      CSV.new(open(payment_sheet.sheet.url)).each do |row| 
+      CSV.new(open(payment_sheet.sheet.path)).each do |row| 
         user = User.find_by(phone_number: row[1])
 
           amount = (row[9].to_f * 100).to_i

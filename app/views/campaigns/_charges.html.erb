@@ -7,7 +7,7 @@
                                     <h3 class="block-title">Uploaded CSVs</h3>
                                 </div>
                                 <div class="block-content">
-                                    <table class="table table-borderless table-striped">
+                                    <table class="table data-table table-borderless table-striped">
                                         <% unless @payment_sheets.count == 0 %>
 
                                         <thead>
@@ -44,6 +44,7 @@
                                     <% end %>
                                         </tbody>
                                     </table>
+                                    <%= will_paginate @payment_sheets, renderer: BootstrapPagination::Rails %>
                                 </div>
                             </div>
                         </div>

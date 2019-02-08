@@ -14,9 +14,15 @@ class PaymentSheetsController < ApplicationController
   def disbursments
     @payment_sheet = PaymentSheet.find(params[:id])
     @disbursments = Disbursment.where(payment_sheet_id: params[:id])
-    @driver_count = @disbursments.where.not(not_found: true).count
-    @total_paid = @disbursments.where.not(not_found: true).sum(:amount)
-    @deliveries_made = @disbursments.where.not(not_found: true).sum(:deliveries_made)
+    @driver_count = @disbursments.where(not_found: false).count
+    @total_paid = @disbursments.where(not_found: false).sum(:amount)
+    @deliveries_made = @disbursments.where(not_found: false).sum(:deliveries_made)
+  end
+
+  def retry
+    RetryDisbursmentsWorker.perform_async(params[:payment_sheet_id])
+    flash[:success] = "Retry started in the background. This won't take long."
+    redirect_back(fallback_location: root_path)
   end
 
   private

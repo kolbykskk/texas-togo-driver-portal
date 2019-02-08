@@ -19,6 +19,8 @@ Rails.application.routes.draw do
   post 'webhooks/stripe', to: 'webhooks#stripe'
   get 'payment_sheet/:id/disbursments', to: 'payment_sheets#disbursments'
 
+  get '/retry', to: 'payment_sheets#retry'
+
   resources :users, only: [:index] do
     post :impersonate, on: :member
     post :stop_impersonating, on: :collection

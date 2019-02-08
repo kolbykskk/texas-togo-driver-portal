@@ -78,3 +78,7 @@ gem 'simple-line-icons-rails'
 gem 'toastr-rails'
 
 gem 'fog'
+
+gem 'will_paginate'
+
+gem 'will_paginate-bootstrap'

@@ -206,6 +206,8 @@
                         </div>
                         <!-- END Row #1 -->
                     </div>
+                                    <%= render 'layouts/messages' %>
+
                 <div class="row js-appear-enabled animated fadeIn" data-toggle="appear">
                     <!-- Row #3 -->
                     <div class="col-md-12">
@@ -214,12 +216,13 @@
                                 <h3 class="block-title">
                                     <%= format_date(@payment_sheet.created_at) %>
                                 </h3>
-                                <div class="block-options">
-                                    <button type="button" class="btn-block-option" data-toggle="block-option"
-                                        data-action="state_toggle" data-action-mode="demo">
-                                        <i class="si si-refresh"></i>
-                                    </button>
-                                </div>
+                                <% if @payment_sheet.not_found > 0 %>
+                                    <div class="block-options">
+                                        <%= button_to retry_path, method: 'get', params: {payment_sheet_id: @payment_sheet.id}, class: 'btn-block-option' do %>
+                                            <i class="si si-refresh"></i>
+                                        <% end %>
+                                    </div>
+                                <% end %>
                             </div>
                             <div class="block-content">
                                 <table class="table table-borderless table-striped">

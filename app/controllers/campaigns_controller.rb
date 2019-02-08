@@ -82,7 +82,7 @@ class CampaignsController < ApplicationController
       @balance_available = @balance.available.first.amount
       @balance_pending = @balance.pending.first.amount
 
-      @payment_sheets = PaymentSheet.all.order(created_at: :desc)
+      @payment_sheets = PaymentSheet.paginate(:page => params[:page], :per_page => 10).order('id DESC')
 
       # Retrieve transactions with an available_on date in the future
       # For a large platform, it's generally preferrable to handle these async
