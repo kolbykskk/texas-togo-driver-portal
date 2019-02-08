@@ -29,7 +29,7 @@ class ChargesController < ApplicationController
         source: charge_params[:stripeToken],
         amount: amount,
         currency: "usd",
-        # application_fee: amount/10, # Take a 10% application fee for the platform
+        application_fee: amount/100, # Take a 10% application fee for the platform
         destination: account_id
         }
       )
