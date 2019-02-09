@@ -22,7 +22,7 @@ class PaymentSheetsController < ApplicationController
 
   def retry
     RetryDisbursmentsWorker.perform_async(params[:payment_sheet_id])
-    flash[:success] = "Retry started in the background. This won't take long."
+    flash[:success] = "Retry started in the background."
     redirect_back(fallback_location: root_path)
   end
 
