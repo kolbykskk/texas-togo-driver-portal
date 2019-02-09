@@ -56,6 +56,8 @@ class CampaignsController < ApplicationController
       redirect_to new_stripe_account_path and return
     end
 
+    @payment_sheets = PaymentSheet.paginate(:page => params[:page], :per_page => 10).order('id DESC')
+    if !current_user.admin?
     # Retrieve charges, transfers, balance transactions, & balance from Stripe
     begin
       @stripe_account = Stripe::Account.retrieve(current_user.stripe_account)
@@ -82,7 +84,6 @@ class CampaignsController < ApplicationController
       @balance_available = @balance.available.first.amount
       @balance_pending = @balance.pending.first.amount
 
-      @payment_sheets = PaymentSheet.paginate(:page => params[:page], :per_page => 10).order('id DESC')
 
       # Retrieve transactions with an available_on date in the future
       # For a large platform, it's generally preferrable to handle these async
@@ -128,6 +129,7 @@ class CampaignsController < ApplicationController
       flash[:error] = e.message
       redirect_to root_path
     end
+  end
   end
 
   def edit
