@@ -29,7 +29,6 @@ class RetryDisbursmentsWorker
       item.save
       payment_sheet.not_found -= 1
       payment_sheet.number_of_drivers += 1 
-      payment_sheet.total_paid += item.amount
       payment_sheet.save
     end
   end
