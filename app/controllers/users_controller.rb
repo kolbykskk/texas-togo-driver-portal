@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
     def index
         @users = User.where.not(admin: true).order(:id)
+        authorize @users
     end
     
     def impersonate

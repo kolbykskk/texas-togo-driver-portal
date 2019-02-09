@@ -305,114 +305,11 @@
                 </div>
                 <% end %>
 
-                <%= render 'charges' %>
-                <% if @balance_available > 0 && !current_user.admin? %>
-                <div class="row js-appear-enabled animated fadeIn" data-toggle="appear">
-                    <!-- Row #3 -->
-                    <div class="col-md-6">
-                        <div class="block">
-                            <div class="block-content block-content-full">
-
-
-                                <div class="topspace text-center">
-                                    <h3>Want your funds immediately?</h3>
-                                    <p>
-                                        For an extra 3% fee, we'll create an instant transfer to your debit card.
-                                    </p>
-                                    <% if @debit_card %>
-                                        <button data-target='#debit-fadein' class="trigger-debit btn btn-alt-secondary" data-toggle='modal'>Get this transfer instantly</button>
-                                    <% else %>
-                                        <%= link_to "Add a debit card", debit_cards_new_path, class: "btn btn-alt-secondary" %>
-                                    <% end %>
-                                </div>
-                                <div class="strike">
-                                    <span>or</span>
-                                </div>
-                                <div class="topspace text-center">
-                                    <% if @bank_account %>
-                                        <button data-target='#bank-fadein' class="trigger-bank btn btn-alt-primary" data-toggle='modal'>Get this transfer in 2-5 days</button>
-                                    <% else %>
-                                        <%= link_to "Add a bank account", new_bank_account_path, class: "btn btn-alt-primary" %>
-                                    <% end %>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <% end %>
-                <!-- END Page Content -->
-
-                <% if @debit_card %>
-                    <!-- Fade In Modal -->
-                    <div class="modal fade" id="debit-fadein" tabindex="-1" role="dialog" aria-labelledby="modal-fadein"
-                        aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="block block-themed block-transparent mb-0">
-                                    <div class="block-header bg-primary-dark">
-                                        <h3 class="block-title">Confirm</h3>
-                                        <div class="block-options">
-                                            <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
-                                                <i class="si si-close"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="block-content">
-                                        <p class="debit-msg"></p>
-                                        <script>
-                                            $('.trigger-debit').click(function(){
-                                                $('.debit-msg').text($('.confirm-debit').data('msg'));
-                                            });
-                                        </script>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-alt-secondary" data-dismiss="modal">Close</button>
-                                    <%= button_to instant_transfer_path, method: :post, data: { msg: "Instant payout of #{format_amount(@standard_amt)} to your #{@debit_card.brand} card ending in #{@debit_card.last4}?", disable_with: "<i class='fa fa-spinner fa-spin'></i> Transferring funds..." }, params: { amount: @instant_amt.round, fee: @instant_fee.round, destination: @debit_card.id, method: 'instant' }, class: "confirm-debit btn btn-alt-success" do %>
-                                        <i class="fa fa-check"></i> Perfect
-                                    <% end %>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- END Fade In Modal -->
-                <% end %>
-
-                <% if @bank_account %>
-                    <!-- Fade In Modal -->
-                    <div class="modal fade" id="bank-fadein" tabindex="-1" role="dialog" aria-labelledby="modal-fadein"
-                        aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="block block-themed block-transparent mb-0">
-                                    <div class="block-header bg-primary-dark">
-                                        <h3 class="block-title">Confirm</h3>
-                                        <div class="block-options">
-                                            <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
-                                                <i class="si si-close"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="block-content">
-                                        <p class="bank-msg"></p>
-                                        <script>
-                                            $('.trigger-bank').click(function(){
-                                                $('.bank-msg').text($('.confirm-bank').data('msg'));
-                                            });
-                                        </script>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-alt-secondary" data-dismiss="modal">Close</button>
-                                    <%= button_to instant_transfer_path, method: :post, data: { msg: "Standard payout of #{format_amount(@standard_amt)} to your #{@bank_account.bank_name} bank account ending in #{@bank_account.last4}?", disable_with: "<i class='fa fa-spinner fa-spin'></i> Transferring funds..." }, params: { amount: @instant_amt.round, fee: @instant_fee.round, destination: @debit_card.id, method: 'instant' }, class: "confirm-bank btn btn-alt-success" do %>
-                                        <i class="fa fa-check"></i> Perfect
-                                    <% end %>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- END Fade In Modal -->
-                <% end %>
+                <% if !current_user.admin %>
+                    <%= render 'charges' %>
+                <% else %>
+                    <%= render 'admin' %>
+                <% end  %>
         </main>
         <!-- END Main Container -->
 
@@ -423,7 +320,7 @@
                     Texas ToGo Driver Portal
                 </div>
                 <div class="float-left">
-                    &copy; 2015-2018 Texas ToGo. All Rights Reserved
+                    &copy; 2015-2019 Texas ToGo. 
                 </div>
             </div>
         </footer>

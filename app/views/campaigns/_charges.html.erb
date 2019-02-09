@@ -1,56 +1,4 @@
-<% if current_user.admin? %>
-                    <div class="row js-appear-enabled animated fadeIn" data-toggle="appear">
-                        <!-- Row #3 -->
-                        <div class="col-md-12">
-                            <div class="block block-rounded block-bordered">
-                                <div class="block-header block-header-default border-b">
-                                    <h3 class="block-title">Uploaded CSVs</h3>
-                                </div>
-                                <div class="block-content">
-                                    <table class="table data-table table-borderless table-striped">
-                                        <% unless @payment_sheets.count == 0 %>
 
-                                        <thead>
-                                            <tr>
-                                                <th style="width: 100px;" class="text-center d-none d-sm-table-cell">ID</th>
-                                                <th># Of Drivers</th>
-                                                <th>Not Found</th>
-                                                <th style="width: 30%;">Total Paid</th>
-                                                <th style="width: 15%;">Created</th>
-                                                <th class="text-center" style="width: 100px;">Status</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        <% @payment_sheets.each do |payment| %>
-                                      <tr class="clickable-row" data-href="/payment_sheet/<%= payment.id %>/disbursments">
-                                        <td class="text-center d-none d-sm-table-cell">PS.<%= payment.id %></td>
-                                        <td><%= payment.number_of_drivers %></td>
-                                        <td><%= payment.not_found %></td>
-                                        <td><%= number_to_currency(payment.total_paid/100) %></td>
-                                        <td><%= format_date(payment.created_at) %></td>
-                                        <td class="text-center">
-                                        <% if payment.failed %>
-                                            <span class="badge badge-danger">Failed</span>
-                                        <% elsif payment.finished %>
-                                            <span class="badge badge-success">Finished</span>
-                                        <% else %>
-                                            <span class="badge badge-info">Processing</span>
-                                        <% end %>
-                                        </td>
-                                      </tr>
-                                    <% end %>
-                                    <% else %>
-                                        No entries yet
-                                    <% end %>
-                                        </tbody>
-                                    </table>
-                                    <%= will_paginate @payment_sheets, renderer: BootstrapPagination::Rails %>
-                                </div>
-                            </div>
-                        </div>
-                      
-                    </div>
-<% else %>
                     <div class="row js-appear-enabled animated fadeIn" data-toggle="appear">
                         <!-- Row #3 -->
                         <div class="col-md-6">
@@ -142,4 +90,111 @@
                         </div>
                         <!-- END Row #3 -->
                     </div>
-    <% end %>
+
+                                    <% if @balance_available > 0 %>
+                <div class="row js-appear-enabled animated fadeIn" data-toggle="appear">
+                    <!-- Row #3 -->
+                    <div class="col-md-6">
+                        <div class="block">
+                            <div class="block-content block-content-full">
+
+
+                                <div class="topspace text-center">
+                                    <h3>Want your funds immediately?</h3>
+                                    <p>
+                                        For an extra 3% fee, we'll create an instant transfer to your debit card.
+                                    </p>
+                                    <% if @debit_card %>
+                                        <button data-target='#debit-fadein' class="trigger-debit btn btn-alt-secondary" data-toggle='modal'>Get this transfer instantly</button>
+                                    <% else %>
+                                        <%= link_to "Add a debit card", debit_cards_new_path, class: "btn btn-alt-secondary" %>
+                                    <% end %>
+                                </div>
+                                <div class="strike">
+                                    <span>or</span>
+                                </div>
+                                <div class="topspace text-center">
+                                    <% if @bank_account %>
+                                        <button data-target='#bank-fadein' class="trigger-bank btn btn-alt-primary" data-toggle='modal'>Get this transfer in 2-5 days</button>
+                                    <% else %>
+                                        <%= link_to "Add a bank account", new_bank_account_path, class: "btn btn-alt-primary" %>
+                                    <% end %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <% end %>
+                <!-- END Page Content -->
+
+                <% if @debit_card %>
+                    <!-- Fade In Modal -->
+                    <div class="modal fade" id="debit-fadein" tabindex="-1" role="dialog" aria-labelledby="modal-fadein"
+                        aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="block block-themed block-transparent mb-0">
+                                    <div class="block-header bg-primary-dark">
+                                        <h3 class="block-title">Confirm</h3>
+                                        <div class="block-options">
+                                            <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
+                                                <i class="si si-close"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="block-content">
+                                        <p class="debit-msg"></p>
+                                        <script>
+                                            $('.trigger-debit').click(function(){
+                                                $('.debit-msg').text($('.confirm-debit').data('msg'));
+                                            });
+                                        </script>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-alt-secondary" data-dismiss="modal">Close</button>
+                                    <%= button_to instant_transfer_path, method: :post, data: { msg: "Instant payout of #{format_amount(@standard_amt)} to your #{@debit_card.brand} card ending in #{@debit_card.last4}?", disable_with: "<i class='fa fa-spinner fa-spin'></i> Transferring funds..." }, params: { amount: @instant_amt.round, fee: @instant_fee.round, destination: @debit_card.id, method: 'instant' }, class: "confirm-debit btn btn-alt-success" do %>
+                                        <i class="fa fa-check"></i> Perfect
+                                    <% end %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END Fade In Modal -->
+                <% end %>
+
+                <% if @bank_account %>
+                    <!-- Fade In Modal -->
+                    <div class="modal fade" id="bank-fadein" tabindex="-1" role="dialog" aria-labelledby="modal-fadein"
+                        aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="block block-themed block-transparent mb-0">
+                                    <div class="block-header bg-primary-dark">
+                                        <h3 class="block-title">Confirm</h3>
+                                        <div class="block-options">
+                                            <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
+                                                <i class="si si-close"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="block-content">
+                                        <p class="bank-msg"></p>
+                                        <script>
+                                            $('.trigger-bank').click(function(){
+                                                $('.bank-msg').text($('.confirm-bank').data('msg'));
+                                            });
+                                        </script>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-alt-secondary" data-dismiss="modal">Close</button>
+                                    <%= button_to instant_transfer_path, method: :post, data: { msg: "Standard payout of #{format_amount(@standard_amt)} to your #{@bank_account.bank_name} bank account ending in #{@bank_account.last4}?", disable_with: "<i class='fa fa-spinner fa-spin'></i> Transferring funds..." }, params: { amount: @instant_amt.round, fee: @instant_fee.round, destination: @debit_card.id, method: 'instant' }, class: "confirm-bank btn btn-alt-success" do %>
+                                        <i class="fa fa-check"></i> Perfect
+                                    <% end %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END Fade In Modal -->
+                <% end %>

@@ -1,0 +1,54 @@
+   <div class="row js-appear-enabled animated fadeIn" data-toggle="appear">
+                        <!-- Row #3 -->
+                        <div class="col-md-12">
+                            <div class="block block-rounded block-bordered">
+                                <div class="block-header block-header-default border-b">
+                                    <h3 class="block-title">Uploaded CSVs</h3>
+                                </div>
+                                <div class="block-content">
+                                                            <div class="table-responsive">
+
+                                    <table class="table data-table table-borderless table-striped">
+                                        <% unless @payment_sheets.count == 0 %>
+
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 100px;" class="text-center d-none d-sm-table-cell">ID</th>
+                                                <th># Of Drivers</th>
+                                                <th>Not Found</th>
+                                                <th style="width: 30%;">Total Paid</th>
+                                                <th style="width: 15%;">Created</th>
+                                                <th class="text-center" style="width: 100px;">Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <% @payment_sheets.each do |payment| %>
+                                      <tr class="clickable-row" data-href="/payment_sheet/<%= payment.id %>/disbursments">
+                                        <td class="text-center d-none d-sm-table-cell">PS.<%= payment.id %></td>
+                                        <td><%= payment.number_of_drivers %></td>
+                                        <td><%= payment.not_found %></td>
+                                        <td><%= number_to_currency(payment.total_paid/100) %></td>
+                                        <td><%= format_date(payment.created_at) %></td>
+                                        <td class="text-center">
+                                        <% if payment.failed %>
+                                            <span class="badge badge-danger">Failed</span>
+                                        <% elsif payment.finished %>
+                                            <span class="badge badge-success">Finished</span>
+                                        <% else %>
+                                            <span class="badge badge-info">Processing</span>
+                                        <% end %>
+                                        </td>
+                                      </tr>
+                                    <% end %>
+                                    <% else %>
+                                        No entries yet
+                                    <% end %>
+                                        </tbody>
+                                    </table>
+                                    </div>
+                                    <%= will_paginate @payment_sheets, renderer: BootstrapPagination::Rails %>
+                                </div>
+                            </div>
+                        </div>
+                      
+                    </div>

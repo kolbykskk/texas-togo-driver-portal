@@ -5,7 +5,15 @@ Rails.application.routes.draw do
   get 'payment_sheets/create'
 
   devise_for :users, controllers: { registrations: "registrations" }
-  root to: "campaigns#dashboard"
+
+  authenticated :user do
+    root 'campaigns#dashboard', as: :authenticated_root
+  end
+
+  devise_scope :user do
+    root to: "devise/sessions#new"
+  end
+  
   get 'dashboard', to: 'campaigns#dashboard'
   get 'pricing', to: 'pages#pricing'
   get 'terms', to: 'pages#terms'
