@@ -51,7 +51,7 @@ class CampaignsController < ApplicationController
     @campaigns = current_user.campaigns.order(created_at: :desc)
 
     # Redirect if there's not a Stripe account for this user yet
-    unless current_user.stripe_account || current_user.admin
+    if !current_user.stripe_account && !current_user.admin
       flash[:success] = "Create an account to get started."
       redirect_to new_stripe_account_path and return
     end
