@@ -13,7 +13,7 @@
 
                                         <thead>
                                             <tr>
-                                                <th style="width: 100px;" class="text-center d-none d-sm-table-cell">ID</th>
+                                                <th style="width: 100px;" class="text-center">ID</th>
                                                 <th># Of Drivers</th>
                                                 <th>Not Found</th>
                                                 <th style="width: 30%;">Total Paid</th>
@@ -24,7 +24,7 @@
                                         <tbody>
                                         <% @payment_sheets.each do |payment| %>
                                       <tr class="clickable-row" data-href="/payment_sheet/<%= payment.id %>/disbursments">
-                                        <td class="text-center d-none d-sm-table-cell">PS.<%= payment.id %></td>
+                                        <td class="text-center">PS.<%= payment.id %></td>
                                         <td><%= payment.number_of_drivers %></td>
                                         <td><%= payment.not_found %></td>
                                         <td><%= number_to_currency(payment.total_paid/100) %></td>

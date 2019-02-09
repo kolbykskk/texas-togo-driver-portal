@@ -17,7 +17,7 @@
 
                                         <thead>
                                             <tr>
-                                                <th class="d-none d-sm-table-cell" style="width: 100px;">Payment ID</th>
+                                                <th style="width: 100px;">Payment ID</th>
                                                 <th>Amount</th>
                                                 <th>Date</th>
                                             </tr>
@@ -25,7 +25,7 @@
                                         <tbody>
                                                                           <% @payments.each do |payment| %>
                                       <tr>
-                                        <td class="d-none d-sm-table-cell"><%= payment.destination_payment %></td>
+                                        <td><%= payment.destination_payment %></td>
                                         <td><%= number_to_currency(payment.amount.to_f/100) %></div>
                                         <td><%= format_date(payment.created) %></td>
                                       </tr>
@@ -57,16 +57,16 @@
                                     <% unless @payouts.data.empty? %>
                                         <thead>
                                             <tr>
-                                                <th class="d-none d-sm-table-cell" style="width: 100px;">Transfer ID</th>
+                                                <th style="width: 100px;">Transfer ID</th>
                                                 <th>Destination</th>
                                                 <th>Amount</th>
-                                                <th class="d-none d-sm-table-cell text-center">Date</th>
+                                                <th class="text-center">Date</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                           <% @payouts.each do |payout| %>
                                             <tr>
-                                              <td class="d-none d-sm-table-cell"><%= payout.id %></td>
+                                              <td><%= payout.id %></td>
                                               <td>             
                                                 <% if payout.type.eql?('bank_account') %>
                                                   <%= payout.destination.bank_name %> ending in <%= payout.destination.last4 %>
@@ -75,7 +75,7 @@
                                                 <% end %>
                                               </td>
                                               <td><%= format_amount(payout.amount) %></td>
-                                              <td class="d-none d-sm-table-cell"><%= format_date(payout.arrival_date) %></td>
+                                              <td><%= format_date(payout.arrival_date) %></td>
                                           </tr>
                                           <% end %>
                                         </tbody>
