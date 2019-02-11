@@ -88,7 +88,7 @@
           <div class="col-md-4">
             <div class="form-group">
               <%= f.label :address_state, "State" %>
-              <%= f.select(:address_state, options_for_select(states, @account[:address_state]), {:selected => 'Texas'}, { class: "form-control input-lg" }) %>
+              <%= f.select(:address_state, options_for_select(states, 'TX'), {}, { class: "form-control input-lg" }) %>
             </div>
           </div>
           <div class="col-md-4">
