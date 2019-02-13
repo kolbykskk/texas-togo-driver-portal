@@ -29,6 +29,4 @@ jQuery(document).ready(function($) {
     $('.browse-csv').change(function(){
         $('.browse-csv-submit').click();
     });
-
-    $(".data-table").DataTable();
 });
