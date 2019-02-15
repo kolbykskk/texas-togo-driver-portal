@@ -6,7 +6,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-    validates_presence_of :first_name
-    validates_presence_of :last_name
-    validates_presence_of :phone_number, unique: true
+  validates_presence_of :first_name
+  validates_presence_of :last_name
+  validates_presence_of :phone_number, unique: true
+
+  def phone_number=(val)
+    write_attribute(:phone_number, val.gsub(/[^\w\s]/, ''))
+  end
 end

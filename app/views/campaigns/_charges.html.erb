@@ -157,7 +157,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-alt-secondary" data-dismiss="modal">Close</button>
-                                    <%= button_to instant_transfer_path, method: :post, data: { msg: "Instant payout of #{format_amount(@standard_amt)} to your #{@debit_card.brand} card ending in #{@debit_card.last4}?", disable_with: "<i class='fa fa-spinner fa-spin'></i> Transferring funds..." }, params: { amount: @instant_amt.round, fee: @instant_fee.round, destination: @debit_card.id, method: 'instant' }, class: "confirm-debit btn btn-alt-success" do %>
+                                    <%= button_to instant_transfer_path, method: :post, data: { msg: "Instant payout of #{format_amount(@instant_amt)} to your #{@debit_card.brand} card ending in #{@debit_card.last4}?", disable_with: "<i class='fa fa-spinner fa-spin'></i> Transferring funds..." }, params: { amount: @instant_amt.round, fee: @instant_fee.round, destination: @debit_card.id, method: 'instant' }, class: "confirm-debit btn btn-alt-success" do %>
                                         <i class="fa fa-check"></i> Perfect
                                     <% end %>
                                 </div>
