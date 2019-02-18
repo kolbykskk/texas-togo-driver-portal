@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   get 'payment_sheet/:id/disbursments', to: 'payment_sheets#disbursments'
 
   get '/retry', to: 'payment_sheets#retry'
+  get '/invite-drivers', to: 'users#invite'
 
   resources :users, only: [:index] do
     post :impersonate, on: :member

@@ -94,6 +94,12 @@
             <span>Dashboard</span>
           </button>
           <% end %>
+          <button type="button" class="btn btn-circle btn-dual-secondary" data-toggle="layout" data-action="header_search_on">
+                            <i class="fa fa-search"></i>
+                        </button>
+                           <button type="button" class="btn btn-circle btn-dual-secondary" data-toggle="modal" data-target='#invite-fadein'>
+                            <i class="fa fa-envelope"></i>
+                        </button>       
         <% else %>
             <%= link_to root_path do %>
           <button type="button" class="btn btn-rounded btn-dual-secondary">
@@ -123,6 +129,60 @@
         </div>
     </div>
 
+      <!-- Fade In Modal -->
+                    <div class="modal fade" id="invite-fadein" tabindex="-1" role="dialog" aria-labelledby="modal-fadein"
+                        aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                            <%= form_tag invite_drivers_path, method: 'get' do %>
+                                <form action="/invite-drivers" method="post">
+                                <div class="block block-themed block-transparent mb-0">
+                                    <div class="block-header bg-primary-dark">
+                                        <h3 class="block-title">Invite Drivers</h3>
+                                        <div class="block-options">
+                                            <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
+                                                <i class="si si-close"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="block-content">
+                                        <%= text_area_tag :emails %>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                 <button type="button" class="btn btn-alt-secondary" data-dismiss="modal">Close</button>
+                                        <%= button_tag class: "btn btn-alt-success" do %>
+                                            <i class="fa fa-check"></i> Invite
+                                        <% end %>
+                                </div>
+                                <% end %>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END Fade In Modal -->
+
+<div id="page-header-search" class="overlay-header">
+                    <div class="content-header content-header-fullrow">
+                        <form action="/users" method="get">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <!-- Close Search Section -->
+                                    <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
+                                    <button type="button" class="btn btn-secondary" data-toggle="layout" data-action="header_search_off">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                    <!-- END Close Search Section -->
+                                </div>
+                                <input type="text" class="form-control" placeholder="Search or hit ESC.." id="page-header-search-input" name="search">
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-secondary">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
 </header>
     <main id="main-container" style="min-height: 1113px;">
 <div class="content">
@@ -141,7 +201,7 @@
                                         <img class="img-avatar" src="https://i.ibb.co/GxXHwf6/avatar8.jpg" alt="">
                                     </div>
                                     <div class="float-left mt-10">
-                                        <div class="font-w600 mb-5"><%= user.first_name %></div>
+                                        <div class="font-w600 mb-5"><%= user.first_name %> <%= user.last_name.truncate(15) %></div>
                                         <div class="font-size-sm text-muted"><%= user.phone_number %></div>
                                     </div>
                                 </div>
