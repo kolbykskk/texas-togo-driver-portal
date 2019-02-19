@@ -4,7 +4,7 @@ class UsersController < ApplicationController
         unless params[:search] && params[:search] != ""
             @users = User.where.not(admin: true).order(:id)
         else
-            @users = User.where('admin != ? and first_name like ? or last_name like ? or phone_number like ?', true, params[:search], params[:search], params[:search]).order(:id)
+            @users = User.where('admin != (?) and lower(first_name) like (?) or lower(last_name) like (?) or lower(phone_number) like (?)', true, params[:search].downcase, params[:search].downcase, params[:search].downcase).order(:id)
         end
         authorize @users
     end
@@ -22,7 +22,7 @@ class UsersController < ApplicationController
 
     def invite
         emails = params[:emails].split("\r\n")
-        UserMailer.invite(params[:emails]).deliver
+        UserMailer.invite(emails).deliver
         redirect_back(fallback_location: root_path)
     end
 end
