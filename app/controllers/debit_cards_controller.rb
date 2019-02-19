@@ -53,13 +53,15 @@ class DebitCardsController < ApplicationController
         { stripe_account: account.id }
       )
 
-      # Take a 3% fee for the instant payout
-      Stripe::Charge.create(
-        amount: params[:fee],
-        currency: "usd",
-        source: account.id,
-        description: "Payout fee for #{payout.id}"
-      )
+      unless method == "standard"
+        # Take a 3% fee for the instant payout
+        Stripe::Charge.create(
+          amount: params[:fee],
+          currency: "usd",
+          source: account.id,
+          description: "Payout fee for #{payout.id}"
+        )
+      end
 
       # Success, send on to the dashboard
       flash[:success] = "Your payout has been made!"
