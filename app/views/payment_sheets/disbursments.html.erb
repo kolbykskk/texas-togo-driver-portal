@@ -216,7 +216,7 @@
                                     </thead>
                                     <tbody>
                                         <% @disbursments.each do |disbursment| %>
-                                        <tr class="<%= disbursment.not_found ? "bg-danger-light" : "bg-success-light" %>">
+                                        <tr data-toggle="<%= 'modal' if disbursment.not_found %>" data-target='<%= '#invite-fadein' if disbursment.not_found %>' class="<%= disbursment.not_found ? "bg-danger-light" : "bg-success-light" %>">
                                             <td>
                                                 <%= disbursment.driver_name %>
                                             </td>
@@ -251,6 +251,41 @@
 
                 </div>
             </div>
+
+
+      <!-- Fade In Modal -->
+                    <div class="modal fade" id="invite-fadein" tabindex="-1" role="dialog" aria-labelledby="modal-fadein"
+                        aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                            <%= form_tag invite_drivers_path, method: 'get' do %>
+                                <form action="/invite-drivers" method="post">
+                                <div class="block block-themed block-transparent mb-0">
+                                    <div class="block-header bg-primary-dark">
+                                        <h3 class="block-title">Invite Drivers</h3>
+                                        <div class="block-options">
+                                            <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
+                                                <i class="si si-close"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="block-content">
+                                        <%= text_area_tag :emails, nil, placeholder: 'Place each email address on a new line', id: 'invite-text-area' %>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                 <button type="button" class="btn btn-alt-secondary" data-dismiss="modal">Close</button>
+                                        <%= button_tag class: "btn btn-alt-success" do %>
+                                            <i class="fa fa-check"></i> Invite
+                                        <% end %>
+                                </div>
+                                <% end %>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END Fade In Modal -->
+
+
         </main>
         <footer id="page-footer" class="opacity-0" style="opacity: 1;">
             <div class="content py-20 font-size-xs clearfix">
