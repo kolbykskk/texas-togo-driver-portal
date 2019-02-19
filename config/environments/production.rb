@@ -55,11 +55,21 @@ Rails.application.configure do
   # Use a real queuing backend for Active Job (and separate queues per environment)
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "seller-dashboard_#{Rails.env}"
+  # Don't care if the mailer can't send.
   config.action_mailer.perform_caching = false
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.delivery_method = :smtp
 
-  # Ignore bad email addresses and do not raise email delivery errors.
-  # Set this to true and configure the email server for immediate delivery to raise delivery errors.
-  # config.action_mailer.raise_delivery_errors = false
+  ActionMailer::Base.smtp_settings = {
+  :user_name => 'letsdodelivery@gmail.com',
+  :password => 'umehfupjcjqzbnin',
+  :domain => 'letsdodelivery.com',
+  :address => 'smtp.gmail.com',
+  :port => 587,
+  :authentication => :plain,
+  :enable_starttls_auto => true
+}
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
