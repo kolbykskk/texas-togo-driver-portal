@@ -23,6 +23,7 @@ class UsersController < ApplicationController
     def invite
         emails = params[:emails].split("\r\n")
         UserMailer.invite(emails).deliver
+        params[:success] = "Invites sent"
         redirect_back(fallback_location: root_path)
     end
 end
