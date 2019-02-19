@@ -113,10 +113,10 @@ class CampaignsController < ApplicationController
       @debit_card = @stripe_account.external_accounts.find { |c| c.object == "card"}
       @bank_account = @stripe_account.external_accounts.find { |c| c.object == "bank_account"}
 
-      @balance_available*0.03 >= 75 ? @instant_fee = @balance_available*0.03 : @instant_fee = 75
+      @balance_available*0.03 >= 150 ? @instant_fee = @balance_available*0.03 : @instant_fee = 150
       @instant_amt = @balance_available - @instant_fee
 
-      @standard_fee = 50
+      @standard_fee = 0
       @standard_amt = @balance_available - @standard_fee
 
     # Handle Stripe exceptions

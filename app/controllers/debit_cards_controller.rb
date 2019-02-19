@@ -63,6 +63,8 @@ class DebitCardsController < ApplicationController
 
       # Success, send on to the dashboard
       flash[:success] = "Your payout has been made!"
+      current_user.payout_wait = Date.today + 3.days
+      current_user.save
       redirect_to dashboard_path
 
     # Handle exceptions from Stripe

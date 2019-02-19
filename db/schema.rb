@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190208142256) do
+ActiveRecord::Schema.define(version: 20190219193716) do
 
   create_table "campaigns", force: :cascade do |t|
     t.integer  "user_id"
@@ -111,6 +111,7 @@ ActiveRecord::Schema.define(version: 20190208142256) do
     t.string   "phone_number"
     t.string   "first_name"
     t.string   "last_name"
+    t.datetime "payout_wait"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

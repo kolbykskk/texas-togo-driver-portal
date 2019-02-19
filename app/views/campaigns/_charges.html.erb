@@ -119,7 +119,11 @@
                                 </div>
                                 <div class="topspace text-center">
                                     <% if @bank_account %>
-                                        <button data-target='#bank-fadein' class="trigger-bank btn btn-alt-primary" data-toggle='modal'>Get this transfer in 2-5 days</button>
+                                        <% if current_user.payout_wait.nil? || current_user.payout_wait <= Date.today %>
+                                            <button data-target='#bank-fadein' class="trigger-bank btn btn-alt-primary" data-toggle='modal'>Get this transfer in 2-5 days</button>
+                                        <% else %>
+                                            <button class="trigger-bank btn btn-alt-danger">You cannot payout via ACH until <%= current_user.payout_wait.to_date %></button>
+                                        <% end %>
                                     <% else %>
                                         <%= link_to "Add a bank account", new_bank_account_path, class: "btn btn-alt-primary" %>
                                     <% end %>
@@ -157,7 +161,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-alt-secondary" data-dismiss="modal">Close</button>
-                                    <%= button_to instant_transfer_path, method: :post, data: { msg: "We charge a 3% (minimum .75) fee for instant payouts. Confirm instant payout of #{format_amount(@instant_amt)} to your #{@debit_card.brand} card ending in #{@debit_card.last4}?", disable_with: "<i class='fa fa-spinner fa-spin'></i> Transferring funds..." }, params: { amount: @instant_amt.round, fee: @instant_fee.round, destination: @debit_card.id, method: 'instant' }, class: "confirm-debit btn btn-alt-success" do %>
+                                    <%= button_to instant_transfer_path, method: :post, data: { msg: "We charge a 3% (minimum 1.50) fee for instant payouts. Confirm instant payout of #{format_amount(@instant_amt)} to your #{@debit_card.brand} card ending in #{@debit_card.last4}?", disable_with: "<i class='fa fa-spinner fa-spin'></i> Transferring funds..." }, params: { amount: @instant_amt.round, fee: @instant_fee.round, destination: @debit_card.id, method: 'instant' }, class: "confirm-debit btn btn-alt-success" do %>
                                         <i class="fa fa-check"></i> Perfect
                                     <% end %>
                                 </div>
@@ -193,7 +197,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-alt-secondary" data-dismiss="modal">Close</button>
-                                    <%= button_to instant_transfer_path, method: :post, data: { msg: "We charge a fixed $0.50 fee for standard payouts. Confirm standard payout of #{format_amount(@standard_amt)} to your #{@bank_account.bank_name} bank account ending in #{@bank_account.last4}?", disable_with: "<i class='fa fa-spinner fa-spin'></i> Transferring funds..." }, params: { amount: @standard_amt.round, fee: @standard_fee.round, destination: @bank_account.id, method: 'standard' }, class: "confirm-bank btn btn-alt-success" do %>
+                                    <%= button_to instant_transfer_path, method: :post, data: { msg: "Confirm standard payout of #{format_amount(@standard_amt)} to your #{@bank_account.bank_name} bank account ending in #{@bank_account.last4}?", disable_with: "<i class='fa fa-spinner fa-spin'></i> Transferring funds..." }, params: { amount: @standard_amt.round, fee: @standard_fee.round, destination: @bank_account.id, method: 'standard' }, class: "confirm-bank btn btn-alt-success" do %>
                                         <i class="fa fa-check"></i> Perfect
                                     <% end %>
                                 </div>
