@@ -129,6 +129,7 @@
                                 <div class="topspace text-center">
                                     <% if @bank_account %>
                                         <% if current_user.payout_wait.nil? || current_user.payout_wait <= Date.today %>
+                                            <p>There is no cost to ACH payouts. Limited to 1 ACH every 3 days.</p>
                                             <button data-target='#bank-fadein' class="trigger-bank btn btn-alt-primary" data-toggle='modal'>Get this transfer in 2-5 days</button>
                                         <% else %>
                                             <button class="trigger-bank btn btn-alt-danger">You cannot payout via ACH until <%= current_user.payout_wait.to_date %></button>
