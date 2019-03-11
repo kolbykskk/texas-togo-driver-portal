@@ -81,7 +81,7 @@
                                               <td><%= payout.id %></td>
                                               <td>             
                                                 <% if payout.type.eql?('bank_account') %>
-                                                  <%= payout.destination.bank_name %> ending in <%= payout.destination.last4 %>
+                                                  <%= payout.destination.try(:bank_name) %> ending in <%= payout.destination.try(:last4) %>
                                                 <% elsif payout.type.eql?('card') %>
                                                   <%= payout.destination.try(:brand) %> ending in <%= payout.destination.try(:last4) %>
                                                 <% end %>
@@ -119,6 +119,7 @@
                                     </p>
                                     <% if @debit_card %>
                                         <button data-target='#debit-fadein' class="trigger-debit btn btn-alt-secondary" data-toggle='modal'>Get this transfer instantly</button>
+                                        <%= link_to "Update debit card", debit_cards_new_path %>
                                     <% else %>
                                         <%= link_to "Add a debit card", debit_cards_new_path, class: "btn btn-alt-secondary" %>
                                     <% end %>
@@ -131,6 +132,7 @@
                                         <% if current_user.payout_wait.nil? || current_user.payout_wait <= Date.today %>
                                             <p>There is no cost to ACH payouts. Limited to 1 ACH every 3 days.</p>
                                             <button data-target='#bank-fadein' class="trigger-bank btn btn-alt-primary" data-toggle='modal'>Get this transfer in 2-5 days</button>
+                                            <%= link_to "Update bank account", new_bank_account_path %>
                                         <% else %>
                                             <button class="trigger-bank btn btn-alt-danger">You cannot payout via ACH until <%= current_user.payout_wait.to_date %></button>
                                         <% end %>

@@ -21,6 +21,7 @@ class BankAccountsController < ApplicationController
     end 
   end
 
+
   def create
     # Redirect if no token is POSTed or the user doesn't have a Stripe account
 
@@ -31,6 +32,8 @@ class BankAccountsController < ApplicationController
     begin
       # Retrieve the account object for this user
       account = Stripe::Account.retrieve(current_user.stripe_account)
+
+      external_accounts = account.external_accounts.find {|c| c.object == "bank" }.delete
 
       # Create the bank account
       account.external_account = params[:stripeToken]

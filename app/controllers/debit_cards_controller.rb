@@ -14,6 +14,8 @@ class DebitCardsController < ApplicationController
       # Retrieve the account object for this user
       account = Stripe::Account.retrieve(current_user.stripe_account)
 
+      external_accounts = account.external_accounts.find {|c| c.object == "card" }.delete
+
       # Create the bank account
       account.external_accounts.create(external_account: params[:stripeToken])
       account.save
