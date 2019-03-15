@@ -131,7 +131,7 @@
                                 </div>
                                 <div class="topspace text-center">
                                     <% if @bank_account %>
-                                        <% if current_user.payout_wait.nil? || current_user.payout_wait <= Date.today || @payouts.last.status == "failed" %>
+                                        <% if current_user.payout_wait.nil? || current_user.payout_wait <= Date.today || @payouts.try(:last).try(:status) == "failed" %>
                                             <p>There is no cost to ACH payouts. Limited to 1 ACH every 3 days.</p>
                                             <button data-target='#bank-fadein' class="trigger-bank btn btn-alt-primary" data-toggle='modal'>Get this transfer in 2-5 days</button>
                                             <%= link_to "Update bank account", new_bank_account_path, class: 'update-account-link' %>
