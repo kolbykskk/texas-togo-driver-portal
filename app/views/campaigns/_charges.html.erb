@@ -69,6 +69,7 @@
                                     <% unless @payouts.data.empty? %>
                                         <thead>
                                             <tr>
+                                                <th>Status</th>
                                                 <th style="width: 100px;">Transfer ID</th>
                                                 <th>Destination</th>
                                                 <th>Amount</th>
@@ -78,6 +79,7 @@
                                         <tbody>
                                           <% @payouts.each do |payout| %>
                                             <tr>
+                                            <td><span title="<%= payout.status == 'failed' ? payout.failure_message : '' %>" class="badge badge-pill badge-<%= payout.status == "paid" ? 'success' : (payout.status == "failed" ? 'danger' : 'info') %>"><%= payout.status %></span></td>
                                               <td><%= payout.id %></td>
                                               <td>             
                                                 <% if payout.type.eql?('bank_account') %>
@@ -129,7 +131,7 @@
                                 </div>
                                 <div class="topspace text-center">
                                     <% if @bank_account %>
-                                        <% if current_user.payout_wait.nil? || current_user.payout_wait <= Date.today %>
+                                        <% if current_user.payout_wait.nil? || current_user.payout_wait <= Date.today || @payouts.last.status == "failed" %>
                                             <p>There is no cost to ACH payouts. Limited to 1 ACH every 3 days.</p>
                                             <button data-target='#bank-fadein' class="trigger-bank btn btn-alt-primary" data-toggle='modal'>Get this transfer in 2-5 days</button>
                                             <%= link_to "Update bank account", new_bank_account_path, class: 'update-account-link' %>

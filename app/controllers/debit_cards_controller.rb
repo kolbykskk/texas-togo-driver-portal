@@ -55,6 +55,7 @@ class DebitCardsController < ApplicationController
         },
         { stripe_account: account.id }
       )
+      puts payout
 
       unless method == "standard"
         # Take a 3% fee for the instant payout
