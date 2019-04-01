@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   get 'payouts/:id', to: 'payouts#show', as: 'payout'
   post 'webhooks/stripe', to: 'webhooks#stripe'
   get 'payment_sheet/:id/disbursments', to: 'payment_sheets#disbursments'
+  post 'failed-payout', to: 'debit_cards#failed_payout'
 
   get '/retry', to: 'payment_sheets#retry'
   get '/invite-drivers', to: 'users#invite'

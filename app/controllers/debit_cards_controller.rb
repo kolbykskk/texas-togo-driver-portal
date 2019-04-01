@@ -1,5 +1,6 @@
 class DebitCardsController < ApplicationController
   before_action :authenticate_user!
+  skip_before_action :verify_authenticity_token
 
   def new
   end
@@ -38,6 +39,10 @@ class DebitCardsController < ApplicationController
   def destroy
   end
 
+  def failed_payout
+    puts "inside"
+  end
+
   def transfer
     begin
       # Retrieve the account object for this user
@@ -55,7 +60,6 @@ class DebitCardsController < ApplicationController
         },
         { stripe_account: account.id }
       )
-      puts payout
 
       unless method == "standard"
         # Take a 3% fee for the instant payout
