@@ -70,8 +70,6 @@ class CampaignsController < ApplicationController
         }
       )
 
-      puts @payments.first.status
-
       # Last 10 payouts from the managed account to their bank account
       @payouts = Stripe::Payout.list(
         {
