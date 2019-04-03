@@ -30,11 +30,13 @@
                                         </thead>
                                         <tbody>
                                                                           <% @payments.each do |payment| %>
+                                                            <% unless payment.reversed %>
                                       <tr>
                                         <td><%= payment.destination_payment %></td>
                                         <td><%= number_to_currency(payment.amount.to_f/100) %></div>
                                         <td><%= format_date(payment.created) %></td>
                                       </tr>
+                                      <% end %>
                                     <% end %>
                                         </tbody>
                                         <% else %>
