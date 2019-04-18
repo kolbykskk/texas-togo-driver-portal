@@ -33,12 +33,13 @@ class BankAccountsController < ApplicationController
       # Retrieve the account object for this user
       account = Stripe::Account.retrieve(current_user.stripe_account)
 
-      external_accounts = account.external_accounts.find {|c| c.object == "bank" }
-      external_accounts.delete unless external_accounts.nil?
-
       # Create the bank account
       account.external_account = params[:stripeToken]
       account.save
+
+      external_accounts = account.external_accounts.find {|c| c.object == "bank" }
+      external_accounts.delete unless external_accounts.nil?
+
       
       # Success, send on to the dashboard
       flash[:success] = "Your bank account has been added!"
