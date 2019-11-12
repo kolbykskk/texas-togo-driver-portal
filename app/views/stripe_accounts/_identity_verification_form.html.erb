@@ -102,27 +102,15 @@
           </div>
         </div>
       <% end %>
-      <% if @stripe_account.verification.fields_needed.include?('legal_entity.ssn_last_4') %>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="form-group">
-              <%= f.label :ssn_last_4, "Last 4 digits of your SSN" %>
-              <%= f.text_field :ssn_last_4, class: "form-control input-lg", placeholder: "6789" %>
-            </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label>Full social security number (used to verify your identity)</label>
+            <input type="text" id="personal_id_number" class="form-control input-lg" placeholder="123-45-6789" required>
+            <span class="help-block">Never stored, only used to verify your identity.</span>
           </div>
         </div>
-      <% end %>
-      <% if @stripe_account.verification.fields_needed.include?('legal_entity.personal_id_number') %>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="form-group">
-              <label>Full social security number (used to verify your identity)</label>
-              <input type="text" id="personal_id_number" class="form-control input-lg" placeholder="123-45-6789" required>
-              <span class="help-block">Never stored, only used to verify your identity.</span>
-            </div>
-          </div>
-        </div>
-      <% end %>
+      </div>
       <% if @stripe_account.verification.fields_needed.include?('legal_entity.verification.document') %>
         <div class="row">
           <div class="col-md-12">
