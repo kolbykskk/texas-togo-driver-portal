@@ -34,7 +34,7 @@ class StripeAccountsController < ApplicationController
                 state: account_params[:address_state],
                 postal_code: account_params[:address_postal]
               },
-              personal_id_number: account_params[:personal_id_number]
+              personal_id_number: account_params[:ssn_last_4]
             },
             tos_acceptance: {
               date: Time.now.to_i,
