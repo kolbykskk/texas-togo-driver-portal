@@ -1,14 +1,31 @@
 class PaymentSheetsController < ApplicationController
   def create
     @payment_sheet = PaymentSheet.new(payment_sheet_params)
-    if @payment_sheet.save
-        ProcessPaymentSheetWorker.perform_async
-        flash[:success] = "Payment disbursment process successfully started in the background."
+    if enough_funds_check
+      if @payment_sheet.save
+          ProcessPaymentSheetWorker.perform_async
+          flash[:success] = "Payment disbursment process successfully started in the background."
+          redirect_to dashboard_path
+      else
+        flash[:error] = "There was an error."
         redirect_to dashboard_path
+      end
     else
-      flash[:error] = "There was an error."
+      flash[:error] = "There are not enough funds."
       redirect_to dashboard_path
     end
+  end
+
+  def enough_funds_check
+    total = []
+    CSV.new(open(@payment_sheet.sheet.url)).each do |row| 
+      total << row[6].to_f
+    end
+
+    csv_total = total.inject(0){|sum,x| sum + x }
+    stripe_balance = Stripe::Balance.retrieve().available[0].amount.to_f / 100
+
+    stripe_balance >= csv_total
   end
 
   def disbursments
