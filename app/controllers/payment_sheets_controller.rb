@@ -26,7 +26,7 @@ class PaymentSheetsController < ApplicationController
     csv_total = total.inject(0){|sum,x| sum + x }
     stripe_balance = Stripe::Balance.retrieve().available[0].amount.to_f / 100
 
-    stripe_balance <= csv_total
+    stripe_balance >= csv_total
   end
 
   def disbursments
