@@ -74,6 +74,19 @@ class WebhooksController < ApplicationController
         payment.description = "Chargeback reversal for #{charge.id}"
         payment.save
 
+      when 'payout.failed'
+        payout = event.data.object
+
+        unless payout.method == "standard"
+          payout.amount * 0.03 >= 150 ? fee = payout.amount*0.03 : fee = 150
+
+          # Create a transfer to the connected account to return the dispute fee
+          transfer = Stripe::Transfer.create(
+            amount: fee,
+            currency: "usd",
+            destination: event.account
+          )
+          end
       end
 
     # Something bad happened with the event or retrieving details from Stripe: probably log this.
