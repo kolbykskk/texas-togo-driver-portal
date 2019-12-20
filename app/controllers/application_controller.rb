@@ -5,12 +5,6 @@ class ApplicationController < ActionController::Base
   impersonates :user
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
-  before_filter :block_foreign_hosts
-
-  def block_foreign_hosts
-    redirect_to "https://www.txtogo.com/driver_support" unless request.remote_ip.start_with?("68.70.24.114", "54.187.205.235")
-  end
-
   # Pretty generic method to handle exceptions.
   # You'll probably want to do some logging, notifications, etc.
   def handle_error(message = "Sorry, something failed.", view = 'new')
