@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   before_filter :block_foreign_hosts
 
   def block_foreign_hosts
-    redirect_to "https://www.txtogo.com/driver_support" unless request.remote_ip.start_with?("123.456.789")
+    redirect_to "https://www.txtogo.com/driver_support" unless request.remote_ip.start_with?("68.70.24.114")
   end
 
   # Pretty generic method to handle exceptions.
