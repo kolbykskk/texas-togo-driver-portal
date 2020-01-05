@@ -11,14 +11,13 @@ class WebhooksController < ApplicationController
 
     begin
       puts "START $$$$$$$$"
-      puts Stripe::Webhook.construct_event(
-        payload, sig_header, endpoint_secret
-      )
-      
+
       event = Stripe::Webhook.construct_event(
         payload, sig_header, endpoint_secret
       )
-
+      
+      throw 'err'
+      
       puts "%%%%%%%%%%%"
       puts event.inspect
 
