@@ -10,6 +10,11 @@ class WebhooksController < ApplicationController
     event = nil
 
     begin
+      puts "START $$$$$$$$"
+      puts Stripe::Webhook.construct_event(
+        payload, sig_header, endpoint_secret
+      )
+      
       event = Stripe::Webhook.construct_event(
         payload, sig_header, endpoint_secret
       )
