@@ -2,6 +2,7 @@ class WebhooksController < ApplicationController
   protect_from_forgery except: :stripe
 
   def stripe
+    puts 'start $$$$$'
     # Use signed webhooks
     endpoint_secret = ENV['ENDPOINT_SECRET'].to_s
 
@@ -13,6 +14,8 @@ class WebhooksController < ApplicationController
       event = Stripe::Webhook.construct_event(
         payload, sig_header, endpoint_secret
       )
+
+      puts event.type
 
       case event.type
 
