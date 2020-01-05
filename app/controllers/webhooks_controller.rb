@@ -75,10 +75,14 @@ class WebhooksController < ApplicationController
         payment.save
 
       when 'payout.failed'
+        puts 'inside1'
         payout = event.data.object
 
         unless payout.method == "standard"
-          payout.amount * 0.03 >= 150 ? fee = payout.amount*0.03 : fee = payout.amount*0.03
+          puts 'inside2'
+          payout.amount * 0.03 >= 150 ? fee = payout.amount*0.03 : fee = 150
+
+          puts "FEE: #{fee}"
 
           # Create a transfer to the connected account to return the dispute fee
           transfer = Stripe::Transfer.create(
@@ -86,6 +90,7 @@ class WebhooksController < ApplicationController
             currency: "usd",
             destination: event.account
           )
+          puts "^^^^^^^"
           puts transfer.inspect
           end
       end
