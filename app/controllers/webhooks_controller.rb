@@ -78,7 +78,7 @@ class WebhooksController < ApplicationController
         payout = event.data.object
 
         unless payout.method == "standard"
-          payout.amount * 0.03 >= 150 ? fee = payout.amount*0.03 : fee = 150
+          payout.amount * 0.03 >= 150 ? fee = payout.amount*0.03 : fee = payout.amount*0.03
 
           # Create a transfer to the connected account to return the dispute fee
           transfer = Stripe::Transfer.create(
