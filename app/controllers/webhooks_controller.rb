@@ -86,6 +86,7 @@ class WebhooksController < ApplicationController
             currency: "usd",
             destination: event.account
           )
+          puts transfer.inspect
           end
       end
 
