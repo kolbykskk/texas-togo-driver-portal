@@ -79,16 +79,12 @@ class WebhooksController < ApplicationController
           orig_amt_cents = payout.amount/(1-0.03)
           (orig_amt_cents*0.03).round >= 150 ? fee = (orig_amt_cents*0.03).round : fee = 150
 
-          puts "FEE: #{fee}"
-
           # Create a transfer to the connected account to return the dispute fee
           transfer = Stripe::Transfer.create(
             amount: fee,
             currency: "usd",
             destination: event.account
           )
-          puts "^^^^^^^"
-          puts transfer.inspect
           end
       end
 
