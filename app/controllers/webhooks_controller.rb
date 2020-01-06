@@ -12,7 +12,7 @@ class WebhooksController < ApplicationController
     begin
       puts "START $$$$$$$$"
 
-      # event = Stripe::Webhook.construct_event(payload, sig_header, endpoint_secret)
+      event = Stripe::Webhook.construct_event(payload, sig_header, endpoint_secret)
 
       puts "AFTER $$$$$"
       puts event
