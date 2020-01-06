@@ -76,8 +76,7 @@ class WebhooksController < ApplicationController
         payout = event.data.object
 
         unless payout.method == "standard"
-          puts 'inside2'
-          payout.amount * 0.03 >= 150 ? fee = (payout.amount*0.03).round : fee = 150
+          payout.amount/(1-0.03).round >= 150 ? fee = payout.amount/(1-0.03).round : fee = 150
 
           puts "FEE: #{fee}"
 
