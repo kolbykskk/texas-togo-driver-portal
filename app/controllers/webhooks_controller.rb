@@ -77,7 +77,7 @@ class WebhooksController < ApplicationController
 
         unless payout.method == "standard"
           orig_amt_cents = payout.amount/(1-0.03).round
-          orig_amt_cents*0.03 >= 150 ? fee = orig_amt_cents*0.03 : fee = 150
+          (orig_amt_cents*0.03).round >= 150 ? fee = (orig_amt_cents*0.03).round : fee = 150
 
           puts "FEE: #{fee}"
 
