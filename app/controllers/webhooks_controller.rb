@@ -10,12 +10,7 @@ class WebhooksController < ApplicationController
     event = nil
 
     begin
-      puts "START $$$$$$$$"
-
       event = Stripe::Webhook.construct_event(payload, sig_header, endpoint_secret)
-
-      puts "AFTER $$$$$"
-      puts event
 
       case event.type
 
@@ -78,12 +73,11 @@ class WebhooksController < ApplicationController
         payment.save
 
       when 'payout.failed'
-        puts 'inside1'
         payout = event.data.object
 
         unless payout.method == "standard"
           puts 'inside2'
-          payout.amount * 0.03 >= 150 ? fee = payout.amount*0.03 : fee = 150
+          payout.amount * 0.03 >= 150 ? fee = (payout.amount*0.03).round : fee = 150
 
           puts "FEE: #{fee}"
 
