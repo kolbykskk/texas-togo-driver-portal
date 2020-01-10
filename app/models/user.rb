@@ -1,6 +1,6 @@
 class User < ApplicationRecord
-  has_many :campaigns
-  has_one :stat
+  has_many :campaigns, :dependent => :destroy
+  has_one :stat, :dependent => :destroy
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
