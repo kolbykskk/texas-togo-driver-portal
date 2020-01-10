@@ -38,7 +38,7 @@ class StripeAccountsController < ApplicationController
               date: Time.now.to_i,
               ip: request.remote_ip
             },
-            business_type: 'custom',
+            business_type: 'individual',
             settings: {
               payouts: {
                 schedule: {
