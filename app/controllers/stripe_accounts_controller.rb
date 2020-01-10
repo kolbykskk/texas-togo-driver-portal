@@ -92,6 +92,7 @@ class StripeAccountsController < ApplicationController
         handle_error("Sorry, we weren't able to create this account.", 'new')
       end
 
+      @account.email = current_user.email
       options = { 
         :body => @account.to_json
       }
