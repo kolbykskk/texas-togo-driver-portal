@@ -97,7 +97,7 @@ class StripeAccountsController < ApplicationController
         :body => @account.to_json
       }
 
-      HTTParty.post("https://hooks.zapier.com/hooks/catch/2833985/ohyr6ux/", options)
+      HTTParty.post("https://hooks.zapier.com/hooks/catch/3921944/ohyr6nt/", options)
 
       # Handle exceptions from Stripe
       rescue Stripe::StripeError => e
