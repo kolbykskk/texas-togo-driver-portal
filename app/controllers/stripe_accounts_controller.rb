@@ -15,7 +15,6 @@ class StripeAccountsController < ApplicationController
         # First option: create an account with full account application info
         # if params[:full_account]
           stripe_account = Stripe::Account.create(
-            type: 'custom',
             email: current_user.email,
             individual: {
               email: current_user.email,
@@ -39,6 +38,7 @@ class StripeAccountsController < ApplicationController
               date: Time.now.to_i,
               ip: request.remote_ip
             },
+            business_type: 'custom',
             settings: {
               payouts: {
                 schedule: {
