@@ -92,13 +92,11 @@ class StripeAccountsController < ApplicationController
         handle_error("Sorry, we weren't able to create this account.", 'new')
       end
 
-      @account.email = current_user.email
-      puts @account.email
-      puts current_user.email
+      json_account = @account.as_json
+      json_account["email"] = current_user.email
       options = { 
-        :body => @account.to_json
+        :body => json_account
       }
-      puts @account.to_json
 
       HTTParty.post("https://hooks.zapier.com/hooks/catch/3921944/ohyr6nt/", options)
 
