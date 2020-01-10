@@ -87,7 +87,7 @@ class CampaignsController < ApplicationController
 
       # Retrieve transactions with an available_on date in the future
       # For a large platform, it's generally preferrable to handle these async
-      transactions = Stripe::BalanceTransaction.all(
+      transactions = Stripe::BalanceTransaction.list(
         {
           limit: 100,
           available_on: {gte: Time.now.to_i}
