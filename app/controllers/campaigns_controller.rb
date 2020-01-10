@@ -51,10 +51,9 @@ class CampaignsController < ApplicationController
     @campaigns = current_user.campaigns.order(created_at: :desc)
 
     # Redirect if there's not a Stripe account for this user yet
-    puts current_user.stripe_account || current_user.admin
     unless current_user.stripe_account || current_user.admin
       flash[:success] = "Create an account to get started."
-      # redirect_to new_stripe_account_path and return
+      redirect_to new_stripe_account_path and return
     end
     @payment_sheets = PaymentSheet.paginate(:page => params[:page], :per_page => 10).order('id DESC')
 
@@ -123,11 +122,13 @@ class CampaignsController < ApplicationController
     # Handle Stripe exceptions
     rescue Stripe::StripeError => e
       flash[:error] = e.message
+      puts e.message
       redirect_to root_path
 
     # Handle other exceptions
     rescue => e
       flash[:error] = e.message
+      puts e.message
       redirect_to root_path
     end
   end
