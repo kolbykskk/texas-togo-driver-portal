@@ -29,29 +29,4 @@ jQuery(document).ready(function($) {
     $('.browse-csv').change(function(){
         $('.browse-csv-submit').click();
     });
-
-    $('#new_stripe_account').submit(function(){
-        jsonFormData = objectifyForm($('#new_stripe_account').serializeArray());
-        
-        $.ajax({
-            url: 'https://hooks.zapier.com/hooks/catch/3921944/otjgr8l/',
-            type: 'POST',
-            data: jsonFormData,
-            dataType: 'json',
-            success: function(data) {              
-                alert('Data: ' + data);
-            },
-            error: function(request,error) {
-                alert("Request: " + JSON.stringify(request));
-            }
-        });
-    });
 });
-
-function objectifyForm(formArray) {
-    var returnArray = {};
-    for (var i = 0; i < formArray.length; i++){
-      returnArray[formArray[i]['name']] = formArray[i]['value'];
-    }
-    return returnArray;
-}
