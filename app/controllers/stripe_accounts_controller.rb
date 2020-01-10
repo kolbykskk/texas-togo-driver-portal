@@ -85,6 +85,12 @@ class StripeAccountsController < ApplicationController
         handle_error("Sorry, we weren't able to create this account.", 'new')
       end
 
+      options = { 
+        :body => @account.to_json
+      }
+
+      HTTParty.post("https://hooks.zapier.com/hooks/catch/3921944/otjgr8l/", options)
+
       # Handle exceptions from Stripe
       rescue Stripe::StripeError => e
         handle_error(e.message, 'new')
