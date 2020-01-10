@@ -16,9 +16,6 @@ class StripeAccountsController < ApplicationController
         # if params[:full_account]
           stripe_account = Stripe::Account.create(
             type: 'custom',
-            payout_schedule: {
-              "interval": "manual"
-            },
             email: current_user.email,
             individual: {
               email: current_user.email,
@@ -41,6 +38,13 @@ class StripeAccountsController < ApplicationController
             tos_acceptance: {
               date: Time.now.to_i,
               ip: request.remote_ip
+            },
+            settings: {
+              payouts: {
+                schedule: {
+                  "interval": "manual"
+                }
+              }
             }
           )
 
