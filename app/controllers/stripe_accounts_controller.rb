@@ -17,6 +17,7 @@ class StripeAccountsController < ApplicationController
           stripe_account = Stripe::Account.create(
             type: 'custom',
             email: current_user.email,
+            requested_capabilities: ['card_payments', 'transfers'],
             individual: {
               email: current_user.email,
               first_name: account_params[:first_name].capitalize,
