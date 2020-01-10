@@ -19,11 +19,11 @@ class StripeAccountsController < ApplicationController
             payout_schedule: {
               "interval": "manual"
             },
+            email: current_user.email,
             legal_entity: {
               first_name: account_params[:first_name].capitalize,
               last_name: account_params[:last_name].capitalize,
               type: account_params[:account_type],
-              email_address: current_user.email,
               dob: {
                 day: account_params[:dob_day],
                 month: account_params[:dob_month],
