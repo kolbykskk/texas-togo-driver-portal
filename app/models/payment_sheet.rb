@@ -1,6 +1,6 @@
 class PaymentSheet < ApplicationRecord
     mount_uploader :sheet, SheetUploader
-    has_many :disbursments
+    has_many :disbursments, :dependent => :destroy
     before_save :default_values
 
     def default_values
