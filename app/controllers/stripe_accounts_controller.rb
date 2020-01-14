@@ -95,6 +95,7 @@ class StripeAccountsController < ApplicationController
 
       json_account = @account.as_json
       json_account["email"] = current_user.email
+      json_account["phone_number"] = current_user.phone_number
       options = { 
         :body => json_account
       }

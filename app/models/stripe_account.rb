@@ -19,6 +19,4 @@ class StripeAccount < ApplicationRecord
 
   validates :tos,
   inclusion: { in: [ true ], message: ": You must agree to the terms of service" }
-
-  attr_accessor :email
 end
