@@ -14,8 +14,6 @@ class StripeAccountsController < ApplicationController
 
         # First option: create an account with full account application info
         # if params[:full_account]
-          puts current_user.phone_number
-          puts current_user.phone_number.length
           stripe_account = Stripe::Account.create(
             type: 'custom',
             email: current_user.email,
