@@ -20,7 +20,7 @@ class StripeAccountsController < ApplicationController
             requested_capabilities: ['card_payments', 'transfers'],
             individual: {
               email: current_user.email,
-              phone: current_user.phone_number,
+              phone: '+1' + current_user.phone_number,
               first_name: account_params[:first_name].capitalize,
               last_name: account_params[:last_name].capitalize,
               dob: {
