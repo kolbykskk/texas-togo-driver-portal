@@ -18,6 +18,9 @@ class StripeAccountsController < ApplicationController
             type: 'custom',
             email: current_user.email,
             requested_capabilities: ['transfers'],
+            business_profile: {
+              url: 'https://www.txtogo.com/'
+            },
             individual: {
               email: current_user.email,
               phone: current_user.phone_number,
