@@ -17,7 +17,7 @@ class StripeAccountsController < ApplicationController
           stripe_account = Stripe::Account.create(
             type: 'custom',
             email: current_user.email,
-            requested_capabilities: ['card_payments', 'transfers'],
+            requested_capabilities: ['transfers'],
             individual: {
               email: current_user.email,
               phone: current_user.phone_number,
