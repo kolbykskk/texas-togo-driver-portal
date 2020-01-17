@@ -20,7 +20,7 @@ class StripeAccountsController < ApplicationController
             requested_capabilities: ['transfers', 'card_payments'],
             business_profile: {
               url: 'https://www.txtogo.com/',
-              mcc: '1520'
+              mcc: '1799'
             },
             individual: {
               email: current_user.email,
