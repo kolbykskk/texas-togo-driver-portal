@@ -19,7 +19,8 @@ class StripeAccountsController < ApplicationController
             email: current_user.email,
             requested_capabilities: ['transfers', 'card_payments'],
             business_profile: {
-              url: 'https://www.txtogo.com/'
+              url: 'https://www.txtogo.com/',
+              mcc: '1520'
             },
             individual: {
               email: current_user.email,
