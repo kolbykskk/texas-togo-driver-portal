@@ -17,7 +17,7 @@ class StripeAccountsController < ApplicationController
           stripe_account = Stripe::Account.create(
             type: 'custom',
             email: current_user.email,
-            requested_capabilities: ['transfers'],
+            requested_capabilities: ['transfers', 'card_payments'],
             business_profile: {
               url: 'https://www.txtogo.com/'
             },
