@@ -1,5 +1,3 @@
-require 'checkr'
-
 class User < ApplicationRecord
   has_many :campaigns, :dependent => :destroy
   has_one :stat, :dependent => :destroy
@@ -18,24 +16,10 @@ class User < ApplicationRecord
   mount_uploader :drivers_license, VerificationUploader
   mount_uploader :insurance_card, VerificationUploader
 
-  after_create :initiate_background_check
+  after_commit :initiate_background_check, :on => :create
 
   def initiate_background_check
-    Checkr.api_key = ENV["CHECKR_SECRET"]
-
-    candidate = Checkr::Candidate.create({
-      :first_name => first_name,
-      :last_name => last_name,
-      :email => email,
-      :phone => phone_number
-    })
-
-    Checkr::Invitation.create({
-      :candidate_id => candidate.id,
-      :package => "driver_basic"
-    })
-
-    self.update_attributes(candidate_id: candidate.id)
+    BackgroundCheckWorker.perform_async(id)
   end
 
   def phone_number=(val)
