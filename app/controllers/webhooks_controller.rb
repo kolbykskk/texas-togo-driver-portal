@@ -1,5 +1,6 @@
 class WebhooksController < ApplicationController
   protect_from_forgery except: [:stripe, :checkr]
+  before_action :verify_request, only: :checkr
 
   def checkr
     case params[:type]
@@ -113,6 +114,14 @@ class WebhooksController < ApplicationController
   end
 
   private
+    def verify_request
+      digest = OpenSSL::Digest.new('sha256')
+      hmac = OpenSSL::HMAC.hexdigest(digest, ENV['CHECKR_SECRET'], request.body.read)
+      base64 = Base64.encode64(hmac)
+
+      return head :unauthorized unless ActiveSupport::SecurityUtils.secure_compare(hmac, request.headers['X-Checkr-Signature'])
+    end
+
     def activate_account(activate=true)
       user_by_candidate.update_attributes(is_active: activate) if user_by_candidate
     end

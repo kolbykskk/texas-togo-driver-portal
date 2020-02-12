@@ -195,6 +195,22 @@
 
           </div>
         </div>
+        <% if current_user.admin? %>
+          <div class="row js-appear-enabled animated fadeIn" data-toggle="appear">
+            <div class="col-md-6 col-md-push-3 col-sm-push-3">
+              <div class="block">
+                <div class="block-content">
+                  <% if current_user.drivers_license.file %>
+                    <%= link_to 'Driver\'s license', current_user.drivers_license.url, target: :_blank %><br>
+                  <% end %>
+                  <% if current_user.insurance_card.file %>
+                    <%= link_to 'Insurance card', current_user.insurance_card.url, target: :_blank %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
     </main>
     <footer id="page-footer" class="opacity-0" style="opacity: 1;">
       <div class="content py-20 font-size-xs clearfix">

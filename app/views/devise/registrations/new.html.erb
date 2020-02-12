@@ -115,66 +115,58 @@
               <%= form_for(resource, html: {class: 'js-validation-signup px-30'}, as: resource_name, url: registration_path(resource_name)) do |f| %>
               <div class="form-group row">
                 <div class="col-12">
-                  <div class="form-material floating">
-                    <%= f.text_field :first_name, class: 'form-control input-lg', autofocus: true %>
-                    <%= f.label :first_name %>
-                  </div>
+                  <%= f.label :first_name %>
+                  <%= f.text_field :first_name, class: 'form-control input-lg', autofocus: true %>
                 </div>
               </div>
 
               <div class="form-group row">
                 <div class="col-12">
-                  <div class="form-material floating">
-                    <%= f.text_field :last_name, class: 'form-control input-lg' %>
-                    <%= f.label :last_name %>
-                  </div>
+                  <%= f.label :last_name %>
+                  <%= f.text_field :last_name, class: 'form-control input-lg' %>
                 </div>
               </div>
               <div class="form-group row">
                 <div class="col-12">
-                  <div class="form-material floating">
-                    <%= f.text_field :phone_number, class: 'form-control input-lg' %>
-                    <%= f.label :phone_number %>
-                  </div>
+                  <%= f.label :phone_number %>
+                  <%= f.text_field :phone_number, class: 'form-control input-lg' %>
                 </div>
               </div>
               <div class="form-group row">
                 <div class="col-12">
-                  <div class="form-material floating">
-                    <%= f.email_field :email, class: 'form-control input-lg' %>
-                    <%= f.label :email %>
-                  </div>
+                  <%= f.label :email %>
+                  <%= f.email_field :email, class: 'form-control input-lg' %>
                 </div>
               </div>
               <div class="form-group row">
                 <div class="col-12">
-                  <div class="form-material floating">
-                    <%= f.password_field :password, autocomplete: "off", class: 'form-control input-lg' %>
-                    <%= f.label :password %>
-                  </div>
+                  <%= f.label :password %>
+                  <%= f.password_field :password, autocomplete: "off", class: 'form-control input-lg' %>
                 </div>
               </div>
               <div class="form-group row">
                 <div class="col-12">
-                  <div class="form-material floating">
-                    <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control input-lg' %>
-                    <%= f.label :password_confirmation %>
-                  </div>
+                  <%= f.label :password_confirmation %>
+                  <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control input-lg' %>
                 </div>
               </div>
               <div class="form-group row">
                 <div class="col-12">
+                  <%= f.label :drivers_license, 'Driver\'s license' %>
                   <div class="custom-file">
-                    <%= f.file_field :drivers_license, class: 'form-control input-lg custom-file-input' %>
-                    <%= f.label :drivers_license, '', class: 'custom-file-label' %>
+                    <%= f.file_field :drivers_license, autocomplete: 'off', class: 'custom-file-input', data: { toggle: "custom-file-input" } %>
+                    <%= f.label :drivers_license, @user.drivers_license.filename || 'Choose file', class: 'custom-file-label' %>
+                    <%= f.hidden_field :drivers_license_cache %>
                   </div>
                 </div>
               </div>
               <div class="form-group row">
                 <div class="col-12">
+                  <%= f.label :insurance_card, 'Insurance card' %>
                   <div class="custom-file">
-                    <%= f.file_field :insurance_card, class: 'form-control input-lg custom-file-input' %>
-                    <%= f.label :insurance_card, '', class: 'custom-file-label' %>
+                    <%= f.file_field :insurance_card, autocomplete: 'off', class: 'custom-file-input', data: { toggle: "custom-file-input" } %>
+                    <%= f.label :insurance_card, @user.insurance_card.filename || 'Choose file', class: 'custom-file-label' %>
+                    <%= f.hidden_field :insurance_card_cache %>
                   </div>
                 </div>
               </div>
