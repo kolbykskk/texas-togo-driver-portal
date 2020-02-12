@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190219193716) do
+ActiveRecord::Schema.define(version: 20200212054802) do
 
   create_table "campaigns", force: :cascade do |t|
     t.integer  "user_id"
@@ -112,8 +112,16 @@ ActiveRecord::Schema.define(version: 20190219193716) do
     t.string   "first_name"
     t.string   "last_name"
     t.datetime "payout_wait"
+    t.boolean  "is_active"
+    t.string   "candidate_id"
+    t.integer  "failed_attempts",        default: 0,     null: false
+    t.string   "unlock_token"
+    t.datetime "locked_at"
+    t.string   "drivers_license"
+    t.string   "insurance_card"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
 end

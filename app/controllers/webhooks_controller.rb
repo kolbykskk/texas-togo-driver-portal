@@ -1,5 +1,16 @@
 class WebhooksController < ApplicationController
-  protect_from_forgery except: :stripe
+  protect_from_forgery except: [:stripe, :checkr]
+
+  def checkr
+    case params[:type]
+    when 'report.completed', 'report.engaged'
+      activate_account
+    when 'report.pre_adverse_action'
+      activate_account(false)
+    when 'report.post_adverse_action'
+      lock_account
+    end
+  end
 
   def stripe
     # Use signed webhooks
@@ -102,6 +113,18 @@ class WebhooksController < ApplicationController
   end
 
   private
+    def activate_account(activate=true)
+      user_by_candidate.update_attributes(is_active: activate) if user_by_candidate
+    end
+
+    def lock_account
+      user_by_candidate.lock_access! if user_by_candidate
+    end
+
+    def user_by_candidate
+      User.find_by(candidate_id: params[:data][:object][:candidate_id])
+    end
+
     def reverse_transfer(charge)
       # Retrieve the transfer for the charge
       transfer = Stripe::Transfer.retrieve(charge.transfer)

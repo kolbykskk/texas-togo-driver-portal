@@ -36,6 +36,8 @@ Rails.application.routes.draw do
     post :stop_impersonating, on: :collection
   end
 
+  post 'webhooks/checkr', to: 'webhooks#checkr'
+
   resources :payment_sheets
 
   resources :campaigns

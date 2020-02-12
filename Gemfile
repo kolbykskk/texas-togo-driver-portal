@@ -86,3 +86,5 @@ gem 'will_paginate-bootstrap'
 gem "pundit"
 
 gem "httparty"
+
+gem "checkr-official"
