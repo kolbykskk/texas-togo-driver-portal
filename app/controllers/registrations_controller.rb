@@ -1,8 +1,9 @@
 class RegistrationsController < Devise::RegistrationsController
+
   protected
 
   def after_sign_up_path_for(resource)
-    new_campaign_path
+    bgc_payment_path
   end
 
   def sign_up_params

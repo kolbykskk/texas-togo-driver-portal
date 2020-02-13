@@ -30,6 +30,10 @@ Rails.application.routes.draw do
 
   get '/retry', to: 'payment_sheets#retry'
   get '/invite-drivers', to: 'users#invite'
+  
+  get 'bgc/payment', to: 'background_checks#payment'
+  get 'bgc/pending', to: 'background_checks#pending'
+  post 'bgc/payment/charge', to: 'background_checks#charge'
 
   resources :users, only: [:index] do
     post :impersonate, on: :member

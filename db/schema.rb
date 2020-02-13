@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200212054802) do
+ActiveRecord::Schema.define(version: 20200213213551) do
 
   create_table "campaigns", force: :cascade do |t|
     t.integer  "user_id"
@@ -119,6 +119,7 @@ ActiveRecord::Schema.define(version: 20200212054802) do
     t.datetime "locked_at"
     t.string   "drivers_license"
     t.string   "insurance_card"
+    t.boolean  "bgc_paid"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true

@@ -4,7 +4,12 @@ class WebhooksController < ApplicationController
 
   def checkr
     case params[:type]
-    when 'report.completed', 'report.engaged'
+    when 'report.completed'
+      status = params[:data][:object][:status]
+      if status === 'clear'
+        activate_account
+      end
+    when 'report.engaged'
       activate_account
     when 'report.pre_adverse_action'
       activate_account(false)

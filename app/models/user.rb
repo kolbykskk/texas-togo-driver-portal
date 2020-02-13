@@ -16,17 +16,21 @@ class User < ApplicationRecord
   mount_uploader :drivers_license, VerificationUploader
   mount_uploader :insurance_card, VerificationUploader
 
-  after_commit :initiate_background_check, :on => :create
+  after_commit :zapier_webhook, :on => :create
 
-  def initiate_background_check
-    BackgroundCheckWorker.perform_async(id)
-  end
 
   def phone_number=(val)
     write_attribute(:phone_number, val.gsub(/[^\w\s]/, ''))
   end
 
-  def active_for_authentication?
-    super and self.is_active?
+  def zapier_webhook
+    json_account = self.as_json
+    json_account["drivers_license"] = drivers_license.url
+    json_account["insurance_card"] = drivers_license.url
+    options = { 
+      :body => json_account
+    }
+
+    HTTParty.post("https://hooks.zapier.com/hooks/catch/2833985/ohyr6ux/", options)
   end
 end
