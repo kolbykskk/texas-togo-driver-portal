@@ -10,17 +10,17 @@ class User < ApplicationRecord
   validates_presence_of :last_name
   validates_presence_of :phone_number
   validates_uniqueness_of :phone_number
-  validates_presence_of :drivers_license, unless: :admin?
-  validates_presence_of :insurance_card, unless: :admin?
+  validates_presence_of :drivers_license, :on => :create, :unless => :admin?
+  validates_presence_of :insurance_card, :on => :create, :unless => :admin?
 
   mount_uploader :drivers_license, VerificationUploader
   mount_uploader :insurance_card, VerificationUploader
 
-  after_commit :zapier_webhook, :on => :create
+  after_commit :zapier_webhook, :on => :create, :unless => :admin?
 
 
   def phone_number=(val)
-    write_attribute(:phone_number, val.gsub(/[^\w\s]/, ''))
+    write_attribute(:phone_number, val.gsub(/([-() ])/, ''))
   end
 
   def zapier_webhook
@@ -31,6 +31,6 @@ class User < ApplicationRecord
       :body => json_account
     }
 
-    HTTParty.post("https://hooks.zapier.com/hooks/catch/2833985/ohyr6ux/", options)
+    HTTParty.post("https://hooks.zapier.com/hooks/catch/2833985/od099h6/", options)
   end
 end

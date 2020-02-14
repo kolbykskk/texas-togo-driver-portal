@@ -16,7 +16,7 @@ class BackgroundChecksController < ApplicationController
     end
   
     def charge
-      Stripe.api_key = 'sk_test_dzEB4SxsyceQgUDSWdqMmIV7'
+      Stripe.api_key = ENV['SECRET_KEY']
   
       token = params[:stripeToken]
       
@@ -24,7 +24,8 @@ class BackgroundChecksController < ApplicationController
         charge = Stripe::Charge.create({
           amount: 1500,
           currency: 'usd',
-          source: token
+          source: token,
+          description: "Background check for #{current_user.email}"
         })
   
         BackgroundCheckWorker.perform_async(current_user.id)
@@ -33,10 +34,10 @@ class BackgroundChecksController < ApplicationController
         
       rescue Stripe::StripeError => e
         flash[:error] = e.message
-        redirect_to users_bgc_payment_path
+        redirect_to bgc_payment_path
       rescue => e
         flash[:error] = e.message
-        redirect_to users_bgc_payment_path
+        redirect_to bgc_payment_path
       end
     end
 
