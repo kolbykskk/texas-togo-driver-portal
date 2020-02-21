@@ -179,6 +179,28 @@
                 <div class="form-group">
                   <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control input-lg', placeholder: "Confirm new password" %>
                 </div>
+                  <% if true_user.admin? %>
+                <div class="form-group">
+                  <%= f.label :drivers_license, 'Driver\'s license' %>
+                  <div class="custom-file">
+                    <%= f.file_field :drivers_license, autocomplete: 'off', class: 'custom-file-input', data: { toggle: "custom-file-input" } %>
+                    <%= f.label :drivers_license, @user.drivers_license.file.filename || 'Choose file', class: 'custom-file-label' %>
+                    <% if current_user.drivers_license.file %>
+                      <%= link_to 'Driver\'s license', current_user.drivers_license.url, target: :_blank %><br>
+                    <% end %>
+                  </div>
+              </div>
+              <div class="form-group">
+                  <%= f.label :insurance_card, 'Insurance card' %>
+                  <div class="custom-file">
+                    <%= f.file_field :insurance_card, autocomplete: 'off', class: 'custom-file-input', data: { toggle: "custom-file-input" } %>
+                    <%= f.label :insurance_card, @user.insurance_card.file.filename || 'Choose file', class: 'custom-file-label' %>
+                    <% if current_user.insurance_card.file %>
+                      <%= link_to 'Insurance card', current_user.insurance_card.url, target: :_blank %>
+                    <% end %>
+                  </div>
+              </div>
+              <% end %>
 
                 <div class="form-group">
                   <%= f.password_field :current_password, autocomplete: "off", class: 'form-control input-lg', placeholder: "Current password" %>
@@ -195,22 +217,6 @@
 
           </div>
         </div>
-        <% if true_user.admin? %>
-          <div class="row js-appear-enabled animated fadeIn" data-toggle="appear">
-            <div class="col-md-6 col-md-push-3 col-sm-push-3">
-              <div class="block">
-                <div class="block-content">
-                  <% if current_user.drivers_license.file %>
-                    <%= link_to 'Driver\'s license', current_user.drivers_license.url, target: :_blank %><br>
-                  <% end %>
-                  <% if current_user.insurance_card.file %>
-                    <%= link_to 'Insurance card', current_user.insurance_card.url, target: :_blank %>
-                  <% end %>
-                </div>
-              </div>
-            </div>
-          </div>
-        <% end %>
     </main>
     <footer id="page-footer" class="opacity-0" style="opacity: 1;">
       <div class="content py-20 font-size-xs clearfix">

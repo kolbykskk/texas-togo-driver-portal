@@ -30,6 +30,7 @@ class BackgroundChecksController < ApplicationController
   
         BackgroundCheckWorker.perform_async(current_user.id)
         current_user.update_attributes(bgc_paid: true)
+        zapier_webhook
         redirect_to bgc_pending_path
         
       rescue Stripe::StripeError => e
@@ -42,6 +43,15 @@ class BackgroundChecksController < ApplicationController
     end
 
     private
+    def zapier_webhook
+      json_account = current_user.as_json
+      options = { 
+        :body => json_account
+      }
+  
+      HTTParty.post("https://hooks.zapier.com/hooks/catch/2833985/odjvcx2/", options)
+    end
+
     def go_to_dashboard
         redirect_to dashboard_path if current_user.is_active?
     end

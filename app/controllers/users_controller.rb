@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-    
+    skip_before_action :is_active?, only: :stop_impersonating
+
     def index
         unless params[:search] && params[:search] != ""
             @users = User.where.not(admin: true).order(:id)
