@@ -88,3 +88,5 @@ gem "pundit"
 gem "httparty"
 
 gem "checkr-official"
+
+gem 'rack-affiliates'

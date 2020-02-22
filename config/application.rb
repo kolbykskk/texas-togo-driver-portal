@@ -16,6 +16,8 @@ module SellerDashboard
     config.assets.paths << Rails.root.join("app", "assets", "css")
     config.assets.paths << Rails.root.join("app", "assets", "css", "themes")
     config.assets.paths << Rails.root.join("app", "assets", "js", "pages")
+    
+    config.middleware.use Rack::Affiliates
 
   end
 end

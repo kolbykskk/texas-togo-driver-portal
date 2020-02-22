@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_many :campaigns, :dependent => :destroy
   has_one :stat, :dependent => :destroy
+  belongs_to :referrer, :class_name => 'User', foreign_key: 'referred_by_id', optional: true
   # Include default devise modules. Others available are:
   # :confirmable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,

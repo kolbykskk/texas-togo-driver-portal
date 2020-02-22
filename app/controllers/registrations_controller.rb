@@ -1,5 +1,7 @@
 class RegistrationsController < Devise::RegistrationsController
 
+  after_action :check_referral, only: :create
+
   protected
 
   def after_sign_up_path_for(resource)
@@ -19,6 +21,14 @@ class RegistrationsController < Devise::RegistrationsController
       resource.update_without_password(params.except("current_password"))
     else
       super
+    end
+  end
+  
+  def check_referral
+    if resource.persisted? # user is created successfuly
+      if request.env['affiliate.tag'] && affiliate = User.find_by_id(request.env['affiliate.tag'])
+        resource.update_attributes(referrer: affiliate)
+      end
     end
   end
 end
