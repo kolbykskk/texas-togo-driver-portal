@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200222202926) do
+ActiveRecord::Schema.define(version: 20200224185234) do
 
   create_table "campaigns", force: :cascade do |t|
     t.integer  "user_id"
@@ -121,6 +121,7 @@ ActiveRecord::Schema.define(version: 20200222202926) do
     t.string   "insurance_card"
     t.boolean  "bgc_paid"
     t.integer  "referred_by_id"
+    t.boolean  "refer_paid"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["referred_by_id"], name: "index_users_on_referred_by_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

@@ -18,5 +18,7 @@ class PayReferralWorker
           destination: second_stripe_account
         }
       )
+
+      User.find_by(stripe_account: first_stripe_account).update_attributes(refer_paid: true)
   end
 end

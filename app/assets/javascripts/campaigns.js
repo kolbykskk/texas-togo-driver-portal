@@ -26,6 +26,16 @@ $(function() {
       return null;
   }
 
+  $('.refer .close').click(function(){
+    setCookie('refer-' + $(this).parents('.refer').data('user-id'), true, 365);
+  });
+
+  $('.refer').each(function(){
+    if(!getCookie('refer-' + $(this).data('user-id'))){
+      $('.refer[data-user-id=' + $(this).data('user-id') + ']').show();
+    }
+  });
+
   $('.first-payment.close').click(function(){
     setCookie('first-payment', true, 365);
   });
