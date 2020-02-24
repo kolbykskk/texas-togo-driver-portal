@@ -7,6 +7,7 @@ class Stat < ApplicationRecord
   def reached_10_deliveries
     if user.referrer && deliveries_was < 10 && deliveries >= 10
       PayReferralWorker.perform_async(self.user.stripe_account, self.user.referrer.stripe_account)
+      self.user.update_attributes(refer_paid: true)
     end
   end
 
