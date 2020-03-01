@@ -186,7 +186,7 @@
                   <%= f.label :drivers_license, 'Driver\'s license' %>
                   <div class="custom-file">
                     <%= f.file_field :drivers_license, autocomplete: 'off', class: 'custom-file-input', data: { toggle: "custom-file-input" } %>
-                    <%= f.label :drivers_license, @user.drivers_license.file.filename || 'Choose file', class: 'custom-file-label' %>
+                    <%= f.label :drivers_license, @user.drivers_license.file.try(:filename) || 'Choose file', class: 'custom-file-label' %>
                     <% if current_user.drivers_license.file %>
                       <%= link_to 'Driver\'s license', current_user.drivers_license.url, target: :_blank %><br>
                     <% end %>
@@ -196,7 +196,7 @@
                   <%= f.label :insurance_card, 'Insurance card' %>
                   <div class="custom-file">
                     <%= f.file_field :insurance_card, autocomplete: 'off', class: 'custom-file-input', data: { toggle: "custom-file-input" } %>
-                    <%= f.label :insurance_card, @user.insurance_card.file.filename || 'Choose file', class: 'custom-file-label' %>
+                    <%= f.label :insurance_card, @user.insurance_card.file.try(:filename) || 'Choose file', class: 'custom-file-label' %>
                     <% if current_user.insurance_card.file %>
                       <%= link_to 'Insurance card', current_user.insurance_card.url, target: :_blank %>
                     <% end %>
