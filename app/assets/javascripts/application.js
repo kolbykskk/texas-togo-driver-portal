@@ -29,4 +29,6 @@ jQuery(document).ready(function($) {
     $('.browse-csv').change(function(){
         $('.browse-csv-submit').click();
     });
+
+    new ClipboardJS('.btn');
 });

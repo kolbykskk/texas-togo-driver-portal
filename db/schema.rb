@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200224185234) do
+ActiveRecord::Schema.define(version: 20200303194330) do
 
   create_table "campaigns", force: :cascade do |t|
     t.integer  "user_id"
@@ -49,6 +49,13 @@ ActiveRecord::Schema.define(version: 20200224185234) do
     t.integer  "deliveries_made"
     t.boolean  "not_found"
     t.index ["payment_sheet_id"], name: "index_disbursments_on_payment_sheet_id"
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.string   "name"
+    t.boolean  "active",     default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   create_table "payment_sheets", force: :cascade do |t|
@@ -122,7 +129,9 @@ ActiveRecord::Schema.define(version: 20200224185234) do
     t.boolean  "bgc_paid"
     t.integer  "referred_by_id"
     t.boolean  "refer_paid"
+    t.integer  "location_id"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["location_id"], name: "index_users_on_location_id"
     t.index ["referred_by_id"], name: "index_users_on_referred_by_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true

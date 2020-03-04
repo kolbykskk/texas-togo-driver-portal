@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_many :campaigns, :dependent => :destroy
   has_one :stat, :dependent => :destroy
+  belongs_to :location
   belongs_to :referrer, :class_name => 'User', foreign_key: 'referred_by_id', optional: true
   # Include default devise modules. Others available are:
   # :confirmable, :timeoutable and :omniauthable
@@ -14,11 +15,18 @@ class User < ApplicationRecord
   validates_presence_of :drivers_license, :on => :create, :unless => :admin?
   validates_presence_of :insurance_card, :on => :create, :unless => :admin?
 
+  validate :location_is_active, :on => :create
+
   mount_uploader :drivers_license, VerificationUploader
   mount_uploader :insurance_card, VerificationUploader
 
   after_commit :zapier_webhook, :on => :create, :unless => :admin?
 
+  def location_is_active
+    unless self.location_id && Location.find(self.location_id).active
+      errors.add(:location_id, 'must be active')
+    end
+  end
 
   def phone_number=(val)
     write_attribute(:phone_number, val.gsub(/([-() ])/, ''))
