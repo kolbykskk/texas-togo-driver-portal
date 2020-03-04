@@ -119,7 +119,7 @@
                 <div class="form-group row">
                 <div class="col-12">
                   <%= f.label :location_id, 'Location' %>
-                  <%= f.select :location_id, options_from_collection_for_select(Location.where(active: true).order('name DESC'), 'id', 'name'), {:include_blank => ''}, class: 'form-control input-lg' %>
+                  <%= f.select :location_id, options_from_collection_for_select(Location.where(active: true).order('name ASC'), 'id', 'name'), {:include_blank => ''}, class: 'form-control input-lg' %>
                 </div>
               </div>
                 <div class="form-group row">
