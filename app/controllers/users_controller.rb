@@ -29,4 +29,12 @@ class UsersController < ApplicationController
         end
         redirect_back(fallback_location: root_path)
     end
+
+    def sms
+        unless params[:message].nil? || params[:message] == "" || params[:locations].nil? || params[:locations].empty?
+            TextMessageWorker.perform_async(params[:locations], params[:message])
+            flash[:success] = "Messages sent"
+        end
+        redirect_back(fallback_location: root_path)
+    end
 end
