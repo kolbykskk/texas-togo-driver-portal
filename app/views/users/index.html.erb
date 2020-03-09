@@ -184,7 +184,7 @@
                       <div class="block-content">
                       <div class="form-group">
                             <%= label_tag :location %>
-                            <%= select_tag :locations, options_from_collection_for_select(Location.all.order('name ASC'), "id", "name"), class: 'form-control', multiple: true %>
+                            <%= select_tag :locations, options_from_collection_for_select(Location.all.order('name ASC'), "id", "name"), class: 'form-control', multiple: true, size: Location.all.count %>
                         </div>
                         <div class="form-group">
                             <%= label_tag :message %>
