@@ -238,7 +238,7 @@
              
                      <div class="row">
              <!-- Row #1 -->
-         <% @users.where('drivers_license_expiration_date IS NULL OR insurance_card_expiration_date IS NULL').each do |user| %>
+         <% @users_pending_expiration.each do |user| %>
                  <div class="col-md-6 col-xl-3">
                      <%= link_to impersonate_user_path(user), method: :post, class: 'block block-link-shadow' do %>
                      <div class="block-content block-content-full clearfix">
@@ -260,6 +260,7 @@
                      </div>
            
          </div>
+         <%= will_paginate @users_pending_expiration, renderer: BootstrapPagination::Rails, :param_name => 'page_1' %>
     <h2 class="content-heading">Drivers (Active)</h2>
            <div class="row js-appear-enabled animated fadeIn" data-toggle="appear">
                         <!-- Row #3 -->
@@ -267,7 +268,7 @@
                         
                                 <div class="row">
                         <!-- Row #1 -->
-                    <% @users.where(inactive: false).each do |user| %>
+                    <% @active_users.each do |user| %>
                             <div class="col-md-6 col-xl-3">
                                 <%= link_to impersonate_user_path(user), method: :post, class: 'block block-link-shadow' do %>
                                 <div class="block-content block-content-full clearfix">
@@ -289,6 +290,7 @@
                                 </div>
                       
                     </div>
+                    <%= will_paginate @active_users, renderer: BootstrapPagination::Rails, :param_name => 'page_2' %>
                     <h2 class="content-heading">Drivers (Inactive)</h2>
                     <div class="row js-appear-enabled animated fadeIn" data-toggle="appear">
                                  <!-- Row #3 -->
@@ -296,7 +298,7 @@
                                  
                                          <div class="row">
                                  <!-- Row #1 -->
-                             <% @users.where(inactive: true).each do |user| %>
+                             <% @inactive_users.each do |user| %>
                                      <div class="col-md-6 col-xl-3">
                                          <%= link_to impersonate_user_path(user), method: :post, class: 'block block-link-shadow' do %>
                                          <div class="block-content block-content-full clearfix">
@@ -318,6 +320,7 @@
                                          </div>
                                
                              </div>
+                             <%= will_paginate @inactive_users, renderer: BootstrapPagination::Rails, :param_name => 'page_3' %>
 </div>
     </main>
 
