@@ -9,6 +9,9 @@ class UsersController < ApplicationController
             @users_pending_expiration = @users.where('drivers_license_expiration_date IS NULL OR insurance_card_expiration_date IS NULL').paginate(:page => params[:page_1], :per_page => 12)
         else
             @users = User.where('admin != (?) and lower(first_name) like (?) or lower(last_name) like (?) or lower(phone_number) like (?)', true, params[:search].downcase, params[:search].downcase, params[:search].downcase).order(:id)
+            @active_users = @users.where(inactive: false).paginate(:page => params[:page_2], :per_page => 12)
+            @inactive_users = @users.where(inactive: true).paginate(:page => params[:page_3], :per_page => 12)
+            @users_pending_expiration = @users.where('drivers_license_expiration_date IS NULL OR insurance_card_expiration_date IS NULL').paginate(:page => params[:page_1], :per_page => 12)
         end
         authorize @users
     end
