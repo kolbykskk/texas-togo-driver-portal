@@ -6,12 +6,12 @@ class UsersController < ApplicationController
             @users = User.where.not(admin: true).order(:id)
             @active_users = @users.where(inactive: false).paginate(:page => params[:page_2], :per_page => 12)
             @inactive_users = @users.where(inactive: true).paginate(:page => params[:page_3], :per_page => 12)
-            @users_pending_expiration = @users.where('drivers_license_expiration_date IS NULL AND drivers_license IS NOT NULL OR insurance_card_expiration_date IS NULL AND insurance_card IS NOT NULL').paginate(:page => params[:page_1], :per_page => 12)
+            @users_pending_expiration = @users.where('drivers_license_expiration_date IS NULL AND drivers_license IS NOT NULL AND stripe_account IS NOT NULL OR insurance_card_expiration_date IS NULL AND insurance_card IS NOT NULL AND stripe_account IS NOT NULL').paginate(:page => params[:page_1], :per_page => 12)
         else
             @users = User.where('admin != (?) and lower(first_name) like (?) or lower(last_name) like (?) or lower(phone_number) like (?)', true, params[:search].downcase, params[:search].downcase, params[:search].downcase).order(:id)
             @active_users = @users.where(inactive: false).paginate(:page => params[:page_2], :per_page => 12)
             @inactive_users = @users.where(inactive: true).paginate(:page => params[:page_3], :per_page => 12)
-            @users_pending_expiration = @users.where('drivers_license_expiration_date IS NULL AND drivers_license IS NOT NULL OR insurance_card_expiration_date IS NULL AND insurance_card IS NOT NULL').paginate(:page => params[:page_1], :per_page => 12)
+            @users_pending_expiration = @users.where('drivers_license_expiration_date IS NULL AND drivers_license IS NOT NULL AND stripe_account IS NOT NULL OR insurance_card_expiration_date IS NULL AND insurance_card IS NOT NULL AND stripe_account IS NOT NULL').paginate(:page => params[:page_1], :per_page => 12)
         end
         authorize @users
     end
