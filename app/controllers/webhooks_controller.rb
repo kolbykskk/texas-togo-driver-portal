@@ -128,7 +128,7 @@ class WebhooksController < ApplicationController
     end
 
     def activate_account(activate=true)
-      user_by_candidate.update_attributes(is_active: activate) if user_by_candidate
+      user_by_candidate.update_attributes(is_active: activate, bgc_completed: (activate ? Date.current : nil)) if user_by_candidate
     end
 
     def lock_account

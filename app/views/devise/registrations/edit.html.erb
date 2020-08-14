@@ -181,27 +181,43 @@
                 <div class="form-group">
                   <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control input-lg', placeholder: "Confirm new password" %>
                 </div>
-                  <% if true_user.admin? %>
+                <% if current_user.drivers_license_expiration_date && current_user.drivers_license_expiration_date - 14.days <= Date.current || true_user.admin? %>
                 <div class="form-group">
                   <%= f.label :drivers_license, 'Driver\'s license' %>
                   <div class="custom-file">
                     <%= f.file_field :drivers_license, autocomplete: 'off', class: 'custom-file-input', data: { toggle: "custom-file-input" } %>
-                    <%= f.label :drivers_license, @user.drivers_license.file.try(:filename) || 'Choose file', class: 'custom-file-label' %>
-                    <% if current_user.drivers_license.file %>
-                      <%= link_to 'Driver\'s license', current_user.drivers_license.url, target: :_blank %><br>
+                    <%= f.label :drivers_license, 'Choose file', class: 'custom-file-label' %>
+                    <% if current_user.drivers_license.file && true_user.admin? %>
+                      <%= link_to 'Driver\'s license', current_user.drivers_license.url, target: :_blank %>
+                      <%= f.date_field :drivers_license_expiration_date, class: 'float-right' %>
+                    <% end %>
+                    <% unless true_user.admin? %>
+                      <%= f.hidden_field :drivers_license_expiration_date, value: nil, class: 'float-right' %>
                     <% end %>
                   </div>
               </div>
+              <% end %>
+              <% if current_user.insurance_card_expiration_date && current_user.insurance_card_expiration_date - 14.days <= Date.current || true_user.admin? %>
               <div class="form-group">
                   <%= f.label :insurance_card, 'Insurance card' %>
                   <div class="custom-file">
                     <%= f.file_field :insurance_card, autocomplete: 'off', class: 'custom-file-input', data: { toggle: "custom-file-input" } %>
-                    <%= f.label :insurance_card, @user.insurance_card.file.try(:filename) || 'Choose file', class: 'custom-file-label' %>
-                    <% if current_user.insurance_card.file %>
+                    <%= f.label :insurance_card, 'Choose file', class: 'custom-file-label' %>
+                    <% if current_user.insurance_card.file && true_user.admin? %>
                       <%= link_to 'Insurance card', current_user.insurance_card.url, target: :_blank %>
+                      <%= f.date_field :insurance_card_expiration_date, class: 'float-right' %>
+                    <% end %>
+                    <% unless true_user.admin? %>
+                      <%= f.hidden_field :insurance_card_expiration_date, value: nil, class: 'float-right' %>
                     <% end %>
                   </div>
               </div>
+              <% end %>
+
+              <% if true_user.admin? %>
+                <div class="form-group">
+                  <%= f.select :inactive, options_for_select([['Active', false], ['Inactive', true]], current_user.inactive.to_s), {}, { class: 'form-control input-lg', autocomplete: 'off' } %>
+                </div>
               <% end %>
 
                 <div class="form-group">

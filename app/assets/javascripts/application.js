@@ -31,4 +31,11 @@ jQuery(document).ready(function($) {
     });
 
     new ClipboardJS('.btn');
+
+    $('.signupform').submit(function(){
+        if(!$('#example-inline-checkbox1').is(':checked')){
+            alert("You must accept the terms before submitting your application");
+            return false;
+        }
+    });
 });

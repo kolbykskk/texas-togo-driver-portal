@@ -17,10 +17,12 @@ class User < ApplicationRecord
 
   validate :location_is_active, :on => :create
 
+  after_update :zap_webhook_on_inactive, if: Proc.new { inactive_changed? && inactive }
+
   mount_uploader :drivers_license, VerificationUploader
   mount_uploader :insurance_card, VerificationUploader
 
-  after_commit :zapier_webhook, :on => :create, :unless => :admin?
+  # after_commit :zapier_webhook, :on => :create, :unless => :admin?
 
   def location_is_active
     unless self.location_id && Location.find(self.location_id).active
@@ -30,6 +32,10 @@ class User < ApplicationRecord
 
   def phone_number=(val)
     write_attribute(:phone_number, val.gsub(/([-() ])/, ''))
+  end
+
+  def zap_webhook_on_inactive
+    puts '^^^^^^^^^^^^^^^^^^^^'
   end
 
   def zapier_webhook

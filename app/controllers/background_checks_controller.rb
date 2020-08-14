@@ -4,8 +4,8 @@ class BackgroundChecksController < ApplicationController
     skip_before_action :is_active?
 
     before_action :go_to_dashboard    
-    before_action :go_to_payment, only: :pending
-    before_action :go_to_pending, only: :payment
+    # before_action :go_to_payment, only: :pending
+    # before_action :go_to_pending, only: :payment
 
     def payment
   
@@ -22,7 +22,7 @@ class BackgroundChecksController < ApplicationController
       
       begin
         charge = Stripe::Charge.create({
-          amount: 1500,
+          amount: !current_user.bgc_paid ? 1500 : 500,
           currency: 'usd',
           source: token,
           description: "Background check for #{current_user.email}"
@@ -53,7 +53,7 @@ class BackgroundChecksController < ApplicationController
     end
 
     def go_to_dashboard
-        redirect_to dashboard_path if current_user.is_active?
+        redirect_to dashboard_path if current_user.is_active? && current_user.bgc_completed && current_user.bgc_completed + 6.months > Date.current + 14.days
     end
 
     def go_to_payment

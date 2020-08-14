@@ -43,6 +43,8 @@ class CampaignsController < ApplicationController
   end
 
   def dashboard
+    puts request.session[:impersonated_user_id]
+    puts true_user.email
     # List campaigns for the current user
     if Stat.find_by(user_id: current_user.id).nil?
       Stat.create(user_id: current_user.id)
