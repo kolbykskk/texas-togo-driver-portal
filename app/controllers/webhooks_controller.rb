@@ -8,9 +8,11 @@ class WebhooksController < ApplicationController
       status = params[:data][:object][:status]
       if status === 'clear'
         activate_account
+        zap_webhook_on_checkr_pass
       end
     when 'report.engaged'
       activate_account
+      zap_webhook_on_checkr_pass
     when 'report.pre_adverse_action'
       activate_account(false)
     when 'report.post_adverse_action'
@@ -129,6 +131,18 @@ class WebhooksController < ApplicationController
 
     def activate_account(activate=true)
       user_by_candidate.update_attributes(is_active: activate, bgc_completed: (activate ? Date.current : nil)) if user_by_candidate
+    end
+
+    def zap_webhook_on_checkr_pass
+      if user_by_candidate
+        puts '%%%%%%%%%%%%%%%%%%'
+        json_account = user_by_candidate.as_json
+        options = { 
+          :body => json_account
+        }
+    
+        HTTParty.post("https://hooks.zapier.com/hooks/catch/2833985/o9drksr/", options)
+      end
     end
 
     def lock_account

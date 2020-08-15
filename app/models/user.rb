@@ -36,12 +36,16 @@ class User < ApplicationRecord
 
   def zap_webhook_on_inactive
     puts '^^^^^^^^^^^^^^^^^^^^'
+    json_account = self.as_json
+    options = { 
+      :body => json_account
+    }
+
+    HTTParty.post("https://hooks.zapier.com/hooks/catch/2833985/of5rglx/", options)
   end
 
   def zapier_webhook
     json_account = self.as_json
-    json_account["drivers_license"] = drivers_license.url
-    json_account["insurance_card"] = drivers_license.url
     options = { 
       :body => json_account
     }
