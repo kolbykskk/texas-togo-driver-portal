@@ -22,7 +22,7 @@ class User < ApplicationRecord
   mount_uploader :drivers_license, VerificationUploader
   mount_uploader :insurance_card, VerificationUploader
 
-  # after_commit :zapier_webhook, :on => :create, :unless => :admin?
+  after_commit :zapier_webhook, :on => :create, :unless => :admin?
 
   def location_is_active
     unless self.location_id && Location.find(self.location_id).active
