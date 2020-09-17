@@ -54,7 +54,6 @@
     "addons": [
         "redistogo",
         "papertrail",
-        "scheduler",
         "adminium"
     ]
 }
