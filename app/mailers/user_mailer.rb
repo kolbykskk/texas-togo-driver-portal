@@ -1,6 +1,6 @@
 class UserMailer < ApplicationMailer
     def invite(emails)
-        mail(to: emails, subject: "Invite to Texas ToGo Driver Portal")
+        mail(to: emails, subject: "Invite to Driver Portal")
     end
 
     def drivers_license_expiring(user, days)
