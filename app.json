@@ -35,7 +35,24 @@
         "TWILIO_PHONE_NUMBER": {},
         "TWILIO_ACCOUNT_SID": {},
         "TWILIO_AUTH_TOKEN": {},
-        "REDIS_PROVIDER": "REDISTOGO_URL"
+        "REDIS_PROVIDER": "REDISTOGO_URL",
+        "LOGO_IMAGE_URL": {
+            "description": "Small logo above signup form on landing page",
+            "value": "https://i.ibb.co/pwVVvQP/dot-logo-brandblue-large-min.png",
+            "required": false
+        },
+        "WELCOME_IMAGE_URL": {
+            "description": "Large image on left side of landing page",
+            "value": "https://i.ibb.co/HhMbLqx/shutterstock-1441140161-min.jpg"
+        },
+        "BANNER_IMAGE_URL": {
+            "description": "Large main image at top of dashboard",
+            "value": "https://i.ibb.co/s1Zfw3t/photo34-2x.jpg"
+        },
+        "SUPPORT_URL": {
+            "description": "Location for support link at top of dashboard",
+            "required": false
+        }
     },
     "scripts": {
         "postdeploy": "rails db:migrate"
