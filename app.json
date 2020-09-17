@@ -1,7 +1,6 @@
 {
     "name": "Let's Do Delivery",
     "description": "Onboarding platform for drivers",
-    "repository": "https://github.com/kolbykskk/texas-togo-driver-portal",
     "logo": "https://www.delivery.com/images/static/dcom-logo-og-share.jpg",
     "env": {
         "PUBLISHABLE_KEY": {
