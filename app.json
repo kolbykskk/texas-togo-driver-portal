@@ -19,18 +19,16 @@
             "description": "Checkr secret API key"
         },
         "S3_BUCKET_NAME": {
-            "description": "AWS S3 bucket name",
-            "value": "driver-portal"
+            "description": "AWS S3 bucket name"
         },
         "S3_REGION": {
-            "description": "AWS S3 bucket region",
-            "value": "us-east-2"
+            "description": "AWS S3 bucket region"
         },
         "S3_KEY": {
-            "description": "AWS S3 bucket key"
+            "description": "AWS S3 key"
         },
         "S3_SECRET": {
-            "description": "AWS S3 bucket secret"
+            "description": "AWS S3 secret"
         },
         "TWILIO_PHONE_NUMBER": {},
         "TWILIO_ACCOUNT_SID": {},
