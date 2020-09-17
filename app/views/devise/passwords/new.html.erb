@@ -88,7 +88,7 @@
     <main id="main-container" style="min-height: 1293px;">
 
       <!-- Page Content -->
-      <div class="bg-image" style="background-image: url('https://i.ibb.co/HhMbLqx/shutterstock-1441140161-min.jpg');">
+      <div class="bg-image" style="background-image: url('<%= ENV["WELCOME_IMAGE_URL"] %>');">
         <div class="row mx-0 bg-black-op">
           <div class="hero-static col-md-6 col-xl-8 d-none d-md-flex align-items-md-end">
             
@@ -97,7 +97,7 @@
             <div class="content content-full">
               <!-- Header -->
               <div class="px-30 py-10">
-                <img src="https://i.ibb.co/pwVVvQP/dot-logo-brandblue-large-min.png" height="75" />
+                <img src="<%= ENV["LOGO_IMAGE_URL"] %>" height="75" />
                 <h1 class="h3 font-w700 mt-30 mb-10">Password Reset</h1>
                 <h2 class="h5 font-w400 text-muted mb-0" style="text-align: left;">Please enter your email</h2>
               </div>
