@@ -1,48 +1,45 @@
 {
     "name": "Let's Do Delivery",
     "description": "Onboarding platform for drivers",
-    "website": "https://www.delivery.com/",
     "repository": "https://github.com/kolbykskk/texas-togo-driver-portal",
-    "logo": "https://via.placeholder.com/150",
+    "logo": "https://www.delivery.com/images/static/dcom-logo-og-share.jpg",
     "env": {
+        "PUBLISHABLE_KEY": {
+            "description": "Stripe publishable API key"
+        },
+        "SECRET_KEY": {
+            "description": "Stripe secret API key"
+        },
+        "ENDPOINT_SECRET": {
+            "description": "Stripe webhook endpoint secret"
+        },
         "CHECKR_PUBLISHABLE": {
             "description": "Checkr publishable API key"
         },
         "CHECKR_SECRET": {
             "description": "Checkr secret API key"
         },
-        "PUBLISHABLE_KEY": {
-            "description": "Stripe publishable API key"
-        },
-        "REDIS_PROVIDER": {
-            "value": "REDISTOGO_URL"
-        },
         "S3_BUCKET_NAME": {
             "description": "AWS S3 bucket name",
             "value": "driver-portal"
-        },
-        "S3_KEY": {
-            "description": "AWS S3 bucket key"
         },
         "S3_REGION": {
             "description": "AWS S3 bucket region",
             "value": "us-east-2"
         },
+        "S3_KEY": {
+            "description": "AWS S3 bucket key"
+        },
         "S3_SECRET": {
             "description": "AWS S3 bucket secret"
         },
-        "SECRET_KEY": {
-            "description": "Stripe secret API key"
-        },
-        "TWILIO_ACCOUNT_SID": {
-
-        },
-        "TWILIO_AUTH_TOKEN": {
-
-        },
-        "TWILIO_PHONE_NUMBER": {
-            
-        }
+        "TWILIO_PHONE_NUMBER": {},
+        "TWILIO_ACCOUNT_SID": {},
+        "TWILIO_AUTH_TOKEN": {},
+        "REDIS_PROVIDER": "REDISTOGO_URL"
+    },
+    "scripts": {
+        "postdeploy": "rails db:migrate"
     },
     "formation": {
         "web": {

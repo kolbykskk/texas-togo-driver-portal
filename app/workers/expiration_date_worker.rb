@@ -1,3 +1,5 @@
+require 'sidekiq-scheduler'
+
 class ExpirationDateWorker
     include Sidekiq::Worker
   

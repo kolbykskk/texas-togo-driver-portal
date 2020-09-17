@@ -1,0 +1,4 @@
+:schedule:
+  expiration_date_worker:
+    cron: '0 0 0 * * *'   # Runs once per day at midnight
+    class: ExpirationDateWorker
