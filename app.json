@@ -52,6 +52,14 @@
         "SUPPORT_URL": {
             "description": "Location for support link at top of dashboard",
             "required": false
+        },
+        "SMTP_USERNAME": {},
+        "SMTP_PASSWORD": {},
+        "SMTP_DOMAIN": {},
+        "SMTP_ADDRESS": {},
+        "SMTP_PORT": {},
+        "BASE_URL": {
+            "description": "Your domain or subdomain that will be used to access the portal"
         }
     },
     "scripts": {
