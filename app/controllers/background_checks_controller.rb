@@ -44,12 +44,14 @@ class BackgroundChecksController < ApplicationController
 
     private
     def zapier_webhook
-      json_account = current_user.as_json
-      options = { 
-        :body => json_account
-      }
-  
-      HTTParty.post("https://hooks.zapier.com/hooks/catch/2833985/odjvcx2/", options)
+      unless ENV["POST_BGC_PAYMENT_WEBHOOK_URL"].blank?
+        json_account = current_user.as_json
+        options = { 
+          :body => json_account
+        }
+    
+        HTTParty.post(ENV["POST_BGC_PAYMENT_WEBHOOK_URL"], options)
+      end
     end
 
     def go_to_dashboard

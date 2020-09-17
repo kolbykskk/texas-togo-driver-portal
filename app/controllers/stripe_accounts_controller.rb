@@ -104,7 +104,9 @@ class StripeAccountsController < ApplicationController
         :body => json_account
       }
 
-      HTTParty.post("https://hooks.zapier.com/hooks/catch/2833985/ohyr6ux/", options)
+      unless ENV["STRIPE_ACCOUNT_CREATED_WEBHOOK_URL"].blank?
+        HTTParty.post(ENV["STRIPE_ACCOUNT_CREATED_WEBHOOK_URL"], options)
+      end
 
       # Handle exceptions from Stripe
       rescue Stripe::StripeError => e

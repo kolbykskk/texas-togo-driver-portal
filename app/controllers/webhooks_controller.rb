@@ -135,13 +135,15 @@ class WebhooksController < ApplicationController
 
     def zap_webhook_on_checkr_pass
       if user_by_candidate
-        puts '%%%%%%%%%%%%%%%%%%'
-        json_account = user_by_candidate.as_json
-        options = { 
-          :body => json_account
-        }
-    
-        HTTParty.post("https://hooks.zapier.com/hooks/catch/2833985/o9drksr/", options)
+        unless ENV["BGC_PASSED_WEBHOOK_URL"].blank?
+          puts '%%%%%%%%%%%%%%%%%%'
+          json_account = user_by_candidate.as_json
+          options = { 
+            :body => json_account
+          }
+      
+          HTTParty.post(ENV["BGC_PASSED_WEBHOOK_URL"], options)
+        end
       end
     end
 

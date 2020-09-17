@@ -83,14 +83,7 @@
             'main-content-boxed'                        Full width Main Content with a specific maximum width (screen width > 1200px)
             'main-content-narrow'                       Full width Main Content with a percentage width (screen width > 1200px)
         -->
-    <div id="page-container" class="side-scroll page-header-fixed page-header-glass page-header-inverse main-content-boxed">
-    <div class="modal" id="modal-large" tabindex="-1" role="dialog" aria-labelledby="modal-large" style="display: none;" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <iframe id="driver-quiz" src="https://www.jotform.com/westtexastogo/new-driver-quiz"></iframe>
-        </div>
-    </div>
-</div>    
+    <div id="page-container" class="side-scroll page-header-fixed page-header-glass page-header-inverse main-content-boxed">  
     <!-- Header -->
         <header id="page-header">
             <% if current_user != true_user %>
@@ -229,14 +222,6 @@
                     <!-- END Row #1 -->
                 </div>
                 <% else %>
-                <div class="row js-appear-enabled animated fadeIn">
-
-                <div class="col-md-12 new-driver-quiz-row" style="display: none;">
-                <div class="alert alert-warning" role="alert">
-                    <p class="mb-0">Complete the new driver quiz to get started. Click <a target="_blank" href="https://www.jotform.com/westtexastogo/new-driver-quiz">here</a>.</p>
-                </div>
-            </div>
-        </div>
 
         <% if current_user.drivers_license_expiration_date && current_user.drivers_license_expiration_date - 14.days <= Date.current %>
         <div class="row js-appear-enabled animated fadeIn">
@@ -262,19 +247,11 @@
         <div class="row js-appear-enabled animated fadeIn">
             <div class="col-md-12">
                 <div class="alert alert-warning" role="alert">
-                    <p class="mb-0">In order to keep your driver account in compliance, delivery.com requests an updated Motor Vehicle Report from you every 6 months. You have <%= [(current_user.bgc_completed + 6.months - Date.current).to_i, 0].max %> days to update. Click <%= link_to 'here', bgc_payment_path %> to update your Motor Vehicle Report.</p>
+                    <p class="mb-0">In order to keep your driver account in compliance, we request an updated Motor Vehicle Report from you every 6 months. You have <%= [(current_user.bgc_completed + 6.months - Date.current).to_i, 0].max %> days to update. Click <%= link_to 'here', bgc_payment_path %> to update your Motor Vehicle Report.</p>
                 </div>
             </div>
         </div>
         <% end %>
-
-        <script>
-            $(document).ready(function(){
-                if(new Date("<%= (current_user.created_at.to_time + 7.days).iso8601 %>") > new Date()){
-                    $('.new-driver-quiz-row').show();
-                }
-            });
-        </script>
 
         <% User.where(referred_by_id: current_user.id, refer_paid: true).each do |user| %>
             <div class="row js-appear-enabled animated fadeIn refer" data-user-id="<%= user.id %>" style="display: none;">

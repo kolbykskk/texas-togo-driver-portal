@@ -54,19 +54,19 @@ class ExpirationDateWorker
             case user.bgc_completed
             when (Date.current - 6.months) + 14.days
                 UserMailer.background_check_expiring(user, 14).deliver
-                TwilioTextMessenger.new(user.phone_number, "In order to keep your driver account in compliance, delivery.com requests an updated Motor Vehicle Report from you every 6 months. You have 14 days to update. Go to https://#{ENV["BASE_URL"]}/bgc/payment/ to update your Motor Vehicle Report.").call
+                TwilioTextMessenger.new(user.phone_number, "In order to keep your driver account in compliance, we request an updated Motor Vehicle Report from you every 6 months. You have 14 days to update. Go to https://#{ENV["BASE_URL"]}/bgc/payment/ to update your Motor Vehicle Report.").call
             when (Date.current - 6.months) + 7.days
                 UserMailer.background_check_expiring(user, 7).deliver
-                TwilioTextMessenger.new(user.phone_number, "In order to keep your driver account in compliance, delivery.com requests an updated Motor Vehicle Report from you every 6 months. You have 7 days to update. Go to https://#{ENV["BASE_URL"]}/bgc/payment/ to update your Motor Vehicle Report.").call
+                TwilioTextMessenger.new(user.phone_number, "In order to keep your driver account in compliance, we request an updated Motor Vehicle Report from you every 6 months. You have 7 days to update. Go to https://#{ENV["BASE_URL"]}/bgc/payment/ to update your Motor Vehicle Report.").call
             when (Date.current - 6.months) + 3.days
                 UserMailer.background_check_expiring(user, 3).deliver
-                TwilioTextMessenger.new(user.phone_number, "In order to keep your driver account in compliance, delivery.com requests an updated Motor Vehicle Report from you every 6 months. You have 3 days to update. Go to https://#{ENV["BASE_URL"]}/bgc/payment/ to update your Motor Vehicle Report.").call
+                TwilioTextMessenger.new(user.phone_number, "In order to keep your driver account in compliance, we request an updated Motor Vehicle Report from you every 6 months. You have 3 days to update. Go to https://#{ENV["BASE_URL"]}/bgc/payment/ to update your Motor Vehicle Report.").call
             when (Date.current - 6.months) + 2.days
                 UserMailer.background_check_expiring(user, 2).deliver
-                TwilioTextMessenger.new(user.phone_number, "In order to keep your driver account in compliance, delivery.com requests an updated Motor Vehicle Report from you every 6 months. You have 2 days to update. Go to https://#{ENV["BASE_URL"]}/bgc/payment/ to update your Motor Vehicle Report.").call
+                TwilioTextMessenger.new(user.phone_number, "In order to keep your driver account in compliance, we request an updated Motor Vehicle Report from you every 6 months. You have 2 days to update. Go to https://#{ENV["BASE_URL"]}/bgc/payment/ to update your Motor Vehicle Report.").call
             when (Date.current - 6.months) + 1.days
                 UserMailer.background_check_expiring(user, 1).deliver
-                TwilioTextMessenger.new(user.phone_number, "In order to keep your driver account in compliance, delivery.com requests an updated Motor Vehicle Report from you every 6 months. You have 1 days to update. Go to https://#{ENV["BASE_URL"]}/bgc/payment/ to update your Motor Vehicle Report.").call
+                TwilioTextMessenger.new(user.phone_number, "In order to keep your driver account in compliance, we request an updated Motor Vehicle Report from you every 6 months. You have 1 days to update. Go to https://#{ENV["BASE_URL"]}/bgc/payment/ to update your Motor Vehicle Report.").call
             end
         end
 

@@ -35,21 +35,25 @@ class User < ApplicationRecord
   end
 
   def zap_webhook_on_inactive
-    puts '^^^^^^^^^^^^^^^^^^^^'
-    json_account = self.as_json
-    options = { 
-      :body => json_account
-    }
+    unless ENV["USER_INACTIVE_WEBHOOK_URL"].blank?
+      puts '^^^^^^^^^^^^^^^^^^^^'
+      json_account = self.as_json
+      options = { 
+        :body => json_account
+      }
 
-    HTTParty.post("https://hooks.zapier.com/hooks/catch/2833985/of5rglx/", options)
+      HTTParty.post(ENV["USER_INACTIVE_WEBHOOK_URL"], options)
+    end
   end
 
   def zapier_webhook
-    json_account = self.as_json
-    options = { 
-      :body => json_account
-    }
+    unless ENV["NEW_USER_WEBHOOK_URL"].blank?
+      json_account = self.as_json
+      options = { 
+        :body => json_account
+      }
 
-    HTTParty.post("https://hooks.zapier.com/hooks/catch/2833985/od099h6/", options)
+      HTTParty.post(ENV["NEW_USER_WEBHOOK_URL"], options)
+    end
   end
 end
