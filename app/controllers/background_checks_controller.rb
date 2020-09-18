@@ -45,7 +45,7 @@ class BackgroundChecksController < ApplicationController
     private
     def zapier_webhook
       unless ENV["POST_BGC_PAYMENT_WEBHOOK_URL"].blank?
-        json_account = current_user.as_json
+        json_account = current_user.to_json
         options = { 
           :body => json_account
         }

@@ -137,7 +137,7 @@ class WebhooksController < ApplicationController
       if user_by_candidate
         unless ENV["BGC_PASSED_WEBHOOK_URL"].blank?
           puts '%%%%%%%%%%%%%%%%%%'
-          json_account = user_by_candidate.as_json
+          json_account = user_by_candidate.to_json
           options = { 
             :body => json_account
           }

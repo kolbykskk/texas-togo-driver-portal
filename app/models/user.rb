@@ -37,7 +37,7 @@ class User < ApplicationRecord
   def zap_webhook_on_inactive
     unless ENV["USER_INACTIVE_WEBHOOK_URL"].blank?
       puts '^^^^^^^^^^^^^^^^^^^^'
-      json_account = self.as_json
+      json_account = self.to_json
       options = { 
         :body => json_account
       }
@@ -48,7 +48,7 @@ class User < ApplicationRecord
 
   def zapier_webhook
     unless ENV["NEW_USER_WEBHOOK_URL"].blank?
-      json_account = self.as_json
+      json_account = self.to_json
       options = { 
         :body => json_account
       }
