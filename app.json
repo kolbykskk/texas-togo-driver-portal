@@ -47,6 +47,10 @@
             "description": "Large main image at top of dashboard",
             "value": "https://i.ibb.co/s1Zfw3t/photo34-2x.jpg"
         },
+        "FAVICON_URL": {
+            "description": "Small icon in browser tab",
+            "required": false
+        },
         "SUPPORT_URL": {
             "description": "Location for support link at top of dashboard",
             "required": false
