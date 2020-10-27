@@ -108,6 +108,10 @@
         },
         "INSTANT_PAYOUT_FEE": {
             "value": "0.03"
+        },
+        "ACH_PAYOUT_FREQUENCY": {
+            "value": "3",
+            "description": "ACH payouts are limited to 1 every x days"
         }
     },
     "scripts": {
