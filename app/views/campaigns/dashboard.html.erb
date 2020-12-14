@@ -308,7 +308,7 @@
                                         Your Referral Link
                                     </span>
                                 </div>
-                                <input id="referral" style="background:none;" type="text" class="form-control" readonly value="https://<%= ENV["BASE_URL"] %>/?ref=<%= current_user.id %>">
+                                <input id="referral" style="background:none;" type="text" class="form-control" readonly value="https://<%= ENV["BASE_URL"] %>/users/sign_up/?ref=<%= current_user.id %>">
                                 <div class="input-group-append">
                                     <button data-clipboard-target="#referral" type="button" class="btn btn-secondary">
                                         <i class="fa fa-clipboard"></i>
