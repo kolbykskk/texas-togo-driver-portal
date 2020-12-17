@@ -97,6 +97,10 @@
             "value": "driver_basic",
             "description": "Initial background check type: driver_basic or mvr_only"
         },
+        "MVR_BGC_TYPE": {
+            "value": "mvr_only",
+            "description": "Regular background check type: mvr_only"
+        },
         "BGC_FEE": {
             "value": "15"
         },

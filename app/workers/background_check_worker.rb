@@ -17,7 +17,7 @@ class BackgroundCheckWorker
 
     Checkr::Invitation.create({
       :candidate_id => candidate.id,
-      :package => !user.bgc_completed ? ENV["BGC_TYPE"] : "mvr_only"
+      :package => !user.bgc_completed ? ENV["BGC_TYPE"] : ENV["MVR_BGC_TYPE"]
     })
 
     user.update_attributes(candidate_id: candidate.id)
