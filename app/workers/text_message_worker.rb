@@ -6,7 +6,9 @@ class TextMessageWorker
       loc = Location.find(location)
       if loc
         loc.users.each do |user|
-          TwilioTextMessenger.new(user.phone_number, message).call
+          unless user.inactive
+            TwilioTextMessenger.new(user.phone_number, message).call
+          end
         end
       end
     end
