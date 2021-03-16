@@ -368,6 +368,70 @@
                     </div>
                     <!-- END Row #3 -->
                 </div>
+                <% if current_user != true_user %>
+                    <div class="row js-appear-enabled animated fadeIn" data-toggle="appear">
+                        <div class="col-md-4">
+                            <div class="block">
+                                <div class="block-content block-content-full">
+                                    <% if current_user.bgc_completed && current_user.bgc_completed + 6.months <= Date.current + 14.days %>
+                                        <%= link_to bgc_payment_path do %>
+                                            <div class="ribbon-box">
+                                                <i class="fa fa-exclamation-triangle"></i> Click to Update
+                                            </div>
+                                        <% end %>
+                                    <% end %>
+                                    <div class="py-20 text-center">
+                                        <div class="mb-20">
+                                            <i class="fa fa-envelope-open fa-4x text-primary"></i>
+                                        </div>
+                                        <div class="font-size-h4 font-w600">MVR</div>
+                                        <div class="text-muted">Expires <%= current_user.bgc_completed + 6.months %></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="block">
+                                <div class="block-content block-content-full">
+                                    <% if current_user.drivers_license_expiration_date && current_user.drivers_license_expiration_date - 14.days <= Date.current %>
+                                        <%= link_to edit_user_registration_path do %>
+                                            <div class="ribbon-box">
+                                                <i class="fa fa-exclamation-triangle"></i> Click to Update
+                                            </div>
+                                        <% end %>
+                                    <% end %>
+                                    <div class="py-20 text-center">
+                                        <div class="mb-20">
+                                            <i class="fa fa-twitter fa-4x text-info"></i>
+                                        </div>
+                                        <div class="font-size-h4 font-w600">Driver's License</div>
+                                        <div class="text-muted">Expires <%= current_user.drivers_license_expiration_date %></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="block">
+                                <div class="block-content block-content-full">
+                                    <% if current_user.insurance_card_expiration_date && current_user.insurance_card_expiration_date - 14.days <= Date.current %>
+                                        <%= link_to edit_user_registration_path do %>    
+                                            <div class="ribbon-box">
+                                                <i class="fa fa-exclamation-triangle"></i> Click to Update
+                                            </div>
+                                        <% end %>
+                                    <% end %>
+                                    <div class="py-20 text-center">
+                                        <div class="mb-20">
+                                            <i class="fa fa-check fa-4x text-success"></i>
+                                        </div>
+                                        <div class="font-size-h4 font-w600">Insurance Card</div>
+                                        <div class="text-muted">Expires <%= current_user.insurance_card_expiration_date %></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <% end %>
                 <% end %>
 
                 <% if !current_user.admin %>
