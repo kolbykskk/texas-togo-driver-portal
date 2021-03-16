@@ -223,6 +223,16 @@
                 </div>
                 <% else %>
 
+        <% if current_user.inactive %>
+        <div class="row js-appear-enabled animated fadeIn">
+            <div class="col-md-12">
+                <div class="alert alert-danger" role="alert">
+                    <p class="mb-0">Your driver account is currently inactive, to reactivate your account please fill out the following form. <%= link_to 'Driver Reactivation Form', 'https://form.jotform.com/202375869455063' %></p>
+                </div>
+            </div>
+        </div>
+        <% end %>
+
         <% if current_user.drivers_license_expiration_date && current_user.drivers_license_expiration_date - 14.days <= Date.current %>
         <div class="row js-appear-enabled animated fadeIn">
             <div class="col-md-12">
