@@ -372,7 +372,7 @@
                     <div class="row js-appear-enabled animated fadeIn" data-toggle="appear">
                         <div class="col-md-4">
                             <div class="block">
-                                <div class="block-content block-content-full">
+                                <div class="block-content block-content-full ribbon ribbon-danger ribbon-left">
                                     <% if current_user.bgc_completed && current_user.bgc_completed + 6.months <= Date.current + 14.days %>
                                         <%= link_to bgc_payment_path do %>
                                             <div class="ribbon-box">
@@ -389,7 +389,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="block">
-                                <div class="block-content block-content-full">
+                                <div class="block-content block-content-full ribbon ribbon-danger ribbon-left">
                                     <% if current_user.drivers_license_expiration_date && current_user.drivers_license_expiration_date - 14.days <= Date.current %>
                                         <%= link_to edit_user_registration_path do %>
                                             <div class="ribbon-box">
@@ -406,7 +406,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="block">
-                                <div class="block-content block-content-full">
+                                <div class="block-content block-content-full ribbon ribbon-danger ribbon-left">
                                     <% if current_user.insurance_card_expiration_date && current_user.insurance_card_expiration_date - 14.days <= Date.current %>
                                         <%= link_to edit_user_registration_path do %>    
                                             <div class="ribbon-box">
