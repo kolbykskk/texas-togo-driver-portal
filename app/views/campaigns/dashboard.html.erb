@@ -215,9 +215,9 @@
                             </div>
                         </a>
                     </div>
-                                                <%= form_for PaymentSheet.new do |f| %>
+                                                <%= form_for PaymentSheet.new, :html => { :onsubmit => "return confirm('Are you sure you want to upload this CSV?')" } do |f| %>
                                 <%= f.file_field :sheet, class: 'browse-csv', id: 'browse-csv' %>
-                                <%= f.submit "Submit", class: 'browse-csv-submit', data: { confirm: 'Are you sure you want to upload this CSV?' } %>
+                                <%= f.submit "Submit", class: 'browse-csv-submit' %>
                             <% end %>
                     <!-- END Row #1 -->
                 </div>
