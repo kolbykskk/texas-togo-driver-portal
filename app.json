@@ -78,6 +78,12 @@
         "USER_INACTIVE_WEBHOOK_URL": {
             "required": false
         },
+        "FIRST_DELIVERY_WEBHOOK_URL": {
+            "required": false
+        },
+        "100_DELIVERIES_WEBHOOK_URL": {
+            "required": false
+        },
         "GA_TRACKING_ID": {
             "required": false,
             "description": "Google analytics tracking ID (UA-XXXXXXXX-X)"

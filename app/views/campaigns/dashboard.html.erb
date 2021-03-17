@@ -313,11 +313,6 @@
                         <div class="block-content">
                             <p>When a new driver uses your link to apply, you'll both earn $<%= ENV["REFER_BONUS"] %> once they complete their first <%= ENV["REFER_DELIVERIES"] %> deliveries!</p>
                             <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">
-                                        Your Referral Link
-                                    </span>
-                                </div>
                                 <input id="referral" style="background:none;" type="text" class="form-control" readonly value="https://<%= ENV["BASE_URL"] %>/users/sign_up/?ref=<%= current_user.id %>">
                                 <div class="input-group-append">
                                     <button data-clipboard-target="#referral" type="button" class="btn btn-secondary">
@@ -330,7 +325,7 @@
                                         $('.share').click(function(){
                                             navigator.share({
                                                 title: 'Let\'s Do Delivery',
-                                                text: 'Use my link to apply as a driver with delivery.com and we\'ll both get a <%= ENV["REFER_BONUS"] %> bonus.',
+                                                text: 'Use my link to apply as a driver with delivery.com and we\'ll both get a $<%= ENV["REFER_BONUS"] %> bonus.',
                                                 url: 'https://<%= ENV["BASE_URL"] %>/users/sign_up/?ref=<%= current_user.id %>',
                                             });
                                         });                                
