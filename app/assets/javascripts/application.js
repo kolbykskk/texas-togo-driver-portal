@@ -38,4 +38,8 @@ jQuery(document).ready(function($) {
             return false;
         }
     });
+
+    if(navigator.share){
+        $('.share').removeClass('d-none');
+    }
 });
