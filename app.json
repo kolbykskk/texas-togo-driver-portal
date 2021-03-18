@@ -84,6 +84,9 @@
         "100_DELIVERIES_WEBHOOK_URL": {
             "required": false
         },
+        "BIRTHDAY_WEBHOOK_URL": {
+            "required": false
+        },
         "GA_TRACKING_ID": {
             "required": false,
             "description": "Google analytics tracking ID (UA-XXXXXXXX-X)"
