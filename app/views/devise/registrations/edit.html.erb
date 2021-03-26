@@ -221,8 +221,8 @@
               <% end %>
 
               <div class="form-group">
-                <div class="custom-control custom-checkbox custom-control-inline mb-5">
-                  <%= f.check_box :accept_sms, class: 'custom-control-input' %>
+                <div class="custom-control custom-checkbox custom-control-inline">
+                  <%= f.check_box :accept_sms, class: 'custom-control-input', autocomplete: "off" %>
                   <%= f.label :accept_sms, 'I would like to receive SMS notifications when delivery.com needs more drivers in my area', class: 'custom-control-label' %>
                 </div>
             </div>
