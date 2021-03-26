@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200813164321) do
+ActiveRecord::Schema.define(version: 20210326194921) do
 
   create_table "campaigns", force: :cascade do |t|
     t.integer  "user_id"
@@ -134,6 +134,7 @@ ActiveRecord::Schema.define(version: 20200813164321) do
     t.date     "insurance_card_expiration_date"
     t.boolean  "inactive",                        default: false
     t.date     "bgc_completed"
+    t.boolean  "accept_sms"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["location_id"], name: "index_users_on_location_id"
     t.index ["referred_by_id"], name: "index_users_on_referred_by_id"

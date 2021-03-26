@@ -48,11 +48,11 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def sign_up_params
-    params.require(:user).permit(:first_name, :last_name, :phone_number, :email, :password, :password_confirmation, :drivers_license, :insurance_card, :drivers_license_cache, :insurance_card_cache, :location_id)
+    params.require(:user).permit(:first_name, :last_name, :phone_number, :email, :password, :password_confirmation, :drivers_license, :insurance_card, :drivers_license_cache, :insurance_card_cache, :location_id, :accept_sms)
   end
 
   def account_update_params
-    params.require(:user).permit(:first_name, :last_name, :phone_number, :email, :password, :password_confirmation, :current_password, :drivers_license, :insurance_card, :drivers_license_cache, :insurance_card_cache, :drivers_license_expiration_date, :insurance_card_expiration_date, :inactive)
+    params.require(:user).permit(:first_name, :last_name, :phone_number, :email, :password, :password_confirmation, :current_password, :drivers_license, :insurance_card, :drivers_license_cache, :insurance_card_cache, :drivers_license_expiration_date, :insurance_card_expiration_date, :inactive, :accept_sms)
   end
 
   def update_resource(resource, params)
