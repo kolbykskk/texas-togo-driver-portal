@@ -19,5 +19,8 @@ module SellerDashboard
     
     config.middleware.use Rack::Affiliates
 
+    config.action_view.field_error_proc = Proc.new { |html_tag, instance| 
+      html_tag.html_safe
+    }
   end
 end
