@@ -87,6 +87,9 @@
         "BIRTHDAY_WEBHOOK_URL": {
             "required": false
         },
+        "AIRTABLE_ID": {
+            "required": false
+        },
         "GA_TRACKING_ID": {
             "required": false,
             "description": "Google analytics tracking ID (UA-XXXXXXXX-X)"

@@ -14,6 +14,7 @@ class User < ApplicationRecord
   validates_uniqueness_of :phone_number
   validates_presence_of :drivers_license, :on => :create, :unless => :admin?
   validates_presence_of :insurance_card, :on => :create, :unless => :admin?
+  validates_presence_of :discovered
 
   validate :location_is_active, :on => :create
 
