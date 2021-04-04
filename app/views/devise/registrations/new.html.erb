@@ -178,6 +178,35 @@
                 </div>
               </div>
               <div class="form-group row">
+                <div class="col-12">
+                  <%= f.label 'How did you hear about us?' %>
+                  <div class="custom-control custom-radio mb-5">
+                    <%= f.radio_button :discovered, 'craiglist', class: 'custom-control-input' %>
+                    <%= f.label :discovered, 'Craiglist', :value => 'craiglist', class: 'custom-control-label' %>
+                  </div>
+                  <div class="custom-control custom-radio mb-5">
+                    <%= f.radio_button :discovered, 'indeed', class: 'custom-control-input' %>
+                    <%= f.label :discovered, 'Indeed', :value => 'indeed', class: 'custom-control-label' %>
+                  </div>
+                  <div class="custom-control custom-radio mb-5">
+                    <%= f.radio_button :discovered, 'facebook', class: 'custom-control-input' %>
+                    <%= f.label :discovered, 'Facebook', :value => 'facebook', class: 'custom-control-label' %>
+                  </div>
+                  <div class="custom-control custom-radio mb-5">
+                    <%= f.radio_button :discovered, 'friend', class: 'custom-control-input' %> 
+                    <%= f.label :discovered, 'Friend', :value => 'friend', class: 'custom-control-label' %>
+                  </div>
+                  <div class="custom-control custom-radio mb-5">
+                    <%= f.radio_button :discovered, 'restaurant', class: 'custom-control-input' %>
+                    <%= f.label :discovered, 'Restaurant', :value => 'restaurant', class: 'custom-control-label' %>
+                    </div>
+                  <div class="custom-control custom-radio mb-5">
+                    <%= f.radio_button :discovered, 'other', class: 'custom-control-input' %> 
+                    <%= f.label :discovered, 'Other', :value => 'other', class: 'custom-control-label' %>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
               <div class="col-12">
 
               <div class="custom-control custom-checkbox custom-control-inline mb-5">
