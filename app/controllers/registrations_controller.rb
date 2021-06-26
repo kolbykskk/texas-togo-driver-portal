@@ -64,10 +64,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
   
   def check_referral
-    puts 'in ^^^^'
     if resource.persisted? # user is created successfuly
-      puts 'persisted ^^^^^^^'
-      puts request.env['affiliate.tag']
       if request.env['affiliate.tag'] && affiliate = User.find_by_id(request.env['affiliate.tag'])
         resource.update_attributes(referrer: affiliate)
       end
