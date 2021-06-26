@@ -17,7 +17,7 @@ module SellerDashboard
     config.assets.paths << Rails.root.join("app", "assets", "css", "themes")
     config.assets.paths << Rails.root.join("app", "assets", "js", "pages")
     
-    config.middleware.use Rack::Affiliates
+    config.middleware.use Rack::Affiliates, { :path => '/' }
 
     config.action_view.field_error_proc = Proc.new { |html_tag, instance| 
       html_tag.html_safe
